@@ -1,0 +1,73 @@
+# 
+# ToyRenderLayer/Source
+# 
+
+## CMake Options
+
+### RenderAPI to use
+set(TRL_DX11         "(1 << 0)")
+set(TRL_OPENGL       "(1 << 1)")
+set(TRL_OPENGLES     "(1 << 2)")
+
+set(OPTION_TRL_RENDER_API "OpenGL" CACHE STRING "Render API to use.")
+set_property(CACHE OPTION_TRL_RENDER_API PROPERTY STRINGS "OpenGL" "DirectX 11" "OpenGL ES")
+
+if(OPTION_TRL_RENDER_API MATCHES "DirectX 11")
+    set(TRL_USING_DX11 TRUE)
+    set(TRL_RENDER_API ${TRL_DX11})
+elseif(OPTION_TRL_RENDER_API MATCHES "OpenGL")
+    set(TRL_USING_OPENGL TRUE)
+    set(TRL_RENDER_API ${TRL_OPENGL})
+else()
+    set(TRL_USING_OPENGLES TRUE)
+    set(TRL_RENDER_API ${TRL_OPENGLES})
+endif()
+
+## end of CMake Options
+
+## Third Party Libs
+ADD_SUBDIRECTORY(ThirdParty)
+
+
+## Configure file
+CONFIGURE_FILE(
+    "${TRL_SOURCE_DIR}/TRLConfig.h.in"
+    "${PROJECT_BINARY_DIR}/TRLConfig.h"
+    )
+
+ADD_SUBDIRECTORY(ToyUtility)
+INCLUDE_DIRECTORIES(${TOY_UTILITY_INCLUDE_PATHS})
+
+# Source files and their filters
+INCLUDE(CMakeSources.cmake)
+
+## TRL_INCLUDE_PATHS is used by high layer libs
+SET(TRL_INCLUDE_PATHS
+    ${TRL_INCLUDE_DIR}
+    ${PROJECT_BINARY_DIR}
+    ${TRL_DEPS_INCLUDE}
+    ${TRL_THIRD_PARTY_INCLUDE_GLFW}
+    CACHE INTERNAL "ToyRenderLayer INCLUDE PATHS"
+)
+
+INCLUDE_DIRECTORIES(
+    ${TRL_INCLUDE_DIR}
+    ${PROJECT_BINARY_DIR}
+	${TRL_DEPS_INCLUDE}
+	${TRL_THIRD_PARTY_INCLUDE_GLFW}
+)
+
+ADD_LIBRARY(TRL
+    ${TRL_SRC}
+    TRLConfig.h.in
+)
+target_link_libraries(TRL
+	ToyUtility
+	glfw
+	${GLFW_LIBRARIES}
+)
+
+
+# IDE specific
+set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
+SET_PROPERTY(TARGET TRL PROPERTY FOLDER Libs)

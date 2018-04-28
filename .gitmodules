@@ -1,0 +1,3 @@
+[submodule "Source/ToyUtility"]
+	path = Source/ToyUtility
+	url = https://github.com/morrow1nd/ToyUtility.git
