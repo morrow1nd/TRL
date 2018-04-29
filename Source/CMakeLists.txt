@@ -41,14 +41,6 @@ INCLUDE_DIRECTORIES(${TOY_UTILITY_INCLUDE_PATHS})
 # Source files and their filters
 INCLUDE(CMakeSources.cmake)
 
-## TRL_INCLUDE_PATHS is used by high layer libs
-SET(TRL_INCLUDE_PATHS
-    ${TRL_INCLUDE_DIR}
-    ${PROJECT_BINARY_DIR}
-    ${TRL_DEPS_INCLUDE}
-    ${TRL_THIRD_PARTY_INCLUDE_GLFW}
-    CACHE INTERNAL "ToyRenderLayer INCLUDE PATHS"
-)
 
 INCLUDE_DIRECTORIES(
     ${TRL_INCLUDE_DIR}
@@ -62,7 +54,7 @@ ADD_LIBRARY(TRL
     TRLConfig.h.in
 )
 target_link_libraries(TRL
-	ToyUtility
+	${TOY_UTILITY_LIBRARIES}
 	glfw
 	${GLFW_LIBRARIES}
 )
@@ -71,3 +63,21 @@ target_link_libraries(TRL
 # IDE specific
 set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
 SET_PROPERTY(TARGET TRL PROPERTY FOLDER Libs)
+
+## For lib user
+SET(TRL_INCLUDE_PATHS
+    ${TOY_UTILITY_INCLUDE_PATHS}
+    ${TRL_INCLUDE_DIR}
+    ${PROJECT_BINARY_DIR}
+    ${TRL_DEPS_INCLUDE}
+    ${TRL_THIRD_PARTY_INCLUDE_GLFW}
+    CACHE INTERNAL "TRL INCLUDE PATHS"
+)
+
+SET(TRL_LIBRARIES
+    TRL
+    ToyUtility
+    glfw
+    ${GLFW_LIBRARIES}
+    CACHE INTERNAL "TRL Librarys"
+)
