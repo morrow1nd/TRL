@@ -7,6 +7,13 @@ namespace TRL
 {
 
 
+int AttributeData::GetMaxAttributeNumber()
+{
+    GLint maxVertexAttribs;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxVertexAttribs);
+    return maxVertexAttribs;
+}
+
 void AttributeData::Init()
 {
     glGenVertexArrays(1, &m_VAO);
