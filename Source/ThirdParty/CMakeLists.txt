@@ -9,6 +9,8 @@ SET(TRL_THIRD_PARTY_INCLUDE_GLFW
     "${TRL_SOURCE_DIR}/ThirdParty/GLFW/glfw-3.2.1/include"
     CACHE INTERNAL "TRL ThirdParty glfw Include Paths"
 )
+# IDE specific
+SET_PROPERTY(TARGET glfw PROPERTY FOLDER ThirdParty)
 
 
 ## OpenGL Needed Libs
