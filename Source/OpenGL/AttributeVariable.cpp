@@ -33,4 +33,5 @@ int AttributeVariable::GetLocation() const
     return m_Location;
 }
 
+
 } // end of namespace TRL

@@ -102,10 +102,10 @@ void main()
     program.Init(vertShader, fragShader);
 
     // Prepare data
-    GpuBuffer pos;
-    pos.Init();
-    pos.Bind(GPU_ARRAY_BUFFER);
-    pos.UploadData(vertices, 24 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
+    GpuBuffer vbo;
+    vbo.Init();
+    vbo.Bind(GPU_ARRAY_BUFFER);
+    vbo.UploadData(vertices, 24 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
 
     GpuBuffer ebo;
     ebo.Init();
@@ -123,8 +123,8 @@ void main()
         return -3;
     }
 
-    attrib.SetAttributeArray(var, pos, 3, GPU_FLOAT, false, 6*sizeof(float), 0);
-    attrib.SetAttributeArray(aColor, pos, 3, GPU_FLOAT, false, 6*sizeof(float), 3 * sizeof(float));
+    attrib.SetAttributeArray(var, vbo, 3, GPU_FLOAT, false, 6*sizeof(float), 0);
+    attrib.SetAttributeArray(aColor, vbo, 3, GPU_FLOAT, false, 6*sizeof(float), 3 * sizeof(float));
     attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
     attrib.Inactive();
     

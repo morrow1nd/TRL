@@ -14,6 +14,7 @@ namespace TRL
 
 
 class GpuShader;
+class GpuTexture;
 
 
 class GpuProgram
@@ -24,6 +25,48 @@ public:
     const ToyUtility::Vector<AttributeVariable>& GetAttributes() const;
     const UniformVariable& FindUniform(const ToyUtility::String& name) const;
     const AttributeVariable& FindAttribute(const ToyUtility::String& name) const;
+
+    void SetUniform(const UniformVariable& variable, GpuFloat x);
+    void SetUniform(const UniformVariable& variable, GpuFloat x, GpuFloat y);
+    void SetUniform(const UniformVariable& variable, GpuFloat x, GpuFloat y, GpuFloat z);
+    void SetUniform(const UniformVariable& variable, GpuFloat x, GpuFloat y, GpuFloat z, GpuFloat w);
+    void SetUniform(const UniformVariable& variable, GpuInt x);
+    void SetUniform(const UniformVariable& variable, GpuInt x, GpuInt y);
+    void SetUniform(const UniformVariable& variable, GpuInt x, GpuInt y, GpuInt z);
+    void SetUniform(const UniformVariable& variable, GpuInt x, GpuInt y, GpuInt z, GpuInt w);
+    void SetUniform(const UniformVariable& variable, GpuUInt x);
+    void SetUniform(const UniformVariable& variable, GpuUInt x, GpuUInt y);
+    void SetUniform(const UniformVariable& variable, GpuUInt x, GpuUInt y, GpuUInt z);
+    void SetUniform(const UniformVariable& variable, GpuUInt x, GpuUInt y, GpuUInt z, GpuUInt w);
+
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+        const GpuFloat* values);
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+        const GpuInt* values);
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+        const GpuUInt* values);
+
+    void SetUniformMatrix2Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix3Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix4Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix2x3Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix3x2Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix2x4Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix4x2Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix3x4Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+    void SetUniformMatrix4x3Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,
+        const GpuFloat* values);
+
+    void SetUniformTex(const UniformVariable& variable, const GpuTexture& texture, int textureUnit);
+
     void Destory();
     
 

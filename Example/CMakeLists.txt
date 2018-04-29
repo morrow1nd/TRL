@@ -1,3 +1,4 @@
 # Example
 
 ADD_SUBDIRECTORY(Triangle)
+ADD_SUBDIRECTORY(Texture)

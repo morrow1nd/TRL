@@ -1,5 +1,6 @@
 SET(TRL_INC_FILES
     "${TRL_INCLUDE_DIR}/TRL/CommonType.h"
+    "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
     "${TRL_INCLUDE_DIR}/TRL/AttributeData.h"
     "${TRL_INCLUDE_DIR}/TRL/GpuBuffer.h"
     "${TRL_INCLUDE_DIR}/TRL/GpuProgram.h"
@@ -7,7 +8,8 @@ SET(TRL_INC_FILES
     "${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
     "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
     "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
-    "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
+    "${TRL_INCLUDE_DIR}/TRL/GpuTexture.h"
+    "${TRL_INCLUDE_DIR}/TRL/GpuTexture2D.h"
 )
 
 if(TRL_USING_OPENGL)
@@ -20,6 +22,8 @@ if(TRL_USING_OPENGL)
 		"${TRL_SOURCE_DIR}/OpenGL/AttributeVariable.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/UniformVariable.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/RenderAPI.cpp"
+		"${TRL_SOURCE_DIR}/OpenGL/GpuTexture.cpp"
+		"${TRL_SOURCE_DIR}/OpenGL/GpuTexture2D.cpp"
 
 		"${TRL_SOURCE_DIR}/ThirdParty/GLAD/glad-c/src/glad.c"
 	)

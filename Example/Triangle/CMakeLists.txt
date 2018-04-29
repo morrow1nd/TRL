@@ -3,7 +3,7 @@
 
 INCLUDE_DIRECTORIES(${TRL_INCLUDE_PATHS} ${TOY_UTILITY_INCLUDE_PATHS})
 add_executable(TRL_Example_Triangle
-	"Triangle.cpp"
+	"Main.cpp"
 )
 
 

@@ -4,6 +4,16 @@
 
 ## CMake Options
 
+### TRL Debug Mode
+option(OPTION_TRL_MORE_RUNTIME_CHECK
+	"Open more TRL runtime checking" ON)
+if(OPTION_TRL_MORE_RUNTIME_CHECK)
+	set(TRL_MORE_RUNTIME_CHECK "1")
+else()
+	set(TRL_MORE_RUNTIME_CHECK "0")
+endif()
+
+
 ### RenderAPI to use
 set(TRL_DX11         "(1 << 0)")
 set(TRL_OPENGL       "(1 << 1)")

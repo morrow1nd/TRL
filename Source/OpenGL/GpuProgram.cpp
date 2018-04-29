@@ -2,6 +2,11 @@
 #include "TRL/GpuShader.h"
 #include "TRL/AttributeVariable.h"
 #include "TRL/UniformVariable.h"
+#include "TRL/GpuTexture.h"
+
+#if (TRL_MORE_RUNTIME_CHECK)
+# include <iostream>
+#endif
 
 
 namespace TRL
@@ -85,6 +90,31 @@ const AttributeVariable & GpuProgram::FindAttribute(const ToyUtility::String & n
     }
 
     return AttributeVariable::None;
+}
+
+void GpuProgram::SetUniformTex(const UniformVariable& variable, const GpuTexture& texture, int textureUnit)
+{
+#if(TRL_MORE_RUNTIME_CHECK)
+    {
+        GLint fragShaderMaxTextureUnit, vertShaderMaxTextureUnit;
+        glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &fragShaderMaxTextureUnit);
+        glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, &vertShaderMaxTextureUnit);
+        if ((textureUnit >= 0
+            && textureUnit < vertShaderMaxTextureUnit
+            && textureUnit < fragShaderMaxTextureUnit) == false)
+        {
+            std::cout << "Error: (textureUnit >= 0 && textureUnit < vertShaderMaxTextureUnit "
+                "&& textureUnit < fragShaderMaxTextureUnit) == false\n"
+                << "fragShaderMaxTextureUnit: " << fragShaderMaxTextureUnit
+                << "\nvertShaderMaxTextureUnit: " << vertShaderMaxTextureUnit
+                << "\ninput textureUnit: " << textureUnit << std::endl;
+            return;
+        }
+    }
+#endif
+
+    texture.ActiveTexture(textureUnit);
+    glUniform1i(variable.GetLocation(), textureUnit);
 }
 
 void GpuProgram::Destory()
