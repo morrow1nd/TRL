@@ -51,27 +51,39 @@ int main()
     }
 
     float vertices[] = {
-        0.5f,  0.5f, 0.0f,  // top right
-        0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
+        0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,  // top left 
     };
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 3,  // first Triangle
         //1, 2, 3   // second Triangle
     };
-    const char *vertexShaderSource = "#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-        "}\0";
-    const char *fragmentShaderSource = "#version 330 core\n"
-        "out vec4 FragColor;\n"
-        "void main()\n"
-        "{\n"
-        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n\0";
+    const char *vertexShaderSource = R"(
+#version 330 core
+
+in vec3 aPos;
+in vec3 aColor;
+
+out vec3 Color;
+void main()
+{
+    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    Color = aColor;
+}
+)";
+    const char *fragmentShaderSource = R"(
+#version 330 core
+in vec3 Color;
+
+out vec4 FragColor;
+void main()
+{
+    //FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    FragColor = vec4(Color.x, Color.y, Color.z, 1.0f);
+}
+)";
 
     GpuShader vertShader, fragShader;
     vertShader.Init(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
@@ -93,7 +105,7 @@ int main()
     GpuBuffer pos;
     pos.Init();
     pos.Bind(GPU_ARRAY_BUFFER);
-    pos.UploadData(vertices, 12 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
+    pos.UploadData(vertices, 24 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
 
     GpuBuffer ebo;
     ebo.Init();
@@ -103,12 +115,18 @@ int main()
     AttributeData attrib;
     attrib.Init();
     attrib.Active();
-    auto var = program.GetAttributes()[0];
-    attrib.SetAttributeArray(var, pos, 3, GPU_FLOAT, false, 3*sizeof(float), 0);
+    auto var = program.FindAttribute("aPos");
+    auto aColor = program.FindAttribute("aColor");
+    if (var == AttributeVariable::None || aColor == AttributeVariable::None)
+    {
+        std::cout << "can't find ...";
+        return -3;
+    }
+
+    attrib.SetAttributeArray(var, pos, 3, GPU_FLOAT, false, 6*sizeof(float), 0);
+    attrib.SetAttributeArray(aColor, pos, 3, GPU_FLOAT, false, 6*sizeof(float), 3 * sizeof(float));
     attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
     attrib.Inactive();
-
-    std::cout << var.GetName() << std::endl;
     
     RenderAPI renderAPI;
 
@@ -121,8 +139,8 @@ int main()
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        Sleep(1000); // one second
-        std::cout << "-" << std::endl;
+        Sleep(100); // 0.1 second
+        //std::cout << "-" << std::endl;
     }
 
     system("pause");

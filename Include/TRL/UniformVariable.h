@@ -12,6 +12,10 @@ namespace TRL
 class UniformVariable
 {
 public:
+    static UniformVariable None;
+
+
+public:
     UniformVariable()
         :
         m_Location(0),
@@ -26,6 +30,14 @@ public:
         m_DataType(type),
         m_ArrayLength(arrayLength)
     {}
+
+    bool operator==(const UniformVariable& rhs) const
+    {
+        return m_Location == rhs.m_Location
+            && m_ArrayLength == rhs.m_ArrayLength
+            && m_DataType == rhs.m_DataType
+            && m_Name == rhs.m_Name;
+    }
 
 
 public:

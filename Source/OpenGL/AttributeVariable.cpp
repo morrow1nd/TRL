@@ -5,6 +5,9 @@ namespace TRL
 {
 
 
+AttributeVariable AttributeVariable::None = AttributeVariable();
+
+
 GpuDataType AttributeVariable::GetDataType() const
 {
     return m_DataType;

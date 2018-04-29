@@ -5,6 +5,9 @@ namespace TRL
 {
 
 
+UniformVariable UniformVariable::None = UniformVariable();
+
+
 GpuDataType UniformVariable::GetDataType() const
 {
     return m_DataType;

@@ -22,6 +22,8 @@ public:
     bool Init(GpuShader& vertShader, GpuShader& fragShader);
     const ToyUtility::Vector<UniformVariable>& GetUniforms() const;
     const ToyUtility::Vector<AttributeVariable>& GetAttributes() const;
+    const UniformVariable& FindUniform(const ToyUtility::String& name) const;
+    const AttributeVariable& FindAttribute(const ToyUtility::String& name) const;
     void Destory();
     
 

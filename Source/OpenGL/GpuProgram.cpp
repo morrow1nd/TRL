@@ -61,6 +61,32 @@ const ToyUtility::Vector<AttributeVariable>& GpuProgram::GetAttributes() const
     return m_VertShaderInfo.Attributes;
 }
 
+const UniformVariable & GpuProgram::FindUniform(const ToyUtility::String & name) const
+{
+    for (auto i = m_VertShaderInfo.Uniforms.begin(); i != m_VertShaderInfo.Uniforms.end(); ++i)
+    {
+        if ((*i).GetName() == name)
+        {
+            return (*i);
+        }
+    }
+
+    return UniformVariable::None;
+}
+
+const AttributeVariable & GpuProgram::FindAttribute(const ToyUtility::String & name) const
+{
+    for (auto i = m_VertShaderInfo.Attributes.begin(); i != m_VertShaderInfo.Attributes.end(); ++i)
+    {
+        if ((*i).GetName() == name)
+        {
+            return (*i);
+        }
+    }
+
+    return AttributeVariable::None;
+}
+
 void GpuProgram::Destory()
 {
     glDeleteProgram(m_ProgramInner);
