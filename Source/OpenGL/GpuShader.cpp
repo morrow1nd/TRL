@@ -70,5 +70,10 @@ void GpuShader::Destory()
     glDeleteShader(m_ShaderInner);
 }
 
+bool GpuShader::IsGeneratedByTRLShader() const
+{
+    return m_ShaderInfo.get() != nullptr;
+}
+
 
 } // end of namespace TRL

@@ -43,46 +43,46 @@ void AttributeData::SetAttributeArray(const AttributeVariable& variable, GpuBuff
     int size, GpuDataType type, bool normalized, int stride, int begin_offset)
 {
     vbo.Bind();
-    glEnableVertexAttribArray(variable.m_Layout);
-    glVertexAttribPointer(variable.m_Layout, size, type, normalized, stride, (const void*)begin_offset);
+    glEnableVertexAttribArray(variable.GetLocation());
+    glVertexAttribPointer(variable.GetLocation(), size, type, normalized ? GL_TRUE : GL_FALSE, stride, (const void*)begin_offset);
 }
 
 void AttributeData::EnableAttributeArray(const AttributeVariable& variable, bool enable)
 {
     if (enable)
-        glEnableVertexAttribArray(variable.m_Layout);
+        glEnableVertexAttribArray(variable.GetLocation());
     else
-        glDisableVertexAttribArray(variable.m_Layout);
+        glDisableVertexAttribArray(variable.GetLocation());
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuFloat x)
 {
-    glVertexAttrib1f(variable.m_Layout, x);
+    glVertexAttrib1f(variable.GetLocation(), x);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuFloat x, GpuFloat y)
 {
-    glVertexAttrib2f(variable.m_Layout, x, y);
+    glVertexAttrib2f(variable.GetLocation(), x, y);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuFloat x, GpuFloat y, GpuFloat z)
 {
-    glVertexAttrib3f(variable.m_Layout, x, y, z);
+    glVertexAttrib3f(variable.GetLocation(), x, y, z);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuFloat x, GpuFloat y, GpuFloat z, GpuFloat w)
 {
-    glVertexAttrib4f(variable.m_Layout, x, y, z, w);
+    glVertexAttrib4f(variable.GetLocation(), x, y, z, w);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuInt x, GpuInt y, GpuInt z, GpuInt w)
 {
-    glVertexAttribI4i(variable.m_Layout, x, y, z, w);
+    glVertexAttribI4i(variable.GetLocation(), x, y, z, w);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, GpuUInt x, GpuUInt y, GpuUInt z, GpuUInt w)
 {
-    glVertexAttribI4ui(variable.m_Layout, x, y, z, w);
+    glVertexAttribI4ui(variable.GetLocation(), x, y, z, w);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, int size, const GpuFloat * values)
@@ -90,16 +90,16 @@ void AttributeData::SetConstantAttribute(const AttributeVariable& variable, int 
     switch (size)
     {
     case 1:
-        glVertexAttrib1fv(variable.m_Layout, values);
+        glVertexAttrib1fv(variable.GetLocation(), values);
         break;
     case 2:
-        glVertexAttrib2fv(variable.m_Layout, values);
+        glVertexAttrib2fv(variable.GetLocation(), values);
         break;
     case 3:
-        glVertexAttrib3fv(variable.m_Layout, values);
+        glVertexAttrib3fv(variable.GetLocation(), values);
         break;
     case 4:
-        glVertexAttrib4fv(variable.m_Layout, values);
+        glVertexAttrib4fv(variable.GetLocation(), values);
         break;
     default:
         // todo: show error info
@@ -109,12 +109,12 @@ void AttributeData::SetConstantAttribute(const AttributeVariable& variable, int 
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, const GpuInt * values)
 {
-    glVertexAttribI4iv(variable.m_Layout, values);
+    glVertexAttribI4iv(variable.GetLocation(), values);
 }
 
 void AttributeData::SetConstantAttribute(const AttributeVariable& variable, const GpuUInt * values)
 {
-    glVertexAttribI4uiv(variable.m_Layout, values);
+    glVertexAttribI4uiv(variable.GetLocation(), values);
 }
 
 void AttributeData::Destory()

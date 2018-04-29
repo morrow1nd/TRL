@@ -2,11 +2,17 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/String/String.h"
+#include "ToyUtility/Container/Vector.h"
+#include "ToyUtility/Memory/SmartPtr.h"
 #include "TRL/CommonType.h"
 
 
 namespace TRL
 {
+
+
+class AttributeVariable;
+class UniformVariable;
 
 
 class GpuShader
@@ -21,18 +27,28 @@ public:
 
 public:
     //void Load(void* p, int size);
-    bool Init(const ToyUtility::String& sourceCode, GpuShaderType type);
+    bool Init(const ToyUtility::String& rawSourceCode, GpuShaderType type);
     bool IsCompiledSucc() const;
     const ToyUtility::String& GetCompileLogInfo() const;
     GpuShaderType GetShaderType() const;
     void Destory();
     
+    bool IsGeneratedByTRLShader() const;
+
     friend class GpuProgram;
+
+private:
+    struct ShaderInfo
+    {
+        ToyUtility::Vector<UniformVariable> Uniforms;
+        ToyUtility::Vector<AttributeVariable> Attributes;
+    };
 
 private:
     bool m_CompiledSucc;
     GpuShaderInner m_ShaderInner;
     ToyUtility::String m_CompileLog;
+    ToyUtility::SPtr<ShaderInfo> m_ShaderInfo;
 };
 
 

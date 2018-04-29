@@ -73,24 +73,6 @@ int main()
         "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
         "}\n\0";
 
-    // Prepare data
-    GpuBuffer pos;
-    pos.Init();
-    pos.Bind(GPU_ARRAY_BUFFER);
-    pos.UploadData(vertices, 12 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
-
-    GpuBuffer ebo;
-    ebo.Init();
-    ebo.Bind(GPU_ELEMENT_ARRAY_BUFFER);
-    ebo.UploadData(indices, 3 * sizeof(GpuUInt), GpuBufferDataType::GPU_STATIC_DRAW);
-
-    AttributeData attrib;
-    attrib.Init();
-    attrib.Active();
-    attrib.SetAttributeArray(AttributeVariable(0), pos, 3, GPU_FLOAT, false, 3*sizeof(float), 0);
-    attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
-    attrib.Inactive();
-
     GpuShader vertShader, fragShader;
     vertShader.Init(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
     if (vertShader.IsCompiledSucc() == false)
@@ -106,6 +88,27 @@ int main()
 
     GpuProgram program;
     program.Init(vertShader, fragShader);
+
+    // Prepare data
+    GpuBuffer pos;
+    pos.Init();
+    pos.Bind(GPU_ARRAY_BUFFER);
+    pos.UploadData(vertices, 12 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
+
+    GpuBuffer ebo;
+    ebo.Init();
+    ebo.Bind(GPU_ELEMENT_ARRAY_BUFFER);
+    ebo.UploadData(indices, 3 * sizeof(GpuUInt), GpuBufferDataType::GPU_STATIC_DRAW);
+
+    AttributeData attrib;
+    attrib.Init();
+    attrib.Active();
+    auto var = program.GetAttributes()[0];
+    attrib.SetAttributeArray(var, pos, 3, GPU_FLOAT, false, 3*sizeof(float), 0);
+    attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
+    attrib.Inactive();
+
+    std::cout << var.GetName() << std::endl;
     
     RenderAPI renderAPI;
 
@@ -117,7 +120,8 @@ int main()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-        Sleep(1000000);
+
+        Sleep(1000); // one second
         std::cout << "-" << std::endl;
     }
 
