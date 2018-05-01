@@ -56,12 +56,12 @@ bool GpuProgram::Init(GpuShader& vertShader, GpuShader& fragShader)
     return true;
 }
 
-const ToyUtility::Vector<UniformVariable>& GpuProgram::GetUniforms() const
+const ToyUtility::List<UniformVariable>& GpuProgram::GetUniforms() const
 {
     return m_VertShaderInfo.Uniforms;
 }
 
-const ToyUtility::Vector<AttributeVariable>& GpuProgram::GetAttributes() const
+const ToyUtility::List<AttributeVariable>& GpuProgram::GetAttributes() const
 {
     return m_VertShaderInfo.Attributes;
 }

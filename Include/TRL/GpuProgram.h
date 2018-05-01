@@ -21,8 +21,8 @@ class GpuProgram
 {
 public:
     bool Init(GpuShader& vertShader, GpuShader& fragShader);
-    const ToyUtility::Vector<UniformVariable>& GetUniforms() const;
-    const ToyUtility::Vector<AttributeVariable>& GetAttributes() const;
+    const ToyUtility::List<UniformVariable>& GetUniforms() const;
+    const ToyUtility::List<AttributeVariable>& GetAttributes() const;
     const UniformVariable& FindUniform(const ToyUtility::String& name) const;
     const AttributeVariable& FindAttribute(const ToyUtility::String& name) const;
 
@@ -75,8 +75,8 @@ public:
 public:
     struct AttributeUniformInfo
     {
-        ToyUtility::Vector<UniformVariable> Uniforms;
-        ToyUtility::Vector<AttributeVariable> Attributes;
+        ToyUtility::List<UniformVariable> Uniforms;
+        ToyUtility::List<AttributeVariable> Attributes;
     };
 
 

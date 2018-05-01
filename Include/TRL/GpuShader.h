@@ -40,8 +40,8 @@ public:
 private:
     struct ShaderInfo
     {
-        ToyUtility::Vector<UniformVariable> Uniforms;
-        ToyUtility::Vector<AttributeVariable> Attributes;
+        ToyUtility::List<UniformVariable> Uniforms;
+        ToyUtility::List<AttributeVariable> Attributes;
     };
 
 private:

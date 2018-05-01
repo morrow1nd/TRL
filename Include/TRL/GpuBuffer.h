@@ -14,7 +14,7 @@ class GpuBuffer
 {
 public:
     // Create multi buffer in one call
-    static ToyUtility::Vector<ToyUtility::SPtr<GpuBuffer>> CreateBuffers(int number);
+    static ToyUtility::List<ToyUtility::SPtr<GpuBuffer>> CreateBuffers(int number);
 
 public:
     GpuBuffer()
