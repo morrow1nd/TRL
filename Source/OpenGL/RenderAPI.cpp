@@ -24,5 +24,10 @@ void RenderAPI::DrawIndices(GpuPrimitiveType mode, const AttributeData& attribut
         (const void*)offset);
 }
 
+void RenderAPI::ConvertProjectionMatrix(const ToyUtility::Matrix4 & matrix, ToyUtility::Matrix4 & dest)
+{
+    dest = matrix;
+}
+
 
 } // end of namespace TRL

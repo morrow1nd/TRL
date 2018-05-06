@@ -2,6 +2,7 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/Memory/SmartPtr.h"
+#include "ToyUtility/Math/Matrix4.h"
 #include "TRL/CommonType.h"
 
 
@@ -20,6 +21,10 @@ public:
     bool IsActiveGpuProgram(const GpuProgram& program);
 
     void DrawIndices(GpuPrimitiveType mode, const AttributeData& attributeData, int offset);
+
+    // Contain a default matrix into a matrix suitable for use by this specific render system.
+    void ConvertProjectionMatrix(const ToyUtility::Matrix4& matrix, ToyUtility::Matrix4& dest);
+
 
 private:
     GpuProgramInner m_ActiveGpuProgram;
