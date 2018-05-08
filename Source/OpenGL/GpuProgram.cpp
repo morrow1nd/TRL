@@ -92,6 +92,184 @@ const AttributeVariable & GpuProgram::FindAttribute(const ToyUtility::String & n
     return AttributeVariable::None;
 }
 
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuFloat x)
+{
+    glUniform1f(variable.GetLocation(), x);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuFloat x, GpuFloat y)
+{
+    glUniform2f(variable.GetLocation(), x, y);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuFloat x, GpuFloat y, GpuFloat z)
+{
+    glUniform3f(variable.GetLocation(), x, y, z);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuFloat x, GpuFloat y, GpuFloat z, GpuFloat w)
+{
+    glUniform4f(variable.GetLocation(), x, y, z, w);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuInt x)
+{
+    glUniform1i(variable.GetLocation(), x);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuInt x, GpuInt y)
+{
+    glUniform2i(variable.GetLocation(), x, y);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuInt x, GpuInt y, GpuInt z)
+{
+    glUniform3i(variable.GetLocation(), x, y, z);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuInt x, GpuInt y, GpuInt z, GpuInt w)
+{
+    glUniform4i(variable.GetLocation(), x, y, z, w);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuUInt x)
+{
+    glUniform1ui(variable.GetLocation(), x);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuUInt x, GpuUInt y)
+{
+    glUniform2ui(variable.GetLocation(), x, y);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuUInt x, GpuUInt y, GpuUInt z)
+{
+    glUniform3ui(variable.GetLocation(), x, y, z);
+}
+
+void GpuProgram::SetUniform(const UniformVariable & variable, GpuUInt x, GpuUInt y, GpuUInt z, GpuUInt w)
+{
+    glUniform4ui(variable.GetLocation(), x, y, z, w);
+}
+
+void GpuProgram::SetUniformArray(const UniformVariable & variable, GpuSizei arrayLength,
+    GpuVariableComponentSize componentSize,
+    const GpuFloat * values)
+{
+    // TODO: or use a function pointer list to replace the switch ?
+    switch (componentSize)
+    {
+    case GpuVariableComponentSize::_1:
+        glUniform1fv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_2:
+        glUniform2fv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_3:
+        glUniform3fv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_4:
+        glUniform4fv(variable.GetLocation(), arrayLength, values);
+        break;
+    }
+}
+
+void GpuProgram::SetUniformArray(const UniformVariable & variable, GpuSizei arrayLength,
+    GpuVariableComponentSize componentSize,
+    const GpuInt * values)
+{
+    switch (componentSize)
+    {
+    case GpuVariableComponentSize::_1:
+        glUniform1iv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_2:
+        glUniform2iv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_3:
+        glUniform3iv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_4:
+        glUniform4iv(variable.GetLocation(), arrayLength, values);
+        break;
+    }
+}
+
+void GpuProgram::SetUniformArray(const UniformVariable & variable, GpuSizei arrayLength,
+    GpuVariableComponentSize componentSize,
+    const GpuUInt * values)
+{
+    switch (componentSize)
+    {
+    case GpuVariableComponentSize::_1:
+        glUniform1uiv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_2:
+        glUniform2uiv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_3:
+        glUniform3uiv(variable.GetLocation(), arrayLength, values);
+        break;
+    case GpuVariableComponentSize::_4:
+        glUniform4uiv(variable.GetLocation(), arrayLength, values);
+        break;
+    }
+}
+
+void GpuProgram::SetUniformMatrix2Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix2fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix3Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix3fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix4Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix4fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix2x3Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix2x3fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix3x2Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix3x2fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix2x4Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix2x4fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix4x2Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix4x2fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix3x4Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix3x4fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
+void GpuProgram::SetUniformMatrix4x3Array(const UniformVariable & variable, GpuSizei arrayLength,
+    bool transpose, const GpuFloat * values)
+{
+    glUniformMatrix4x3fv(variable.GetLocation(), arrayLength, transpose ? GL_TRUE : GL_FALSE, values);
+}
+
 void GpuProgram::SetUniformTex(const UniformVariable& variable, const GpuTexture& texture, int textureUnit)
 {
 #if(TRL_MORE_RUNTIME_CHECK)

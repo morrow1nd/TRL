@@ -39,11 +39,14 @@ public:
     void SetUniform(const UniformVariable& variable, GpuUInt x, GpuUInt y, GpuUInt z);
     void SetUniform(const UniformVariable& variable, GpuUInt x, GpuUInt y, GpuUInt z, GpuUInt w);
 
-    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength,
+        GpuVariableComponentSize componentSize,
         const GpuFloat* values);
-    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength,
+        GpuVariableComponentSize componentSize,
         const GpuInt* values);
-    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength, int componentSize,
+    void SetUniformArray(const UniformVariable& variable, GpuSizei arrayLength,
+        GpuVariableComponentSize componentSize,
         const GpuUInt* values);
 
     void SetUniformMatrix2Array(const UniformVariable& variable, GpuSizei arrayLength, bool transpose,

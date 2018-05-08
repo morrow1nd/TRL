@@ -266,6 +266,14 @@ enum GpuTextureWrapMode
     MIRRORED_REPEAT = GL_MIRRORED_REPEAT,
 };
 
+enum class GpuVariableComponentSize
+{
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+};
+
 
 #endif
 
