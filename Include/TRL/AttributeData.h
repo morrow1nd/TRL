@@ -38,7 +38,7 @@ public:
     //      value is 4.
     // type: Specifies the data type of each component in the array
     // stride: Specifies the byte offset between consecutive generic vertex attributes
-    // beginOffset: Specifies a pointer to the first generic vertex attribute in the array
+    // beginOffset: Specifies a pointer to the first generic vertex attribute in the array (by bytes)
     void SetAttributeArray(const AttributeVariable& variable, GpuBuffer& vbo,
         int size, GpuDataType type, bool normalized, int stride, int beginOffset);
     void EnableAttributeArray(const AttributeVariable& variable, bool enable);
