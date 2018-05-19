@@ -1,5 +1,6 @@
 #pragma once
 
+#include "TRLConfig.h"
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/Math/Matrix4.h"
@@ -14,6 +15,16 @@ class GpuProgram;
 class AttributeData;
 
 
+enum class TRLNativeApi
+{
+    Unknown = 0,
+
+    OpenGL = TRL_OPENGL, // OpenGL 3.3
+    OpenGLES = TRL_OPENGLES, // OpenGL ES 3.0
+    DirectX11 = TRL_DX11,
+};
+
+
 class RenderAPI
 {
 public:
@@ -21,6 +32,8 @@ public:
 
 
 public:
+    TRLNativeApi GetUsedNativeApi() const;
+
     void ActiveGpuProgram(const GpuProgram& program);
     bool IsActiveGpuProgram(const GpuProgram& program);
 

@@ -118,6 +118,17 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     return 0;
 }
 
+TRLNativeApi RenderAPI::GetUsedNativeApi() const
+{
+#if defined(TRL_OPENGL)
+    return TRLNativeApi::OpenGL;
+#elif defined(TRL_OPENGLES)
+    return TRLNativeApi::OpenGLES;
+#else
+# error TRL: Unknow Native Api.
+#endif
+}
+
 void RenderAPI::ActiveGpuProgram(const GpuProgram& program)
 {
     m_ActiveGpuProgram = program.m_ProgramInner;
