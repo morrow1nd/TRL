@@ -12,6 +12,23 @@ SET(TRL_INC_FILES
     "${TRL_INCLUDE_DIR}/TRL/GpuTexture2D.h"
 )
 
+SET(TRL_INC_SL
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/DebugGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/GLSLGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/Token.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/Tokener.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/trlsl_parser.h"
+)
+SET(TRL_SRC_SL
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/DebugGenerator.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/GLSLGenerator.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/trlsl_parser.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLGenerator.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/Tokener.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/Token.cpp"
+)
+
 if(TRL_USING_OPENGL)
 	set(TRL_SRC_FILES
 		"${TRL_SOURCE_DIR}/OpenGL/AttributeData.cpp"
@@ -61,7 +78,9 @@ endif()
 source_group("CMake"									FILES "${TRL_SOURCE_DIR}/../CMakeLists.txt")
 source_group("CMake\\Source"                            FILES "CMakeSources.cmake" "CMakeLists.txt")
 source_group("CMake\\Source\\ThirdParty"				FILES "${TRL_SOURCE_DIR}/ThirdParty/CMakeLists.txt")
-source_group("Header Files"								FILES ${TRL_INC_FILES})
+source_group("Header Files"                             FILES ${TRL_INC_FILES})
+source_group("Source Files\\TRL SL"                     FILES ${TRL_SRC_SL})
+source_group("Header Files\\TRL SL"						FILES ${TRL_INC_SL})
 if(TRL_USING_OPENGL)
 source_group("Source Files\\OpenGL"						FILES ${TRL_SRC_FILES})
 endif()
@@ -78,5 +97,7 @@ set(TRL_SRC
     "CMakeSources.cmake" "CMakeLists.txt"
 	"${TRL_SOURCE_DIR}/ThirdParty/CMakeLists.txt"
 	${TRL_INC_FILES}
-	${TRL_SRC_FILES}
+    ${TRL_SRC_FILES}
+    ${TRL_INC_SL}
+	${TRL_SRC_SL}
 )

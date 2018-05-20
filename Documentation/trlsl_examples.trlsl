@@ -1,0 +1,22 @@
+// TRL Shader Lanuage Example
+
+
+const int numLights = 2;
+
+uniform mat4 mvp;
+uniform vec4 lightPos;
+uniform highp float f[4];
+uniform vec4 lights[numLights];
+
+in vec4 position;
+in vec2 uv;
+
+out vec2 o_uv;
+
+void vertex_main()
+{
+    TRL_position = mvp * position;
+
+    o_uv = uv;
+}
+

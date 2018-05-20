@@ -32,3 +32,7 @@ if(TRL_USING_OPENGL OR TRL_USING_OPENGLES)
         CACHE INTERNAL "TRL ThirdParty Libs Include Paths"
     )
 endif()
+
+
+## sqlite-lemon
+ADD_SUBDIRECTORY(sqlite-lemon)
