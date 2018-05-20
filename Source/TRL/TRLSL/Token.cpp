@@ -1,5 +1,5 @@
 #include "TRL/TRLSL/Token.h"
-#include "TRL/TRLSL/trlsl_parser.h"
+#include "TRL/TRLSL/trlsl_token_id.h"
 
 
 namespace TRL
@@ -47,6 +47,8 @@ Token Token::SUB_ASSIGN = Token(TRLSL_T_SUB_ASSIGN, "-=");
 Token Token::AND_ASSIGN = Token(TRLSL_T_AND_ASSIGN, "&=");
 Token Token::XOR_ASSIGN = Token(TRLSL_T_XOR_ASSIGN, "^=");
 Token Token::OR_ASSIGN = Token(TRLSL_T_OR_ASSIGN, "|=");
+Token Token::LEFT_ASSIGN = Token(TRLSL_T_LEFT_ASSIGN, "<<=");
+Token Token::RIGHT_ASSIGN = Token(TRLSL_T_RIGHT_ASSIGN, ">>=");
 Token Token::SEMICOLON = Token(TRLSL_T_SEMICOLON, ";");
 Token Token::CONST_ = Token(TRLSL_T_CONST, "const");
 Token Token::IN_ = Token(TRLSL_T_IN, "in");
@@ -97,6 +99,8 @@ Token Token::CONTINUE = Token(TRLSL_T_CONTINUE, "continue");
 Token Token::BREAK = Token(TRLSL_T_BREAK, "break");
 Token Token::RETURN = Token(TRLSL_T_RETURN, "return");
 Token Token::DISCARD = Token(TRLSL_T_DISCARD, "discard");
+Token Token::TRUE_ = Token(TRLSL_T_BOOLCONSTANT, "true");
+Token Token::FALSE_ = Token(TRLSL_T_BOOLCONSTANT, "false");
 
 
 } // end of namespace TRL

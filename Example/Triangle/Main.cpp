@@ -9,6 +9,11 @@
 #include "GLFW/glfw3.h"
 #include <iostream>
 
+#include "ToyUtility/DataStream/MemoryDataStream.h"
+#include "TRL/TRLSL/DebugGenerator.h"
+#include "TRL/TRLSL/TRLSLParser.h"
+#include "TRL/TRLSL/TRLSLTokener.h"
+
 
 using namespace ToyUtility;
 using namespace TRL;
@@ -25,6 +30,32 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 int main()
 {
+    const ToyUtility::String code = R"(
+
+int main()
+{
+    return 0;
+}
+
+)";
+
+    TRL::TRLSLTokener tokener;
+    bool res = tokener.Prepare(MemoryDataStream((void*)code.c_str(), code.size() + 1, false));
+    if (!res)
+    {
+        std::cout << "tokener: " << tokener.GetError().ErrorInfo << std::endl;
+        return 2;
+    }
+
+    DebugGenerator generator;
+    
+    TRLSLParser parser;
+    parser.Parse(tokener, generator);
+    
+    std::cout << "end" << std::endl;
+    system("pause");
+    return 3;
+
     // glfw: initialize and configure
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

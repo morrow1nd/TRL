@@ -15,6 +15,10 @@ class DebugGenerator : public TRLSLGenerator
 public:
     void Log(const ToyUtility::String& info);
 
+    virtual void SyntaxError() override;
+    virtual void ParseFailure() override;
+    virtual void StackOverflow() override;
+    virtual void ParseAccept() override;
 
     // Inherited via TRLSLGenerator
     virtual TRL::TRLSLGenerator::RetType variable_identifier__To__IDENTIFIER(TRL::TRLSLGenerator::InType, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr);

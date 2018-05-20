@@ -1,0 +1,83 @@
+
+bool
+break
+const
+continue
+discard
+else
+float
+for
+highp
+identifier  <---
+if
+in
+int
+inout
+ivec...
+lowp
+mat...
+mediump
+out
+return
+sampler...
+uniform
+uint
+uvec...
+vec...
+void
+FIELD_SELECTION (follow .)
+    xxxx
+    xxxy
+    xxxz
+    xxxw
+    xxyx
+    xxyy
+    xxyz
+    xxyw
+    xxzx
+    ...
+while
+0~9
+++
++=
++
+--
+-=
+-
+*=
+*
+/=
+/
+<<=
+<<
+<=
+<
+>>=
+>>
+>=
+>
+==
+=
+!=
+!
+&=
+&&
+&
+%=
+%
+||
+|=
+|
+^=
+^
+.
+,
+?
+:
+;
+(
+)
+[
+]
+{
+}

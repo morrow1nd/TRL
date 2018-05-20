@@ -11,7 +11,21 @@ namespace TRL
 
 class GLSLGenerator : public TRLSLGenerator
 {
-    // Inherited via TRLSLGenerator
+public:
+
+
+
+private:
+
+
+
+    // Handler used by lemon-parser
+public:
+    virtual void SyntaxError() override{ }
+    virtual void ParseFailure() override{ }
+    virtual void StackOverflow() override{ }
+    virtual void ParseAccept() override{ }
+
     virtual TRL::TRLSLGenerator::RetType variable_identifier__To__IDENTIFIER(TRL::TRLSLGenerator::InType, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr);
     virtual TRL::TRLSLGenerator::RetType primary_expression__To__variable_identifier(TRL::TRLSLGenerator::InType, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr);
     virtual TRL::TRLSLGenerator::RetType primary_expression__To__INTCONSTANT(TRL::TRLSLGenerator::InType, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr);

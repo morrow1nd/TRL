@@ -24,8 +24,15 @@ struct Token
         :
         Type(type), Str(str)
     {
-        StrLen = std::strlen(str);
+        auto len = std::strlen(str);
+        //assert(len > 100); // TODOM
+        StrLen = len;
     }
+
+    Token(ToyUtility::uint16 type, const char* str, int strLen)
+        :
+        Type(type), Str(str), StrLen(strLen)
+    {}
 
     ToyUtility::uint16 Type;
     ToyUtility::uint16 StrLen;
@@ -71,6 +78,8 @@ struct Token
     static Token SUB_ASSIGN;
     static Token AND_ASSIGN;
     static Token XOR_ASSIGN;
+    static Token LEFT_ASSIGN;
+    static Token RIGHT_ASSIGN;
     static Token OR_ASSIGN;
     static Token SEMICOLON;
     static Token CONST_;
@@ -122,6 +131,9 @@ struct Token
     static Token BREAK;
     static Token RETURN;
     static Token DISCARD;
+
+    static Token TRUE_;
+    static Token FALSE_;
 };
 
 

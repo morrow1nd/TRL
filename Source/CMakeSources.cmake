@@ -17,15 +17,16 @@ SET(TRL_INC_SL
     "${TRL_INCLUDE_DIR}/TRL/TRLSL/GLSLGenerator.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLGenerator.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLSL/Token.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/Tokener.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/trlsl_parser.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLTokener.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/trlsl_token_id.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLParser.h"
 )
 SET(TRL_SRC_SL
     "${TRL_SOURCE_DIR}/TRL/TRLSL/DebugGenerator.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/GLSLGenerator.cpp"
-    "${TRL_SOURCE_DIR}/TRL/TRLSL/trlsl_parser.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLParser.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLGenerator.cpp"
-    "${TRL_SOURCE_DIR}/TRL/TRLSL/Tokener.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLTokener.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/Token.cpp"
 )
 

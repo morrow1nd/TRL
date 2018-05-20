@@ -38,6 +38,22 @@
 //      %stack_size 
 
 
+%parse_failure {
+    generator->ParseFailure();
+}
+
+%stack_overflow {
+    generator->StackOverflow();
+}
+
+%parse_accept {
+    generator->ParseAccept();
+}
+
+%syntax_error {
+    generator->SyntaxError();
+}
+
 
 %include {
     #include <cassert>
