@@ -7,10 +7,10 @@ namespace TRL
 {
 
 
-ToyUtility::List<Token>& TRLSLGenerator::GetInnerTokenPool()
-{
-    throw std::exception("TRLSLGenerator::GetInnerTokenPool: you should impl this virtual function.");
-}
+//const ToyUtility::List<Token>& TRLSLGenerator::GetAllTokens()
+//{
+//    throw std::exception("TRLSLGenerator::GetAllTokens: you should impl this virtual function.");
+//}
 
 
 } // end of namespace TRL

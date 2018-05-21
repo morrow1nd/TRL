@@ -46,8 +46,6 @@ public:
     template<typename T>
     T* GetUserData() const { return (T*) UserData; }
 
-    Token* Attach(Token* anotherToken);
-
     bool IsTerminalSymbol() const;
 
 

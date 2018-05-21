@@ -13,16 +13,45 @@ namespace TRL
 class DebugGenerator : public TRLSLGenerator
 {
 public:
-    virtual bool CanUseConstToken() const override { return true; }
+    DebugGenerator()
+        :
+        m_Curr(0),
+        m_TokensPtr(nullptr)
+    {}
+
+
+public:
+    virtual Token* NextToken(bool restart = false) override
+    {
+        if(restart)
+            m_Curr = 0;
+
+        if (m_TokensPtr != nullptr && m_Curr < m_TokensPtr->size())
+        {
+            return (Token*)&(m_TokensPtr->at(m_Curr++));
+        }
+
+        return nullptr;
+    }
+
+    virtual void SetAllTokens(const ToyUtility::List<Token>& tokens) override { m_TokensPtr = &tokens; }
 
     void Log(const ToyUtility::String& info);
 
+
+private:
+    const ToyUtility::List<Token>* m_TokensPtr;
+
+    int m_Curr;
+
+
+    // Inherited via TRLSLGenerator
+public:
     virtual void SyntaxError() override;
     virtual void ParseFailure() override;
     virtual void StackOverflow() override;
     virtual void ParseAccept() override;
 
-    // Inherited via TRLSLGenerator
     virtual TRL::TRLSLGenerator::RetType variable_identifier__To__IDENTIFIER(TRL::TRLSLGenerator::InType*, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr) override;
     virtual TRL::TRLSLGenerator::RetType primary_expression__To__variable_identifier(TRL::TRLSLGenerator::InType*, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr) override;
     virtual TRL::TRLSLGenerator::RetType primary_expression__To__INTCONSTANT(TRL::TRLSLGenerator::InType*, TRL::TRLSLGenerator::InType _1 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _2 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _3 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _4 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _5 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _6 = (TRL::TRLSLGenerator::InType)nullptr, TRL::TRLSLGenerator::InType _7 = (TRL::TRLSLGenerator::InType)nullptr) override;

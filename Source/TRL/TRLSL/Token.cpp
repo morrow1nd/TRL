@@ -14,7 +14,7 @@ Token::Token(ToyUtility::uint16 type, const char* str)
     Type(type), Str(str), UserData(nullptr)
 {
     auto len = std::strlen(str);
-    assert(len > std::numeric_limits<StrLenType>::max());
+    assert(len < std::numeric_limits<StrLenType>::max());
     
     StrLen = static_cast<StrLenType>(len);
 }
@@ -116,21 +116,6 @@ Token Token::DISCARD = Token(TRLSL_T_DISCARD, "discard");
 Token Token::TRUE_ = Token(TRLSL_T_BOOLCONSTANT, "true");
 Token Token::FALSE_ = Token(TRLSL_T_BOOLCONSTANT, "false");
 
-
-Token * Token::Attach(Token * anotherToken)
-{
-    if(Type == None.Type)
-        return &None;
-
-    if (anotherToken == nullptr)
-    {
-        this->UserData = nullptr;
-        return &None;
-    }
-
-    this->UserData = anotherToken;
-    return anotherToken;
-}
 
 bool Token::IsTerminalSymbol() const
 {

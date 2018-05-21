@@ -2,6 +2,7 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/String/String.h"
+#include "ToyUtility/Container/List.h"
 #include "TRL/CommonType.h"
 #include "TRL/TRLSL/TRLSLGenerator.h"
 
@@ -21,13 +22,15 @@ class GLSLGenerator : public TRLSLGenerator
 public:
     GLSLGenerator()
         :
-        m_RootToken(nullptr)
+        m_RootToken(0),
+        m_CurrToken(0)
     {}
 
 
 public:
-    virtual bool CanUseConstToken() const override { return false; }
-    virtual ToyUtility::List<Token>& GetInnerTokenPool() override { return m_InnerTokenPool; }
+    virtual Token* NextToken(bool restart = false) override;
+
+    virtual void SetAllTokens(const ToyUtility::List<Token>& tokens) override;
 
     void GenerateCode(ToyUtility::DataStream& stream) const;
 
@@ -35,8 +38,59 @@ public:
 
 
 private:
-    ToyUtility::List<Token> m_InnerTokenPool;
-    Token* m_RootToken;
+    struct TokenHelper
+    {
+        TokenHelper()
+            : Next(0), Last(0), TokenIndex(0)
+        {}
+
+        int TokenIndex;
+        int Next;
+        int Last;
+    };
+
+    Token* _GetLastOne(Token* t);
+
+    int _GetLastOneId(Token* t);
+
+    Token* _GetToken(int tokenIndex)
+    {
+        return &m_TokenPool[tokenIndex];
+    }
+
+    int _GetTokenId(Token* t)
+    {
+        return _GetTokenHelper(t)->TokenIndex;
+    }
+
+    TokenHelper* _GetTokenHelper(Token* t)
+    {
+        return &m_TokenHelpers[(int)(t->GetUserData())];
+    }
+
+    TokenHelper* _GetTokenHelper(int tokenIndex)
+    {
+        return _GetTokenHelper(_GetToken(tokenIndex));
+    }
+
+
+    // Link token 1, 2, 3..., and then return token 1
+    void _LinkTokens(Token* _1, Token* _2, Token* _3, Token* _4, Token* _5, Token* _6, Token* _7);
+    void _LinkTokens(Token* _1, Token* _2);
+
+    // Get a new token and manage it with m_TokenPool
+    Token& _NewToken(Token t);
+
+
+private:
+    ToyUtility::List<int> m_Tokens; // Contain indices of tokens in m_TokenPool
+
+    ToyUtility::List<Token> m_TokenPool;
+    ToyUtility::List<TokenHelper> m_TokenHelpers; // Token.UserData contains the index of TokenHelper
+    
+    int m_RootToken;
+
+    int m_CurrToken;
 
 
     // Handler used by lemon-parser

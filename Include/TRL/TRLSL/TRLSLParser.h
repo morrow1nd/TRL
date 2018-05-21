@@ -14,7 +14,15 @@ class TRLSLGenerator;
 class TRLSLParser
 {
 public:
-    bool Parse(TRLSLTokener& tokener, TRLSLGenerator& generator);
+    TRLSLParser(TRLSLGenerator& generator);
+    ~TRLSLParser();
+
+    bool Parse(TRLSLTokener& tokener);
+
+
+private:
+    TRLSLGenerator& m_Generator;
+    void* m_InnerParser;
 };
 
 

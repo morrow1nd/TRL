@@ -27,8 +27,13 @@ class TRLSLGenerator
 public:
     virtual ~TRLSLGenerator() = default;
 
-    virtual bool CanUseConstToken() const = 0;
-    virtual ToyUtility::List<Token>& GetInnerTokenPool();
+    virtual int GetTokenSize() const { return 0; }
+    virtual Token* GetToken(int index) { return nullptr; }
+
+    // Used to traversal all tokens
+    virtual Token* NextToken(bool restart = false) = 0;
+
+    virtual void SetAllTokens(const ToyUtility::List<Token>& tokens) = 0;
 
 
 public:

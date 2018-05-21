@@ -11,31 +11,32 @@ namespace TRL
 {
 
 
-bool TRLSLParser::Parse(TRLSLTokener & tokener, TRLSLGenerator & generator)
+TRLSLParser::TRLSLParser(TRLSLGenerator& generator)
+    :
+    m_Generator(generator),
+    m_InnerParser(nullptr)
 {
-    void* parser = TrlSLParser_Alloc(malloc, &generator);
+    m_InnerParser = TrlSLParser_Alloc(malloc, &generator);
+}
 
-    if (generator.CanUseConstToken())
+TRLSLParser::~TRLSLParser()
+{
+    TrlSLParser_Free(m_InnerParser, free);
+}
+
+
+bool TRLSLParser::Parse(TRLSLTokener & tokener)
+{
+    m_Generator.SetAllTokens(tokener.GetAllTokens());
+
+    for (Token* t = m_Generator.NextToken(true);
+        t != nullptr;
+        t = m_Generator.NextToken())
     {
-        const Token* t = &tokener.NextToken();
-        while (t != nullptr && t->Type != Token::None.Type)
-        {
-            TrlSLParser_(parser, t->Type, (Token*)t);
-            t = &tokener.NextToken();
-        }
+        TrlSLParser_(m_InnerParser, t->Type, t);
     }
-    else
-    {
-        tokener.CopyAllTokens(generator.GetInnerTokenPool());
+    TrlSLParser_(m_InnerParser, 0, nullptr); // End token
 
-        for each(auto& token in generator.GetInnerTokenPool())
-        {
-            TrlSLParser_(parser, token.Type, (Token*)(&token));
-        }
-    }
-
-    TrlSLParser_(parser, 0, nullptr);
-    TrlSLParser_Free(parser, free);
     return true; // TODOH
 }
 

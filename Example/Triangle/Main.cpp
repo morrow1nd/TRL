@@ -54,11 +54,17 @@ void main()
         return 2;
     }
 
-    //DebugGenerator generator;
-    GLSLGenerator generator;
+    {
+        MemoryDataStream stream(1024);
 
-    TRLSLParser parser;
-    parser.Parse(tokener, generator);
+        //DebugGenerator generator;
+        GLSLGenerator generator;
+
+        TRLSLParser parser(generator);
+        parser.Parse(tokener);
+        generator.GenerateCode(stream);
+        std::cout << stream.GetAsString() << std::endl;
+    }
     
     std::cout << "end" << std::endl;
     system("pause");

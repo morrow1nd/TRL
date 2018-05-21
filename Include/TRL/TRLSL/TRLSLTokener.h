@@ -48,8 +48,10 @@ public:
 
     const Token& NextToken();
     void CopyAllTokens(ToyUtility::List<Token>& container) const;
+    const ToyUtility::List<Token>& GetAllTokens() const { return m_Tokens; }
 
     const TRLSLTokenerError& GetError() const { return m_Error; }
+
 
 private:
     bool _ScanAll();

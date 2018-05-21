@@ -92,7 +92,6 @@ bool TRLSLTokener::_ScanAll()
             _CheckIdentifier(c, &i);
             break;
         case 'i':
-            //CHECK_PUSH_BREAK(c, IDENTIFIER);
             CHECK_PUSH_BREAK(c, IF);
             CHECK_PUSH_BREAK(c, INT);
             CHECK_PUSH_BREAK(c, INOUT_);
