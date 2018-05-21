@@ -42,7 +42,7 @@ public:
 private:
     const ToyUtility::List<Token>* m_TokensPtr;
 
-    int m_Curr;
+    size_t m_Curr;
 
 
     // Inherited via TRLSLGenerator
