@@ -15,10 +15,6 @@ class TRLSLParser
 {
 public:
     bool Parse(TRLSLTokener& tokener, TRLSLGenerator& generator);
-
-
-private:
-
 };
 
 

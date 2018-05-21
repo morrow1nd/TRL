@@ -26,6 +26,12 @@ const Token& TRLSLTokener::NextToken()
     return m_Tokens[m_CurrToken++];
 }
 
+void TRLSLTokener::CopyAllTokens(ToyUtility::List<Token>& container) const
+{
+    container.clear();
+    container = m_Tokens;
+}
+
 #define CMP_WITH_TOKEN(StrPtr, TokenName) \
 _StrCmp((StrPtr), Token::TokenName.Str, Token::TokenName.StrLen)
 

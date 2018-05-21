@@ -47,6 +47,7 @@ public:
     bool Prepare(ToyUtility::DataStream& inputStream);
 
     const Token& NextToken();
+    void CopyAllTokens(ToyUtility::List<Token>& container) const;
 
     const TRLSLTokenerError& GetError() const { return m_Error; }
 
@@ -68,7 +69,7 @@ private:
     const char* m_Begin;
     int m_Length;
     ToyUtility::List<Token> m_Tokens;
-    int m_CurrToken;
+    unsigned int m_CurrToken;
     TRLSLTokenerError m_Error;
 };
 

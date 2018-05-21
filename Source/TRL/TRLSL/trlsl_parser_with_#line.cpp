@@ -24,10 +24,12 @@
 */
 #include <stdio.h>
 /************ Begin %include sections from the grammar ************************/
+#line 58 "trlsl_parser.y"
 
     #include <cassert>
     #include "TRL/TRLSL/Token.h"
     #include "TRL/TRLSL/TRLSLGenerator.h"
+#line 33 "trlsl_parser.c"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless
@@ -1668,8 +1670,10 @@ static void yyStackOverflow(yyParser *yypParser){
    /* Here code is inserted which will execute if the parser
    ** stack every overflows */
 /******** Begin %stack_overflow code ******************************************/
+#line 45 "trlsl_parser.y"
 
     generator->StackOverflow();
+#line 1677 "trlsl_parser.c"
 /******** End %stack_overflow code ********************************************/
    TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument var */
    TrlSLParser_CTX_STORE
@@ -2026,778 +2030,1166 @@ static YYACTIONTYPE yy_reduce(
 /********** Begin reduce actions **********************************************/
         YYMINORTYPE yylhsminor;
       case 0: /* variable_identifier ::= IDENTIFIER */
+#line 77 "trlsl_parser.y"
 { generator->variable_identifier__To__IDENTIFIER(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2036 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 1: /* primary_expression ::= variable_identifier */
+#line 79 "trlsl_parser.y"
 { generator->primary_expression__To__variable_identifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2042 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 2: /* primary_expression ::= INTCONSTANT */
+#line 80 "trlsl_parser.y"
 { generator->primary_expression__To__INTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2048 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 3: /* primary_expression ::= UINTCONSTANT */
+#line 81 "trlsl_parser.y"
 { generator->primary_expression__To__UINTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2054 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 4: /* primary_expression ::= FLOATCONSTANT */
+#line 82 "trlsl_parser.y"
 { generator->primary_expression__To__FLOATCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2060 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 5: /* primary_expression ::= BOOLCONSTANT */
+#line 83 "trlsl_parser.y"
 { generator->primary_expression__To__BOOLCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2066 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 6: /* primary_expression ::= LS expression RS */
+#line 84 "trlsl_parser.y"
 { generator->primary_expression__To__LS___expression___RS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2072 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 7: /* postfix_expression ::= primary_expression */
+#line 86 "trlsl_parser.y"
 { generator->postfix_expression__To__primary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2078 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 8: /* postfix_expression ::= postfix_expression LM integer_expression RM */
+#line 87 "trlsl_parser.y"
 { generator->postfix_expression__To__postfix_expression___LM___integer_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2084 "trlsl_parser.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 9: /* postfix_expression ::= function_call */
+#line 88 "trlsl_parser.y"
 { generator->postfix_expression__To__function_call(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2090 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 10: /* postfix_expression ::= postfix_expression DOT FIELD_SELECTION */
+#line 89 "trlsl_parser.y"
 { generator->postfix_expression__To__postfix_expression___DOT___FIELD_SELECTION(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2096 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 11: /* postfix_expression ::= postfix_expression INC_OP */
+#line 90 "trlsl_parser.y"
 { generator->postfix_expression__To__postfix_expression___INC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2102 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 12: /* postfix_expression ::= postfix_expression DEC_OP */
+#line 91 "trlsl_parser.y"
 { generator->postfix_expression__To__postfix_expression___DEC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2108 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 13: /* integer_expression ::= expression */
+#line 95 "trlsl_parser.y"
 { generator->integer_expression__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2114 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 14: /* function_call ::= function_call_or_method */
+#line 97 "trlsl_parser.y"
 { generator->function_call__To__function_call_or_method(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2120 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 15: /* function_call_or_method ::= function_call_generic */
+#line 99 "trlsl_parser.y"
 { generator->function_call_or_method__To__function_call_generic(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2126 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 16: /* function_call_generic ::= function_call_header_with_parameters RS */
+#line 101 "trlsl_parser.y"
 { generator->function_call_generic__To__function_call_header_with_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2132 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 17: /* function_call_generic ::= function_call_header_no_parameters RS */
+#line 102 "trlsl_parser.y"
 { generator->function_call_generic__To__function_call_header_no_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2138 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 18: /* function_call_header_no_parameters ::= function_call_header VOID */
+#line 104 "trlsl_parser.y"
 { generator->function_call_header_no_parameters__To__function_call_header___VOID(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2144 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 19: /* function_call_header_no_parameters ::= function_call_header */
+#line 105 "trlsl_parser.y"
 { generator->function_call_header_no_parameters__To__function_call_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2150 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 20: /* function_call_header_with_parameters ::= function_call_header assignment_expression */
+#line 107 "trlsl_parser.y"
 { generator->function_call_header_with_parameters__To__function_call_header___assignment_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2156 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 21: /* function_call_header_with_parameters ::= function_call_header_with_parameters COMMA assignment_expression */
+#line 108 "trlsl_parser.y"
 { generator->function_call_header_with_parameters__To__function_call_header_with_parameters___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2162 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 22: /* function_call_header ::= function_identifier LS */
+#line 110 "trlsl_parser.y"
 { generator->function_call_header__To__function_identifier___LS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2168 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 23: /* function_identifier ::= type_specifier */
+#line 116 "trlsl_parser.y"
 { generator->function_identifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2174 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 24: /* function_identifier ::= postfix_expression */
+#line 117 "trlsl_parser.y"
 { generator->function_identifier__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2180 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 25: /* unary_expression ::= postfix_expression */
+#line 119 "trlsl_parser.y"
 { generator->unary_expression__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2186 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 26: /* unary_expression ::= INC_OP unary_expression */
+#line 120 "trlsl_parser.y"
 { generator->unary_expression__To__INC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2192 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 27: /* unary_expression ::= DEC_OP unary_expression */
+#line 121 "trlsl_parser.y"
 { generator->unary_expression__To__DEC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2198 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 28: /* unary_expression ::= unary_operator unary_expression */
+#line 122 "trlsl_parser.y"
 { generator->unary_expression__To__unary_operator___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2204 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 29: /* unary_operator ::= PLUS */
+#line 125 "trlsl_parser.y"
 { generator->unary_operator__To__PLUS(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2210 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 30: /* unary_operator ::= DASH */
+#line 126 "trlsl_parser.y"
 { generator->unary_operator__To__DASH(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2216 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 31: /* unary_operator ::= BANG */
+#line 127 "trlsl_parser.y"
 { generator->unary_operator__To__BANG(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2222 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 32: /* unary_operator ::= TILDE */
+#line 128 "trlsl_parser.y"
 { generator->unary_operator__To__TILDE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2228 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 33: /* multiplicative_expression ::= unary_expression */
+#line 131 "trlsl_parser.y"
 { generator->multiplicative_expression__To__unary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2234 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 34: /* multiplicative_expression ::= multiplicative_expression STAR unary_expression */
+#line 132 "trlsl_parser.y"
 { generator->multiplicative_expression__To__multiplicative_expression___STAR___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2240 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 35: /* multiplicative_expression ::= multiplicative_expression SLASH unary_expression */
+#line 133 "trlsl_parser.y"
 { generator->multiplicative_expression__To__multiplicative_expression___SLASH___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2246 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 36: /* multiplicative_expression ::= multiplicative_expression PERCENT unary_expression */
+#line 134 "trlsl_parser.y"
 { generator->multiplicative_expression__To__multiplicative_expression___PERCENT___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2252 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 37: /* additive_expression ::= multiplicative_expression */
+#line 136 "trlsl_parser.y"
 { generator->additive_expression__To__multiplicative_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2258 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 38: /* additive_expression ::= additive_expression PLUS multiplicative_expression */
+#line 137 "trlsl_parser.y"
 { generator->additive_expression__To__additive_expression___PLUS___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2264 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 39: /* additive_expression ::= additive_expression DASH multiplicative_expression */
+#line 138 "trlsl_parser.y"
 { generator->additive_expression__To__additive_expression___DASH___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2270 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 40: /* shift_expression ::= additive_expression */
+#line 140 "trlsl_parser.y"
 { generator->shift_expression__To__additive_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2276 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 41: /* shift_expression ::= shift_expression LEFT_OP additive_expression */
+#line 141 "trlsl_parser.y"
 { generator->shift_expression__To__shift_expression___LEFT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2282 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 42: /* shift_expression ::= shift_expression RIGHT_OP additive_expression */
+#line 142 "trlsl_parser.y"
 { generator->shift_expression__To__shift_expression___RIGHT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2288 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 43: /* relational_expression ::= shift_expression */
+#line 144 "trlsl_parser.y"
 { generator->relational_expression__To__shift_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2294 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 44: /* relational_expression ::= relational_expression LEFT_ANGLE shift_expression */
+#line 145 "trlsl_parser.y"
 { generator->relational_expression__To__relational_expression___LEFT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2300 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 45: /* relational_expression ::= relational_expression RIGHT_ANGLE shift_expression */
+#line 146 "trlsl_parser.y"
 { generator->relational_expression__To__relational_expression___RIGHT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2306 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 46: /* relational_expression ::= relational_expression LE_OP shift_expression */
+#line 147 "trlsl_parser.y"
 { generator->relational_expression__To__relational_expression___LE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2312 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 47: /* relational_expression ::= relational_expression GE_OP shift_expression */
+#line 148 "trlsl_parser.y"
 { generator->relational_expression__To__relational_expression___GE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2318 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 48: /* equality_expression ::= relational_expression */
+#line 150 "trlsl_parser.y"
 { generator->equality_expression__To__relational_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2324 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 49: /* equality_expression ::= equality_expression EQ_OP relational_expression */
+#line 151 "trlsl_parser.y"
 { generator->equality_expression__To__equality_expression___EQ_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2330 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 50: /* equality_expression ::= equality_expression NE_OP relational_expression */
+#line 152 "trlsl_parser.y"
 { generator->equality_expression__To__equality_expression___NE_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2336 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 51: /* and_expression ::= equality_expression */
+#line 154 "trlsl_parser.y"
 { generator->and_expression__To__equality_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2342 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 52: /* and_expression ::= and_expression AMPERSAND equality_expression */
+#line 155 "trlsl_parser.y"
 { generator->and_expression__To__and_expression___AMPERSAND___equality_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2348 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 53: /* exclusive_or_expression ::= and_expression */
+#line 157 "trlsl_parser.y"
 { generator->exclusive_or_expression__To__and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2354 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 54: /* exclusive_or_expression ::= exclusive_or_expression CARET and_expression */
+#line 158 "trlsl_parser.y"
 { generator->exclusive_or_expression__To__exclusive_or_expression___CARET___and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2360 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 55: /* inclusive_or_expression ::= exclusive_or_expression */
+#line 160 "trlsl_parser.y"
 { generator->inclusive_or_expression__To__exclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2366 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 56: /* inclusive_or_expression ::= inclusive_or_expression VERTICAL_BAR exclusive_or_expression */
+#line 161 "trlsl_parser.y"
 { generator->inclusive_or_expression__To__inclusive_or_expression___VERTICAL_BAR___exclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2372 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 57: /* logical_and_expression ::= inclusive_or_expression */
+#line 163 "trlsl_parser.y"
 { generator->logical_and_expression__To__inclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2378 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 58: /* logical_and_expression ::= logical_and_expression AND_OP inclusive_or_expression */
+#line 164 "trlsl_parser.y"
 { generator->logical_and_expression__To__logical_and_expression___AND_OP___inclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2384 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 59: /* logical_or_expression ::= logical_and_expression */
+#line 166 "trlsl_parser.y"
 { generator->logical_or_expression__To__logical_and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2390 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 60: /* logical_or_expression ::= logical_or_expression OR_OP logical_and_expression */
+#line 167 "trlsl_parser.y"
 { generator->logical_or_expression__To__logical_or_expression___OR_OP___logical_and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2396 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 61: /* conditional_expression ::= logical_or_expression */
+#line 169 "trlsl_parser.y"
 { generator->conditional_expression__To__logical_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2402 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 62: /* conditional_expression ::= logical_or_expression QUESTION expression COLON assignment_expression */
+#line 170 "trlsl_parser.y"
 { generator->conditional_expression__To__logical_or_expression___QUESTION___expression___COLON___assignment_expression(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2408 "trlsl_parser.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 63: /* assignment_expression ::= conditional_expression */
+#line 172 "trlsl_parser.y"
 { generator->assignment_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2414 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 64: /* assignment_expression ::= unary_expression assignment_operator assignment_expression */
+#line 173 "trlsl_parser.y"
 { generator->assignment_expression__To__unary_expression___assignment_operator___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2420 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 65: /* assignment_operator ::= EQUAL */
+#line 175 "trlsl_parser.y"
 { generator->assignment_operator__To__EQUAL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2426 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 66: /* assignment_operator ::= MUL_ASSIGN */
+#line 176 "trlsl_parser.y"
 { generator->assignment_operator__To__MUL_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2432 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 67: /* assignment_operator ::= DIV_ASSIGN */
+#line 177 "trlsl_parser.y"
 { generator->assignment_operator__To__DIV_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2438 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 68: /* assignment_operator ::= MOD_ASSIGN */
+#line 178 "trlsl_parser.y"
 { generator->assignment_operator__To__MOD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2444 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 69: /* assignment_operator ::= ADD_ASSIGN */
+#line 179 "trlsl_parser.y"
 { generator->assignment_operator__To__ADD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2450 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 70: /* assignment_operator ::= SUB_ASSIGN */
+#line 180 "trlsl_parser.y"
 { generator->assignment_operator__To__SUB_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2456 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 71: /* assignment_operator ::= LEFT_ASSIGN */
+#line 181 "trlsl_parser.y"
 { generator->assignment_operator__To__LEFT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2462 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 72: /* assignment_operator ::= RIGHT_ASSIGN */
+#line 182 "trlsl_parser.y"
 { generator->assignment_operator__To__RIGHT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2468 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 73: /* assignment_operator ::= AND_ASSIGN */
+#line 183 "trlsl_parser.y"
 { generator->assignment_operator__To__AND_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2474 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 74: /* assignment_operator ::= XOR_ASSIGN */
+#line 184 "trlsl_parser.y"
 { generator->assignment_operator__To__XOR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2480 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 75: /* assignment_operator ::= OR_ASSIGN */
+#line 185 "trlsl_parser.y"
 { generator->assignment_operator__To__OR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2486 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 76: /* expression ::= assignment_expression */
+#line 187 "trlsl_parser.y"
 { generator->expression__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2492 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 77: /* expression ::= expression COMMA assignment_expression */
+#line 188 "trlsl_parser.y"
 { generator->expression__To__expression___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2498 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 78: /* constant_expression ::= conditional_expression */
+#line 190 "trlsl_parser.y"
 { generator->constant_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2504 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 79: /* declaration ::= init_declarator_list SEMICOLON */
+#line 192 "trlsl_parser.y"
 { generator->declaration__To__init_declarator_list___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2510 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 80: /* function_prototype ::= function_declarator RS */
+#line 194 "trlsl_parser.y"
 { generator->function_prototype__To__function_declarator___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2516 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 81: /* function_declarator ::= function_header */
+#line 196 "trlsl_parser.y"
 { generator->function_declarator__To__function_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2522 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 82: /* function_declarator ::= function_header_with_parameters */
+#line 197 "trlsl_parser.y"
 { generator->function_declarator__To__function_header_with_parameters(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2528 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 83: /* function_header_with_parameters ::= function_header parameter_declaration */
+#line 199 "trlsl_parser.y"
 { generator->function_header_with_parameters__To__function_header___parameter_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2534 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 84: /* function_header_with_parameters ::= function_header_with_parameters COMMA parameter_declaration */
+#line 200 "trlsl_parser.y"
 { generator->function_header_with_parameters__To__function_header_with_parameters___COMMA___parameter_declaration(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2540 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 85: /* function_header ::= fully_specified_type IDENTIFIER LS */
+#line 202 "trlsl_parser.y"
 { generator->function_header__To__fully_specified_type___IDENTIFIER___LS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2546 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 86: /* parameter_declarator ::= type_specifier IDENTIFIER */
+#line 204 "trlsl_parser.y"
 { generator->parameter_declarator__To__type_specifier___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2552 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 87: /* parameter_declarator ::= type_specifier IDENTIFIER array_specifier */
+#line 205 "trlsl_parser.y"
 { generator->parameter_declarator__To__type_specifier___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2558 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 88: /* parameter_declaration ::= type_qualifier parameter_declarator */
+#line 207 "trlsl_parser.y"
 { generator->parameter_declaration__To__type_qualifier___parameter_declarator(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2564 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 89: /* parameter_declaration ::= parameter_declarator */
+#line 208 "trlsl_parser.y"
 { generator->parameter_declaration__To__parameter_declarator(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2570 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 90: /* parameter_declaration ::= type_qualifier parameter_type_specifier */
+#line 209 "trlsl_parser.y"
 { generator->parameter_declaration__To__type_qualifier___parameter_type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2576 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 91: /* parameter_declaration ::= parameter_type_specifier */
+#line 210 "trlsl_parser.y"
 { generator->parameter_declaration__To__parameter_type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2582 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 92: /* parameter_type_specifier ::= type_specifier */
+#line 212 "trlsl_parser.y"
 { generator->parameter_type_specifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2588 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 93: /* init_declarator_list ::= single_declaration */
+#line 214 "trlsl_parser.y"
 { generator->init_declarator_list__To__single_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2594 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 94: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER */
+#line 215 "trlsl_parser.y"
 { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2600 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 95: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER array_specifier */
+#line 216 "trlsl_parser.y"
 { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2606 "trlsl_parser.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 96: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER array_specifier EQUAL initializer */
+#line 217 "trlsl_parser.y"
 { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2612 "trlsl_parser.c"
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
       case 97: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER EQUAL initializer */
+#line 218 "trlsl_parser.y"
 { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2618 "trlsl_parser.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 98: /* single_declaration ::= fully_specified_type */
+#line 220 "trlsl_parser.y"
 { generator->single_declaration__To__fully_specified_type(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2624 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 99: /* single_declaration ::= fully_specified_type IDENTIFIER */
+#line 221 "trlsl_parser.y"
 { generator->single_declaration__To__fully_specified_type___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2630 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 100: /* single_declaration ::= fully_specified_type IDENTIFIER array_specifier */
+#line 222 "trlsl_parser.y"
 { generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2636 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 101: /* single_declaration ::= fully_specified_type IDENTIFIER array_specifier EQUAL initializer */
+#line 223 "trlsl_parser.y"
 { generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2642 "trlsl_parser.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 102: /* single_declaration ::= fully_specified_type IDENTIFIER EQUAL initializer */
+#line 224 "trlsl_parser.y"
 { generator->single_declaration__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2648 "trlsl_parser.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 103: /* fully_specified_type ::= type_specifier */
+#line 226 "trlsl_parser.y"
 { generator->fully_specified_type__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2654 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 104: /* fully_specified_type ::= type_qualifier type_specifier */
+#line 227 "trlsl_parser.y"
 { generator->fully_specified_type__To__type_qualifier___type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2660 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 105: /* type_qualifier ::= single_type_qualifier */
+#line 229 "trlsl_parser.y"
 { generator->type_qualifier__To__single_type_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2666 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 106: /* type_qualifier ::= type_qualifier single_type_qualifier */
+#line 230 "trlsl_parser.y"
 { generator->type_qualifier__To__type_qualifier___single_type_qualifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2672 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 107: /* single_type_qualifier ::= storage_qualifier */
+#line 232 "trlsl_parser.y"
 { generator->single_type_qualifier__To__storage_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2678 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 108: /* single_type_qualifier ::= precision_qualifier */
+#line 233 "trlsl_parser.y"
 { generator->single_type_qualifier__To__precision_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2684 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 109: /* storage_qualifier ::= CONST */
+#line 235 "trlsl_parser.y"
 { generator->storage_qualifier__To__CONST(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2690 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 110: /* storage_qualifier ::= IN */
+#line 236 "trlsl_parser.y"
 { generator->storage_qualifier__To__IN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2696 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 111: /* storage_qualifier ::= OUT */
+#line 237 "trlsl_parser.y"
 { generator->storage_qualifier__To__OUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2702 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 112: /* storage_qualifier ::= INOUT */
+#line 238 "trlsl_parser.y"
 { generator->storage_qualifier__To__INOUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2708 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 113: /* storage_qualifier ::= UNIFORM */
+#line 239 "trlsl_parser.y"
 { generator->storage_qualifier__To__UNIFORM(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2714 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 114: /* type_specifier ::= type_specifier_nonarray */
+#line 241 "trlsl_parser.y"
 { generator->type_specifier__To__type_specifier_nonarray(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2720 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 115: /* type_specifier ::= type_specifier_nonarray array_specifier */
+#line 242 "trlsl_parser.y"
 { generator->type_specifier__To__type_specifier_nonarray___array_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2726 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 116: /* array_specifier ::= LM RM */
+#line 244 "trlsl_parser.y"
 { generator->array_specifier__To__LM___RM(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2732 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 117: /* array_specifier ::= LM constant_expression RM */
+#line 245 "trlsl_parser.y"
 { generator->array_specifier__To__LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2738 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 118: /* array_specifier ::= array_specifier LM RM */
+#line 246 "trlsl_parser.y"
 { generator->array_specifier__To__array_specifier___LM___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2744 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 119: /* array_specifier ::= array_specifier LM constant_expression RM */
+#line 247 "trlsl_parser.y"
 { generator->array_specifier__To__array_specifier___LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 2750 "trlsl_parser.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 120: /* type_specifier_nonarray ::= VOID */
+#line 249 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__VOID(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2756 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 121: /* type_specifier_nonarray ::= FLOAT */
+#line 250 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__FLOAT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2762 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 122: /* type_specifier_nonarray ::= INT */
+#line 251 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__INT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2768 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 123: /* type_specifier_nonarray ::= UINT */
+#line 252 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__UINT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2774 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 124: /* type_specifier_nonarray ::= BOOL */
+#line 253 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__BOOL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2780 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 125: /* type_specifier_nonarray ::= VEC2 */
+#line 254 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__VEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2786 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 126: /* type_specifier_nonarray ::= VEC3 */
+#line 255 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__VEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2792 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 127: /* type_specifier_nonarray ::= VEC4 */
+#line 256 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__VEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2798 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 128: /* type_specifier_nonarray ::= BVEC2 */
+#line 257 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__BVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2804 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 129: /* type_specifier_nonarray ::= BVEC3 */
+#line 258 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__BVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2810 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 130: /* type_specifier_nonarray ::= BVEC4 */
+#line 259 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__BVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2816 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 131: /* type_specifier_nonarray ::= IVEC2 */
+#line 260 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__IVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2822 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 132: /* type_specifier_nonarray ::= IVEC3 */
+#line 261 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__IVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2828 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 133: /* type_specifier_nonarray ::= IVEC4 */
+#line 262 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__IVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2834 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 134: /* type_specifier_nonarray ::= UVEC2 */
+#line 263 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__UVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2840 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 135: /* type_specifier_nonarray ::= UVEC3 */
+#line 264 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__UVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2846 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 136: /* type_specifier_nonarray ::= UVEC4 */
+#line 265 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__UVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2852 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 137: /* type_specifier_nonarray ::= MAT2 */
+#line 266 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2858 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 138: /* type_specifier_nonarray ::= MAT3 */
+#line 267 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2864 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 139: /* type_specifier_nonarray ::= MAT4 */
+#line 268 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2870 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 140: /* type_specifier_nonarray ::= MAT2X2 */
+#line 269 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT2X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2876 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 141: /* type_specifier_nonarray ::= MAT2X3 */
+#line 270 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT2X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2882 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 142: /* type_specifier_nonarray ::= MAT2X4 */
+#line 271 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT2X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2888 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 143: /* type_specifier_nonarray ::= MAT3X2 */
+#line 272 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT3X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2894 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 144: /* type_specifier_nonarray ::= MAT3X3 */
+#line 273 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT3X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2900 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 145: /* type_specifier_nonarray ::= MAT3X4 */
+#line 274 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT3X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2906 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 146: /* type_specifier_nonarray ::= MAT4X2 */
+#line 275 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT4X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2912 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 147: /* type_specifier_nonarray ::= MAT4X3 */
+#line 276 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT4X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2918 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 148: /* type_specifier_nonarray ::= MAT4X4 */
+#line 277 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__MAT4X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2924 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 149: /* type_specifier_nonarray ::= SAMPLER2D */
+#line 278 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__SAMPLER2D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2930 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 150: /* type_specifier_nonarray ::= SAMPLER3D */
+#line 279 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__SAMPLER3D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2936 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 151: /* type_specifier_nonarray ::= SAMPLERCUBE */
+#line 280 "trlsl_parser.y"
 { generator->type_specifier_nonarray__To__SAMPLERCUBE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2942 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 152: /* precision_qualifier ::= HIGH_PRECISION */
+#line 282 "trlsl_parser.y"
 { generator->precision_qualifier__To__HIGH_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2948 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 153: /* precision_qualifier ::= MEDIUM_PRECISION */
+#line 283 "trlsl_parser.y"
 { generator->precision_qualifier__To__MEDIUM_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2954 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 154: /* precision_qualifier ::= LOW_PRECISION */
+#line 284 "trlsl_parser.y"
 { generator->precision_qualifier__To__LOW_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2960 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 155: /* initializer ::= assignment_expression */
+#line 286 "trlsl_parser.y"
 { generator->initializer__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2966 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 156: /* declaration_statement ::= declaration */
+#line 288 "trlsl_parser.y"
 { generator->declaration_statement__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2972 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 157: /* statement ::= compound_statement */
+#line 290 "trlsl_parser.y"
 { generator->statement__To__compound_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2978 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 158: /* statement ::= simple_statement */
+#line 291 "trlsl_parser.y"
 { generator->statement__To__simple_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2984 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 159: /* simple_statement ::= declaration_statement */
+#line 293 "trlsl_parser.y"
 { generator->simple_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2990 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 160: /* simple_statement ::= expression_statement */
+#line 294 "trlsl_parser.y"
 { generator->simple_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 2996 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 161: /* simple_statement ::= selection_statement */
+#line 295 "trlsl_parser.y"
 { generator->simple_statement__To__selection_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3002 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 162: /* simple_statement ::= iteration_statement */
+#line 296 "trlsl_parser.y"
 { generator->simple_statement__To__iteration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3008 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 163: /* simple_statement ::= jump_statement */
+#line 297 "trlsl_parser.y"
 { generator->simple_statement__To__jump_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3014 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 164: /* compound_statement ::= LB RB */
+#line 299 "trlsl_parser.y"
 { generator->compound_statement__To__LB___RB(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3020 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 165: /* compound_statement ::= LB statement_list RB */
+#line 300 "trlsl_parser.y"
 { generator->compound_statement__To__LB___statement_list___RB(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3026 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 166: /* statement_list ::= statement */
+#line 302 "trlsl_parser.y"
 { generator->statement_list__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3032 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 167: /* statement_list ::= statement_list statement */
+#line 303 "trlsl_parser.y"
 { generator->statement_list__To__statement_list___statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3038 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 168: /* expression_statement ::= SEMICOLON */
+#line 305 "trlsl_parser.y"
 { generator->expression_statement__To__SEMICOLON(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3044 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 169: /* expression_statement ::= expression SEMICOLON */
+#line 306 "trlsl_parser.y"
 { generator->expression_statement__To__expression___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3050 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 170: /* selection_statement ::= IF LS expression RS selection_rest_statement */
+#line 308 "trlsl_parser.y"
 { generator->selection_statement__To__IF___LS___expression___RS___selection_rest_statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3056 "trlsl_parser.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 171: /* selection_rest_statement ::= statement ELSE statement */
+#line 310 "trlsl_parser.y"
 { generator->selection_rest_statement__To__statement___ELSE___statement(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3062 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 172: /* selection_rest_statement ::= statement */
+#line 311 "trlsl_parser.y"
 { generator->selection_rest_statement__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3068 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 173: /* condition ::= expression */
+#line 313 "trlsl_parser.y"
 { generator->condition__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3074 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 174: /* condition ::= fully_specified_type IDENTIFIER EQUAL initializer */
+#line 314 "trlsl_parser.y"
 { generator->condition__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3080 "trlsl_parser.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 175: /* iteration_statement ::= WHILE LS condition RS statement */
+#line 316 "trlsl_parser.y"
 { generator->iteration_statement__To__WHILE___LS___condition___RS___statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3086 "trlsl_parser.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 176: /* iteration_statement ::= FOR LS for_init_statement for_rest_statement RS statement */
+#line 317 "trlsl_parser.y"
 { generator->iteration_statement__To__FOR___LS___for_init_statement___for_rest_statement___RS___statement(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3092 "trlsl_parser.c"
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
       case 177: /* for_init_statement ::= expression_statement */
+#line 319 "trlsl_parser.y"
 { generator->for_init_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3098 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 178: /* for_init_statement ::= declaration_statement */
+#line 320 "trlsl_parser.y"
 { generator->for_init_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3104 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 179: /* condition_opt ::= condition */
+#line 322 "trlsl_parser.y"
 { generator->condition_opt__To__condition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3110 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 180: /* condition_opt ::= */
+#line 323 "trlsl_parser.y"
 { generator->condition_opt__To__Empty(&yymsp[1].minor.yy0); }
+#line 3116 "trlsl_parser.c"
         break;
       case 181: /* for_rest_statement ::= condition_opt SEMICOLON */
+#line 325 "trlsl_parser.y"
 { generator->for_rest_statement__To__condition_opt___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3121 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 182: /* for_rest_statement ::= condition_opt SEMICOLON expression */
+#line 326 "trlsl_parser.y"
 { generator->for_rest_statement__To__condition_opt___SEMICOLON___expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3127 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 183: /* jump_statement ::= CONTINUE SEMICOLON */
+#line 328 "trlsl_parser.y"
 { generator->jump_statement__To__CONTINUE___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3133 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 184: /* jump_statement ::= BREAK SEMICOLON */
+#line 329 "trlsl_parser.y"
 { generator->jump_statement__To__BREAK___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3139 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 185: /* jump_statement ::= RETURN SEMICOLON */
+#line 330 "trlsl_parser.y"
 { generator->jump_statement__To__RETURN___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3145 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 186: /* jump_statement ::= RETURN expression SEMICOLON */
+#line 331 "trlsl_parser.y"
 { generator->jump_statement__To__RETURN___expression___SEMICOLON(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3151 "trlsl_parser.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 187: /* jump_statement ::= DISCARD SEMICOLON */
+#line 332 "trlsl_parser.y"
 { generator->jump_statement__To__DISCARD___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3157 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 188: /* translation_unit ::= external_declaration_list */
+#line 334 "trlsl_parser.y"
 { generator->translation_unit__To__external_declaration_list(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3163 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 189: /* external_declaration_list ::= external_declaration */
+#line 336 "trlsl_parser.y"
 { generator->external_declaration_list__To__external_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3169 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 190: /* external_declaration_list ::= external_declaration_list external_declaration */
+#line 337 "trlsl_parser.y"
 { generator->external_declaration_list__To__external_declaration_list___external_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3175 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 191: /* external_declaration ::= function_definition */
+#line 339 "trlsl_parser.y"
 { generator->external_declaration__To__function_definition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3181 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 192: /* external_declaration ::= declaration */
+#line 340 "trlsl_parser.y"
 { generator->external_declaration__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+#line 3187 "trlsl_parser.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 193: /* function_definition ::= function_prototype compound_statement */
+#line 342 "trlsl_parser.y"
 { generator->function_definition__To__function_prototype___compound_statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+#line 3193 "trlsl_parser.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       default:
@@ -2842,8 +3234,10 @@ static void yy_parse_failed(
   /* Here code is inserted which will be executed whenever the
   ** parser fails */
 /************ Begin %parse_failure code ***************************************/
+#line 41 "trlsl_parser.y"
 
     generator->ParseFailure();
+#line 3241 "trlsl_parser.c"
 /************ End %parse_failure code *****************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE
@@ -2862,8 +3256,10 @@ static void yy_syntax_error(
   TrlSLParser_CTX_FETCH
 #define TOKEN yyminor
 /************ Begin %syntax_error code ****************************************/
+#line 53 "trlsl_parser.y"
 
     generator->SyntaxError();
+#line 3263 "trlsl_parser.c"
 /************ End %syntax_error code ******************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE
@@ -2889,8 +3285,10 @@ static void yy_accept(
   /* Here code is inserted which will be executed whenever the
   ** parser accepts */
 /*********** Begin %parse_accept code *****************************************/
+#line 49 "trlsl_parser.y"
 
     generator->ParseAccept();
+#line 3292 "trlsl_parser.c"
 /*********** End %parse_accept code *******************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE

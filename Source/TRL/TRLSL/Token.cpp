@@ -1,9 +1,23 @@
 #include "TRL/TRLSL/Token.h"
+
+#include <cassert>
+#include <limits>
 #include "TRL/TRLSL/trlsl_token_id.h"
 
 
 namespace TRL
 {
+
+
+Token::Token(ToyUtility::uint16 type, const char* str)
+    :
+    Type(type), Str(str), UserData(nullptr)
+{
+    auto len = std::strlen(str);
+    assert(len > std::numeric_limits<StrLenType>::max());
+    
+    StrLen = static_cast<StrLenType>(len);
+}
 
 
 Token Token::None = Token(0);
@@ -101,6 +115,27 @@ Token Token::RETURN = Token(TRLSL_T_RETURN, "return");
 Token Token::DISCARD = Token(TRLSL_T_DISCARD, "discard");
 Token Token::TRUE_ = Token(TRLSL_T_BOOLCONSTANT, "true");
 Token Token::FALSE_ = Token(TRLSL_T_BOOLCONSTANT, "false");
+
+
+Token * Token::Attach(Token * anotherToken)
+{
+    if(Type == None.Type)
+        return &None;
+
+    if (anotherToken == nullptr)
+    {
+        this->UserData = nullptr;
+        return &None;
+    }
+
+    this->UserData = anotherToken;
+    return anotherToken;
+}
+
+bool Token::IsTerminalSymbol() const
+{
+    return Type >= 1 && Type <= TRLSL_T_DISCARD; // TODOL: has a better way ?
+}
 
 
 } // end of namespace TRL

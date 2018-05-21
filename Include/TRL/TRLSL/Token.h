@@ -12,32 +12,55 @@ struct Token
 {
     Token()
         :
-        Type(0), StrLen(0), Str(nullptr)
+        Type(0), StrLen(0), Str(nullptr), UserData(nullptr)
     {}
 
     Token(ToyUtility::uint16 type)
         :
-        Type(type), StrLen(0), Str(nullptr)
+        Type(type), StrLen(0), Str(nullptr), UserData(nullptr)
     {}
 
-    Token(ToyUtility::uint16 type, const char* str)
-        :
-        Type(type), Str(str)
-    {
-        auto len = std::strlen(str);
-        //assert(len > 100); // TODOM
-        StrLen = len;
-    }
+    Token(ToyUtility::uint16 type, const char* str);
 
     Token(ToyUtility::uint16 type, const char* str, int strLen)
         :
-        Type(type), Str(str), StrLen(strLen)
+        Type(type), Str(str), StrLen(strLen), UserData(nullptr)
     {}
 
-    ToyUtility::uint16 Type;
-    ToyUtility::uint16 StrLen;
-    const char* Str;
+    // Copy constructors
+    Token(const Token& t)
+        : Type(t.Type), StrLen(t.StrLen), Str(t.Str), UserData(t.UserData)
+    {}
 
+    // Copy assignment operator
+    Token& Token :: operator= (const Token & rhs)
+    {
+        Type = rhs.Type; StrLen = rhs.StrLen; Str = rhs.Str; UserData = rhs.UserData;
+        return *this;
+    }
+
+
+public:
+    void SetUserData(void* data) { UserData = data; }
+    void* GetUserData() const { return UserData; }
+    template<typename T>
+    T* GetUserData() const { return (T*) UserData; }
+
+    Token* Attach(Token* anotherToken);
+
+    bool IsTerminalSymbol() const;
+
+
+public:
+    ToyUtility::uint16 Type;
+    using StrLenType = ToyUtility::uint16;
+    StrLenType StrLen;
+    const char* Str;
+    void* UserData;
+
+
+    // Static Tokens
+public:
     static Token None;
     static Token LS;
     static Token RS;

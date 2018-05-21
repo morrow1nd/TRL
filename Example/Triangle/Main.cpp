@@ -11,6 +11,7 @@
 
 #include "ToyUtility/DataStream/MemoryDataStream.h"
 #include "TRL/TRLSL/DebugGenerator.h"
+#include "TRL/TRLSL/GLSLGenerator.h"
 #include "TRL/TRLSL/TRLSLParser.h"
 #include "TRL/TRLSL/TRLSLTokener.h"
 
@@ -32,9 +33,15 @@ int main()
 {
     const ToyUtility::String code = R"(
 
-int main()
+uniform vec4 Pos;
+
+void main()
 {
-    return 0;
+    Pos = vec4(1, 2, 3, 4);
+    if(1 == Pos.x)
+    {
+        Pos.y = 4;
+    }
 }
 
 )";
@@ -47,8 +54,9 @@ int main()
         return 2;
     }
 
-    DebugGenerator generator;
-    
+    //DebugGenerator generator;
+    GLSLGenerator generator;
+
     TRLSLParser parser;
     parser.Parse(tokener, generator);
     
