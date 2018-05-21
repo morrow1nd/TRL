@@ -18,6 +18,15 @@ bool TRLSLTokener::Prepare(ToyUtility::DataStream & inputStream)
     return _ScanAll();
 }
 
+bool TRLSLTokener::Prepare(const ToyUtility::String & inputCode)
+{
+    m_Input = inputCode;
+    m_Begin = m_Input.c_str();
+    m_Length = m_Input.size();
+
+    return _ScanAll();
+}
+
 const Token& TRLSLTokener::NextToken()
 {
     if(m_CurrToken >= m_Tokens.size())

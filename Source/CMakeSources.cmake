@@ -30,13 +30,18 @@ SET(TRL_SRC_SL
     "${TRL_SOURCE_DIR}/TRL/TRLSL/Token.cpp"
 )
 
+SET(TRL_SRC_FILES
+	"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
+)
+
 if(TRL_USING_OPENGL)
 	set(TRL_SRC_FILES
+		${TRL_SRC_FILES}
+
 		"${TRL_SOURCE_DIR}/OpenGL/AttributeData.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/GpuBuffer.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/GpuProgram.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/GpuShader.cpp"
-		"${TRL_SOURCE_DIR}/OpenGL/TRLShader.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/AttributeVariable.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/UniformVariable.cpp"
 		"${TRL_SOURCE_DIR}/OpenGL/RenderAPI.cpp"
@@ -49,12 +54,16 @@ endif()
 
 if(TRL_USING_OPENGLES)
 	set(TRL_SRC_FILES
+		${TRL_SRC_FILES}
+
 	
 	)
 endif()
 
 if(TRL_USING_DX11)
 	set(TRL_SRC_FILES
+		${TRL_SRC_FILES}
+
 	
 	)
 endif()
@@ -80,8 +89,8 @@ source_group("CMake"									FILES "${TRL_SOURCE_DIR}/../CMakeLists.txt")
 source_group("CMake\\Source"                            FILES "CMakeSources.cmake" "CMakeLists.txt")
 source_group("CMake\\Source\\ThirdParty"				FILES "${TRL_SOURCE_DIR}/ThirdParty/CMakeLists.txt")
 source_group("Header Files"                             FILES ${TRL_INC_FILES})
-source_group("Source Files\\TRL SL"                     FILES ${TRL_SRC_SL})
-source_group("Header Files\\TRL SL"						FILES ${TRL_INC_SL})
+source_group("Source Files\\TRL_SL"                     FILES ${TRL_SRC_SL})
+source_group("Header Files\\TRL_SL"						FILES ${TRL_INC_SL})
 if(TRL_USING_OPENGL)
 source_group("Source Files\\OpenGL"						FILES ${TRL_SRC_FILES})
 endif()

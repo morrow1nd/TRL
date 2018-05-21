@@ -45,6 +45,7 @@ public:
 
 public:
     bool Prepare(ToyUtility::DataStream& inputStream);
+    bool Prepare(const ToyUtility::String& inputCode);
 
     const Token& NextToken();
     void CopyAllTokens(ToyUtility::List<Token>& container) const;

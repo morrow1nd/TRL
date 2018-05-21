@@ -1,5 +1,6 @@
 #include "TRL/TRLSL/GLSLGenerator.h"
 
+#include <sstream>
 #include "ToyUtility/DataStream/DataStream.h"
 
 
@@ -40,13 +41,15 @@ void GLSLGenerator::SetAllTokens(const ToyUtility::List<Token>& tokens)
     }
 }
 
-void GLSLGenerator::GenerateCode(ToyUtility::DataStream & stream) const
+void GLSLGenerator::GenerateCode(ToyUtility::DataStream& stream) const
 {
+    stream.WriteString("#version 330 core\n");
+
     for (size_t tokenIndex = m_RootToken; tokenIndex != 0 && tokenIndex < m_TokenPool.size(); )
     {
         const Token& t = m_TokenPool[tokenIndex];
         size_t thIndex = (size_t)t.GetUserData();
-        // TODOM: check thIndex range
+        // TODOL: check thIndex range
         const TokenHelper& th = m_TokenHelpers[thIndex];
 
         if (t.IsTerminalSymbol())
@@ -59,13 +62,38 @@ void GLSLGenerator::GenerateCode(ToyUtility::DataStream & stream) const
     }
 }
 
+ToyUtility::String GLSLGenerator::GenerateCode() const
+{
+    std::stringstream stream;
+
+    // TODOM: I don't write the same code twice
+    stream << "#version 330 core\n";
+
+    for (size_t tokenIndex = m_RootToken; tokenIndex != 0 && tokenIndex < m_TokenPool.size(); )
+    {
+        const Token& t = m_TokenPool[tokenIndex];
+        size_t thIndex = (size_t)t.GetUserData();
+        // TODOL: check thIndex range
+        const TokenHelper& th = m_TokenHelpers[thIndex];
+
+        if (t.IsTerminalSymbol())
+        {
+            stream.write(t.Str, t.StrLen);
+            stream.write(" ", 1);
+        }
+
+        tokenIndex = th.Next;
+    }
+
+    return stream.str();
+}
+
 Token * GLSLGenerator::_GetLastOne(Token * t)
 {
     auto th = _GetTokenHelper(t);
     if (th->Last == 0)
     {
         // TODOM: check th->Next == 0
-
         return t;
     }
     else
@@ -125,6 +153,7 @@ Token& GLSLGenerator::_NewToken(Token t)
     return m_TokenPool.back();
 }
 
+// TODOL: Remove unused arguments
 TRLSLGenerator::RetType GLSLGenerator::variable_identifier__To__IDENTIFIER(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
 {
     *_ = _1;

@@ -92,6 +92,9 @@ private:
 
     int m_CurrToken;
 
+    // TODOM: use a FrameAllocator to replace this String List
+    ToyUtility::List<ToyUtility::String> m_StrPool; // Used to manage generated strings
+
 
     // Handler used by lemon-parser
 public:
