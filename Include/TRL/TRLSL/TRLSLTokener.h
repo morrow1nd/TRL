@@ -38,7 +38,7 @@ public:
     TRLSLTokener()
         :
         m_Begin(nullptr),
-        m_Length(0),
+        m_BinaryDataSize(0),
         m_CurrToken(0)
     {}
 
@@ -70,7 +70,7 @@ private:
 private:
     ToyUtility::String m_Input;
     const char* m_Begin;
-    int m_Length;
+    int m_BinaryDataSize;
     ToyUtility::List<Token> m_Tokens;
     unsigned int m_CurrToken;
     TRLSLTokenerError m_Error;

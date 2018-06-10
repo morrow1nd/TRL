@@ -13,7 +13,7 @@ bool TRLSLTokener::Prepare(ToyUtility::DataStream & inputStream)
 {
     m_Input = inputStream.GetAsString();
     m_Begin = m_Input.c_str();
-    m_Length = m_Input.size();
+    m_BinaryDataSize = m_Input.size();
 
     return _ScanAll();
 }
@@ -22,7 +22,7 @@ bool TRLSLTokener::Prepare(const ToyUtility::String & inputCode)
 {
     m_Input = inputCode;
     m_Begin = m_Input.c_str();
-    m_Length = m_Input.size();
+    m_BinaryDataSize = m_Input.size();
 
     return _ScanAll();
 }
@@ -64,7 +64,7 @@ bool TRLSLTokener::_ScanAll()
     int i = 0;
     const char* c;
 
-    while (i < m_Length)
+    while (i < m_BinaryDataSize)
     {
         i = _ConsumeSpace(i);
 
@@ -313,7 +313,7 @@ bool TRLSLTokener::_ScanAll()
 
 int TRLSLTokener::_ConsumeSpace(int i) const
 {
-    while (i < m_Length
+    while (i < m_BinaryDataSize
         && (isspace(*(m_Begin + i))
             || iscntrl(*(m_Begin + i))
             || isblank(*(m_Begin + i))
@@ -396,7 +396,7 @@ void TRLSLTokener::_CheckIdentifier(const char* c, int* i)
     const char* begin = c;
 
     c += 1;
-    while (c - m_Begin < m_Length
+    while (c - m_Begin < m_BinaryDataSize
         && (isalpha(*c) || *c == '_' || isdigit(*c)))
     {
         c++;

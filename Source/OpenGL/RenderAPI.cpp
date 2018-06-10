@@ -1,4 +1,6 @@
 #include "TRL/RenderAPI.h"
+
+#include "ToyUtility/Random/UUID.h"
 #include "TRL/GpuProgram.h"
 #include "TRL/AttributeData.h"
 
@@ -11,6 +13,9 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
 {
     switch (dataType)
     {
+    case GPU_BOOL:
+        return sizeof(GLboolean);
+        break;
     case GPU_BYTE:
         return sizeof(GLbyte);
         break;
@@ -101,17 +106,11 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     case GPU_FLOAT_MAT4x3:
         return sizeof(GLfloat[4][3]); // TODO: check this
         break;
-    //case GPU_SAMPLER_2D:
-    //    return sizeof(GLbyte);
-    //    break;
-    //case GPU_SAMPLER_3D:
-    //    return sizeof(GLbyte);
-    //    break;
-    //case GPU_SAMPLER_CUBE:
-    //    return sizeof(GLbyte);
-    //    break;
-    // 
-    // ......
+    case GPU_SAMPLER_2D:
+    case GPU_SAMPLER_3D:
+    case GPU_SAMPLER_CUBE:
+        return sizeof(ToyUtility::UUID);
+        break;
     }
 
     assert(false && ("RenderAPI::GetGpuDataTypeSize comes to default: " + dataType));

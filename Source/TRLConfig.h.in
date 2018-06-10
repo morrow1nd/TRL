@@ -12,4 +12,7 @@
 #cmakedefine TRL_USING_OPENGL
 #cmakedefine TRL_USING_OPENGLES
 
+
+// Runtime Check
+
 #define TRL_MORE_RUNTIME_CHECK @TRL_MORE_RUNTIME_CHECK@
