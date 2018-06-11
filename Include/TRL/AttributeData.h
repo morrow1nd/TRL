@@ -17,6 +17,12 @@ class AttributeData
 public:
     static int GetMaxAttributeNumber();
 
+    enum class NormalizeAction
+    {
+        NotNeedNormalize,
+        NeedNormalize,
+    };
+
 
 public:
     AttributeData()
@@ -40,7 +46,7 @@ public:
     // stride: Specifies the byte offset between consecutive generic vertex attributes
     // beginOffset: Specifies a pointer to the first generic vertex attribute in the array (by bytes)
     void SetAttributeArray(const AttributeVariable& variable, GpuBuffer& vbo,
-        int size, GpuDataType type, bool normalized, int stride, int beginOffset);
+        GpuVariableComponentSize size, GpuDataType typeOfComponent, NormalizeAction normalizeAction, int stride, int beginOffset);
     void EnableAttributeArray(const AttributeVariable& variable, bool enable);
 
     void SetConstantAttribute(const AttributeVariable& variable, GpuFloat x);

@@ -123,8 +123,8 @@ void main()
         return -3;
     }
 
-    attrib.SetAttributeArray(var, vbo, 3, GPU_FLOAT, false, 6*sizeof(float), 0);
-    attrib.SetAttributeArray(aColor, vbo, 3, GPU_FLOAT, false, 6*sizeof(float), 3 * sizeof(float));
+    attrib.SetAttributeArray(var, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 6*sizeof(float), 0);
+    attrib.SetAttributeArray(aColor, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 6*sizeof(float), 3 * sizeof(float));
     attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
     attrib.Inactive();
     

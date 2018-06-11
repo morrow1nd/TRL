@@ -32,10 +32,8 @@ bool GpuShader::Init(const ToyUtility::String& sourceCode, GpuShaderType type)
         glGetShaderiv(m_ShaderInner, GL_INFO_LOG_LENGTH, &infoLen);
         if (infoLen > 1)
         {
-            //char* infoLog = malloc(sizeof(char) * infoLen); // TODO
             char infoLog[1024];
             glGetShaderInfoLog(m_ShaderInner, infoLen, NULL, infoLog);
-            //m_CompileLog = ToyUtility::String(infoLog);
             m_CompileLog = infoLog;
         }
         

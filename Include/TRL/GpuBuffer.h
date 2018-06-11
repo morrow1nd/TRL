@@ -16,6 +16,7 @@ public:
     // Create multi buffer in one call
     static ToyUtility::List<ToyUtility::SPtr<GpuBuffer>> CreateBuffers(int number);
 
+
 public:
     GpuBuffer()
         :
@@ -26,7 +27,7 @@ public:
 
 public:
     void Init();
-    void Bind(GpuBufferType type);
+    void Bind(GpuBufferType bufferType);
     void Bind() const;
     void UploadData(void* data, int size, GpuBufferDataType dataType) const;
     void UploadSubData(void* data, int size, int offset) const;

@@ -44,6 +44,7 @@ private:
         ToyUtility::List<AttributeVariable> Attributes;
     };
 
+
 private:
     bool m_CompiledSucc;
     GpuShaderInner m_ShaderInner;

@@ -10,10 +10,10 @@ void GpuBuffer::Init()
     glGenBuffers(1, &m_BufferObject);
 }
 
-void GpuBuffer::Bind(GpuBufferType type)
+void GpuBuffer::Bind(GpuBufferType bufferType)
 {
-    glBindBuffer(type, m_BufferObject);
-    m_BufferType = type;
+    glBindBuffer(bufferType, m_BufferObject);
+    m_BufferType = bufferType;
 }
 
 void GpuBuffer::Bind() const

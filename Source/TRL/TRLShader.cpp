@@ -64,6 +64,8 @@ SPtr<GpuShader> TRLShader::GenerateGpuShader(ToyRenderType targetType)
         // TODOL
         break;
     }
+
+    return SPtr<GpuShader>();
 }
 
 

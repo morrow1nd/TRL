@@ -170,8 +170,8 @@ void main()
         return -3;
     }
 
-    attrib.SetAttributeArray(pos, vbo, 3, GPU_FLOAT, false, 5*sizeof(float), 0);
-    attrib.SetAttributeArray(aTextCoord, vbo, 2, GPU_FLOAT, false, 5 * sizeof(float), 3*sizeof(float));
+    attrib.SetAttributeArray(pos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 5*sizeof(float), 0);
+    attrib.SetAttributeArray(aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 5 * sizeof(float), 3*sizeof(float));
     attrib.SetIndicesBuffer(ebo, 6, GPU_UNSIGNED_INT);
     attrib.Inactive();
 

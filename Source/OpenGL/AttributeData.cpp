@@ -47,11 +47,16 @@ GpuDataType AttributeData::GetIndicesDataType() const
 }
 
 void AttributeData::SetAttributeArray(const AttributeVariable& variable, GpuBuffer& vbo,
-    int size, GpuDataType type, bool normalized, int stride, int begin_offset)
+    GpuVariableComponentSize size, GpuDataType typeOfComponent, NormalizeAction normalizeAction, int stride, int beginOffset)
 {
     vbo.Bind();
     glEnableVertexAttribArray(variable.GetLocation());
-    glVertexAttribPointer(variable.GetLocation(), size, type, normalized ? GL_TRUE : GL_FALSE, stride, (const void*)begin_offset);
+    glVertexAttribPointer(variable.GetLocation(),
+        (GLint)size,
+        typeOfComponent,
+        normalizeAction == NormalizeAction::NeedNormalize ? GL_TRUE : GL_FALSE,
+        stride,
+        (const void*)beginOffset);
 }
 
 void AttributeData::EnableAttributeArray(const AttributeVariable& variable, bool enable)

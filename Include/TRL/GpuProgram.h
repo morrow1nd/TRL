@@ -3,7 +3,6 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/String/String.h"
 #include "ToyUtility/Container/List.h"
-#include "ToyUtility/Memory/SmartPtr.h"
 #include "TRL/CommonType.h"
 #include "TRL/AttributeVariable.h"
 #include "TRL/UniformVariable.h"
@@ -86,6 +85,7 @@ public:
 private:
     void _PrepareUniformInfos(GpuShader& vertShader, GpuShader& fragShader);
     void _PrepareAttributeInfos(GpuShader& vertShader, GpuShader& fragShader);
+
 
 private:
     bool m_LinkedSucc;
