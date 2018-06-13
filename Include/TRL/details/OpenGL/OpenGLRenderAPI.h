@@ -44,13 +44,6 @@ private:
 class OpenGLRenderAPI : public RenderAPI
 {
 public:
-    OpenGLRenderAPI()
-        :
-        m_ActiveProgramInnerInited(false)
-    { }
-
-
-public:
     virtual TRLNativeApiType UsedNativeApiType() const override;
     virtual GpuBufferHandle GpuBufferCreate() override;
     virtual void GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int size, GpuBufferDataType dataType) override;
@@ -63,8 +56,6 @@ public:
     virtual const String & GpuShaderGetCompileLogInfo(GpuShaderHandle shader) const override;
     virtual GpuShaderType GpuShaderGetType(GpuShaderHandle shader) const override;
     virtual void GpuShaderDestory(GpuShaderHandle shader) override;
-    virtual void GpuProgramActive(GpuProgramHandle program) override;
-    virtual bool GpuProgramIsActived(GpuProgramHandle program) const override;
     virtual GpuProgramHandle GpuProgramCreate(GpuShaderHandle vertShader, GpuShaderHandle fragShader) override;
     virtual bool GpuProgramIsLinkedSucc(GpuProgramHandle program) const override;
     virtual const AttributeUniformInfo & GpuProgramGetAttributeUniformInfo(GpuProgramHandle program) const override;
@@ -118,12 +109,13 @@ public:
     virtual void GpuTexture2DSetBaseLevel(GpuTexture2DHandle texture2D, int level) override;
     virtual void GpuTexture2DGenerateMipmap(GpuTexture2DHandle texture2D) override;
     virtual void GpuTexture2DDestory(GpuTexture2DHandle texture2D) override;
-    virtual void DrawIndices(GpuPrimitiveType mode, GpuAttributeDataHandle attributeData, int offset = 0) override;
+    virtual void DrawIndices(GpuProgramHandle program, GpuAttributeDataHandle attributeData, GpuPrimitiveType mode, int offset = 0) override;
     virtual void ConvertProjectionMatrix(const ToyUtility::Matrix4 & matrix, ToyUtility::Matrix4 & dest) const override;
 
 
 private:
     void _ActiveGpuAttributeData(GpuAttributeDataHandle h);
+    void _ActiveGpuAttributeData(OpenGLAttributeData attributeData);
     void _ActiveGpuProgram(GpuProgramHandle h);
     void _ActiveTexture2D(GpuTexture2DHandle h);
     void _ActiveTexture2D(OpenGLTexture2D tex2D);

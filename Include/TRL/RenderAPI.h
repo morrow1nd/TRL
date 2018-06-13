@@ -4,7 +4,6 @@
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/Container/List.h"
 #include "ToyUtility/Math/Matrix4.h"
-
 #include "TRLConfig.h"
 #include "TRL/TRLCommonType.h"
 #include "TRL/GpuObjectHandles.h"
@@ -26,13 +25,14 @@ class RenderAPI
 public:
     static int GetGpuDataTypeSize(GpuDataType dataType);
 
-    static RenderAPI* CreateRenderAPI(TRLNativeApiType type);
+    static ToyUtility::SPtr<RenderAPI> CreateDefaultRenderAPI();
+    static ToyUtility::SPtr<RenderAPI> CreateRenderAPI(TRLNativeApiType type);
 
 
 public:
     virtual ~RenderAPI() = default;
 
-    virtual TRLNativeApiType           UsedNativeApiType() const = 0;
+    virtual TRLNativeApiType        UsedNativeApiType() const = 0;
 
     /////////////////////////////////////////////////////////////////////////////////
     // GpuBuffer
@@ -59,8 +59,6 @@ public:
     /////////////////////////////////////////////////////////////////////////////////
     // GpuProgram
 
-    virtual void                    GpuProgramActive(GpuProgramHandle program) = 0;
-    virtual bool                    GpuProgramIsActived(GpuProgramHandle program) const = 0;
     virtual GpuProgramHandle        GpuProgramCreate(GpuShaderHandle vertShader, GpuShaderHandle fragShader) = 0;
     virtual bool                    GpuProgramIsLinkedSucc(GpuProgramHandle program) const = 0;
     virtual const AttributeUniformInfo&
@@ -187,7 +185,7 @@ public:
     /////////////////////////////////////////////////////////////////////////////////
     // Drawing function
 
-    virtual void                    DrawIndices(GpuPrimitiveType mode, GpuAttributeDataHandle attributeData, int offset = 0) = 0;
+    virtual void                    DrawIndices(GpuProgramHandle program, GpuAttributeDataHandle attributeData, GpuPrimitiveType mode, int offset = 0) = 0;
 
     /////////////////////////////////////////////////////////////////////////////////
     // Others

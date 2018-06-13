@@ -8,7 +8,12 @@ namespace TRL
 {
 
 
-RenderAPI * RenderAPI::CreateRenderAPI(TRLNativeApiType type)
+ToyUtility::SPtr<RenderAPI> RenderAPI::CreateDefaultRenderAPI()
+{
+    return ToyUtility::SPtr<RenderAPI>(new TRL::details::OpenGLRenderAPI());
+}
+
+ToyUtility::SPtr<RenderAPI> RenderAPI::CreateRenderAPI(TRLNativeApiType type)
 {
     switch (type)
     {
@@ -16,14 +21,14 @@ RenderAPI * RenderAPI::CreateRenderAPI(TRLNativeApiType type)
         
         break;
     case TRLNativeApiType::OpenGL:
-        return new TRL::details::OpenGLRenderAPI();
+        return ToyUtility::SPtr<RenderAPI>(new TRL::details::OpenGLRenderAPI());
         break;
     case TRLNativeApiType::OpenGLES:
 
         break;
     }
 
-    return nullptr;
+    return ToyUtility::SPtr<RenderAPI>();
 }
 
 

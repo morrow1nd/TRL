@@ -1,10 +1,6 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
-#include "TRL/GpuBuffer.h"
-#include "TRL/AttributeData.h"
 #include "TRL/AttributeVariable.h"
-#include "TRL/GpuProgram.h"
-#include "TRL/GpuShader.h"
 #include <cstdlib>
 #include "GLFW/glfw3.h"
 #include <iostream>
