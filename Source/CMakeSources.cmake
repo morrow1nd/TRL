@@ -54,7 +54,15 @@ set(TRL_SRC_OPENGLES
 )
 
 set(TRL_SRC_DX11
-
+	"${TRL_SOURCE_DIR}/TRL/DX11/AttributeData.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/GpuBuffer.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/GpuProgram.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/GpuShader.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/AttributeVariable.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/UniformVariable.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/RenderAPI.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/GpuTexture.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/GpuTexture2D.cpp"
 )
 
 

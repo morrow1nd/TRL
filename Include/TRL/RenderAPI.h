@@ -5,6 +5,8 @@
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/Math/Matrix4.h"
 #include "TRL/CommonType.h"
+#include "TRL/GpuBuffer.h"
+#include "TRL/GpuShader.h"
 
 
 namespace TRL
@@ -33,6 +35,11 @@ public:
 
 public:
     TRLNativeApi GetUsedNativeApi() const;
+
+    GpuBuffer CreateGpuBuffer();
+
+    GpuShader CreateGpuShader();
+
 
     void ActiveGpuProgram(const GpuProgram& program);
     bool IsActiveGpuProgram(const GpuProgram& program);

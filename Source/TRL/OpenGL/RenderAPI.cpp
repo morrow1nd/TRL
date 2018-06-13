@@ -128,6 +128,11 @@ TRLNativeApi RenderAPI::GetUsedNativeApi() const
 #endif
 }
 
+GpuBuffer RenderAPI::CreateGpuBuffer()
+{
+    return GpuBuffer();
+}
+
 void RenderAPI::ActiveGpuProgram(const GpuProgram& program)
 {
     m_ActiveGpuProgram = program.m_ProgramInner;
