@@ -9,6 +9,8 @@
 #include "TRL/TRLCommonType.h"
 #include "TRL/GpuObjectHandles.h"
 #include "TRL/AttributeUniformInfo.h"
+#include "TRL/AttributeVariable.h"
+#include "TRL/UniformVariable.h"
 
 
 namespace TRL
@@ -24,20 +26,21 @@ class RenderAPI
 public:
     static int GetGpuDataTypeSize(GpuDataType dataType);
 
+    static RenderAPI* CreateRenderAPI(TRLNativeApiType type);
+
 
 public:
     virtual ~RenderAPI() = default;
 
-    virtual ToyRenderType           UsedNativeApiType() const = 0;
+    virtual TRLNativeApiType           UsedNativeApiType() const = 0;
 
     /////////////////////////////////////////////////////////////////////////////////
     // GpuBuffer
 
     virtual GpuBufferHandle         GpuBufferCreate() = 0;
-    //virtual void                    GpuBufferBind(GpuBufferHandle buffer, GpuBufferType bufferType) = 0;
-    //virtual GpuBufferType           GpuBufferGetType(GpuBufferHandle buffer) const = 0;
-    virtual void                    GpuBufferSendData(GpuBufferHandle buffer, const void* data, int size,
-                                        GpuBufferDataType dataType) = 0;
+    virtual void                    GpuBufferSendData(GpuBufferHandle buffer,
+                                        GpuBufferType bufferType,
+                                        const void* data, int size, GpuBufferDataType dataType) = 0;
     virtual void                    GpuBufferSendSubData(GpuBufferHandle buffer,
                                         const void* data, int size, int offset) = 0;
     virtual int                     GpuBufferGetDataSize(GpuBufferHandle buffer) const = 0;
@@ -87,11 +90,11 @@ public:
     virtual void                    GpuProgramSetUniform(GpuProgramHandle program, const UniformVariable& variable,
                                         int32 x, int32 y, int32 z, int32 w) = 0;
     virtual void                    GpuProgramSetUniformArray(GpuProgramHandle program, const UniformVariable& variable,
-                                        uint32 arryLength, GpuVariableComponentSize componentSize, const float* values) = 0;
+                                        uint32 arrayLength, GpuVariableComponentSize componentSize, const float* values) = 0;
     virtual void                    GpuProgramSetUniformArray(GpuProgramHandle program, const UniformVariable& variable,
-                                        uint32 arryLength, GpuVariableComponentSize componentSize, const int32* values) = 0;
+                                        uint32 arrayLength, GpuVariableComponentSize componentSize, const int32* values) = 0;
     virtual void                    GpuProgramSetUniformArray(GpuProgramHandle program, const UniformVariable& variable,
-                                        uint32 arryLength, GpuVariableComponentSize componentSize, const uint32* values) = 0;
+                                        uint32 arrayLength, GpuVariableComponentSize componentSize, const uint32* values) = 0;
     virtual void                    GpuProgramSetUniformMatrix2Array(GpuProgramHandle program, const UniformVariable& variable,
                                         uint32 arrayLength, const float* values, bool needTranspose = false) = 0;
     virtual void                    GpuProgramSetUniformMatrix3Array(GpuProgramHandle program, const UniformVariable& variable,
@@ -184,14 +187,13 @@ public:
     /////////////////////////////////////////////////////////////////////////////////
     // Drawing function
 
-    virtual void DrawIndices(GpuPrimitiveType mode, const AttributeData& attributeData, int offset = 0) = 0;
-
+    virtual void                    DrawIndices(GpuPrimitiveType mode, GpuAttributeDataHandle attributeData, int offset = 0) = 0;
 
     /////////////////////////////////////////////////////////////////////////////////
     // Others
 
     // Contain a default matrix into a matrix suitable for use by this specific render system.
-    virtual void ConvertProjectionMatrix(const ToyUtility::Matrix4& matrix, ToyUtility::Matrix4& dest) const = 0;
+    virtual void                    ConvertProjectionMatrix(const ToyUtility::Matrix4& matrix, ToyUtility::Matrix4& dest) const = 0;
 };
 
 

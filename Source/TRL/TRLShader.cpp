@@ -24,16 +24,16 @@ const TRLSLTokenerError & TRLShader::GetTokenerError() const
     return m_Tokener.GetError();
 }
 
-SPtr<GpuShader> TRLShader::GenerateGpuShader(ToyRenderType targetType)
+SPtr<GpuShader> TRLShader::GenerateGpuShader(TRLNativeApiType targetType)
 {
     switch (targetType)
     {
-    case ToyRenderType::ToyRenderDX11:
+    case TRLNativeApiType::DX11:
     {
         assert(false);
         break;
     }
-    case ToyRenderType::ToyRenderOpenGL:
+    case TRLNativeApiType::OpenGL:
     {
         GLSLGenerator generator;
         TRLSLParser parser(generator);
@@ -55,7 +55,7 @@ SPtr<GpuShader> TRLShader::GenerateGpuShader(ToyRenderType targetType)
         }
         return shader;
     }
-    case ToyRenderType::ToyRenderOpenGLES:
+    case TRLNativeApiType::OpenGLES:
     {
         assert(false);
         break;

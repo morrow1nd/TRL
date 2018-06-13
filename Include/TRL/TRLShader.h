@@ -3,7 +3,7 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/String/String.h"
-#include "TRL/CommonType.h"
+#include "TRL/TRLCommonType.h"
 #include "TRL/TRLSL/TRLSLTokener.h"
 
 
@@ -21,7 +21,7 @@ public:
 
     const TRLSLTokenerError& GetTokenerError() const;
 
-    SPtr<GpuShader> GenerateGpuShader(ToyRenderType targetType);
+    SPtr<GpuShader> GenerateGpuShader(TRLNativeApiType targetType);
 
 
 private:

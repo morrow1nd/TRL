@@ -18,54 +18,44 @@ SET(TRL_SRC_SL
 )
 
 SET(TRL_INC_FILES
-    #"${TRL_INCLUDE_DIR}/TRL/CommonType.h"
 	"${TRL_INCLUDE_DIR}/TRL/AttributeUniformInfo.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
     "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
-    #"${TRL_INCLUDE_DIR}/TRL/AttributeData.h"
-    #"${TRL_INCLUDE_DIR}/TRL/GpuBuffer.h"
     "${TRL_INCLUDE_DIR}/TRL/GpuObjectHandles.h"
-    #"${TRL_INCLUDE_DIR}/TRL/GpuProgram.h"
-    #"${TRL_INCLUDE_DIR}/TRL/GpuShader.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
     "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
     "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
-    #"${TRL_INCLUDE_DIR}/TRL/GpuTexture.h"
-    #"${TRL_INCLUDE_DIR}/TRL/GpuTexture2D.h"
 )
 
 SET(TRL_SRC_FILES
+	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
 	"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
 )
 
+set(TRL_INC_DETAIL_OPENGL
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLRenderAPI.h"
+
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLAttributeData.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLBuffer.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLCommonType.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLProgram.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLShader.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLTexture.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLTexture2D.h"
+)
+
 set(TRL_SRC_OPENGL
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/AttributeData.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/GpuBuffer.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/GpuProgram.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/GpuShader.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/AttributeVariable.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/UniformVariable.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/RenderAPI.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/GpuTexture.cpp"
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/GpuTexture2D.cpp"
+	"${TRL_SOURCE_DIR}/TRL/OpenGL/OpenGLRenderAPI.cpp"
 
 	"${TRL_SOURCE_DIR}/ThirdParty/GLAD/glad-c/src/glad.c"
 )
 
-set(TRL_SRC_OPENGLES
-	
+set(TRL_INC_DETAIL_DX11
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11RenderAPI.h"
 )
 
 set(TRL_SRC_DX11
-	"${TRL_SOURCE_DIR}/TRL/DX11/AttributeData.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/GpuBuffer.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/GpuProgram.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/GpuShader.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/AttributeVariable.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/UniformVariable.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/RenderAPI.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/GpuTexture.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DX11/GpuTexture2D.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DX11/DX11RenderAPI.cpp"
 )
 
 
@@ -77,43 +67,24 @@ source_group("Header Files"                             FILES ${TRL_INC_FILES})
 source_group("Source Files"								FILES ${TRL_SRC_FILES})
 source_group("Header Files\\TRL_SL"						FILES ${TRL_INC_SL})
 source_group("Source Files\\TRL_SL"                     FILES ${TRL_SRC_SL})
-
-if(TRL_USING_OPENGL)
+source_group("Header Files\\details\\OpenGL"			FILES ${TRL_INC_DETAIL_OPENGL})
 source_group("Source Files\\OpenGL"						FILES ${TRL_SRC_OPENGL})
-endif()
-if(TRL_USING_OPENGLES)
-source_group("Source Files\\OpenGLES"					FILES ${TRL_SRC_OPENGLES})
-endif()
-if(TRL_USING_DX11)
+source_group("Header Files\\details\\DX11"				FILES ${TRL_INC_DETAIL_DX11})
 source_group("Source Files\\DX11"						FILES ${TRL_SRC_DX11})
-endif()
 
 
 set(TRL_SRC
 	"${TRL_SOURCE_DIR}/../CMakeLists.txt"
     "CMakeSources.cmake" "CMakeLists.txt"
 	"${TRL_SOURCE_DIR}/ThirdParty/CMakeLists.txt"
+
 	${TRL_INC_FILES}
     ${TRL_SRC_FILES}
     ${TRL_INC_SL}
 	${TRL_SRC_SL}
-)
 
-if(TRL_USING_OPENGL)
-	set(TRL_SRC
-		${TRL_SRC}
-		${TRL_SRC_OPENGL}
-	)
-endif()
-if(TRL_USING_OPENGLES)
-	set(TRL_SRC
-		${TRL_SRC}
-		${TRL_SRC_OPENGLES}
-	)
-endif()
-if(TRL_USING_DX11)
-	set(TRL_SRC
-		${TRL_SRC}
-		${TRL_SRC_DX11}
-	)
-endif()
+	${TRL_INC_DETAIL_OPENGL}
+	${TRL_SRC_OPENGL}
+	${TRL_INC_DETAIL_DX11}
+	${TRL_SRC_DX11}
+)

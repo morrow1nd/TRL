@@ -3,8 +3,8 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/Container/List.h"
 #include "TRL/TRLCommonType.h"
-#include "TRL/AttributeData.h"
 #include "TRL/UniformVariable.h"
+#include "TRL/AttributeVariable.h"
 
 
 namespace TRL

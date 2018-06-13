@@ -17,11 +17,11 @@ using ToyUtility::uint16;
 using ToyUtility::uint32;
 using ToyUtility::uint64;
 
-enum ToyRenderType
+enum class TRLNativeApiType
 {
-    ToyRenderOpenGL = TRL_OPENGL,
-    ToyRenderOpenGLES = TRL_OPENGLES,
-    ToyRenderDX11 = TRL_DX11,
+    OpenGL = TRL_OPENGL,
+    OpenGLES = TRL_OPENGLES,
+    DX11 = TRL_DX11,
 };
 
 enum class GpuVariableComponentSize
@@ -153,7 +153,7 @@ enum GpuTextureType
     GPU_TEXTURE_3D,
     GPU_TEXTURE_2D_ARRAY,
     GPU_TEXTURE_CUBE_MAP,
-    GPU_TEXTURE_2D_MULTISAMPLE,
+    //GPU_TEXTURE_2D_MULTISAMPLE,
 };
 
 enum GpuTextureBaseFormat

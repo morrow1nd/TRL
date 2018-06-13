@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
+#include "ToyUtility/Container/List.h"
+#include "TRLConfig.h"
+#include "TRL/TRLCommonType.h"
 
 
 namespace TRL
@@ -25,6 +28,16 @@ public:
         return m_Id;
     }
 
+    bool operator==(const GpuObjectHandle& rhs) const
+    {
+        return m_Id == rhs.m_Id;
+    }
+
+    bool operator!=(const GpuObjectHandle& rhs) const
+    {
+        return !(rhs == *this);
+    }
+
 
 private:
     int m_Id;
@@ -44,14 +57,83 @@ class GpuShaderHandle : public GpuObjectHandle
 
 class GpuTextureHandle : public GpuObjectHandle
 {
+public:
+    GpuTextureHandle()
+        :
+        m_TextureType(GPU_TEXTURE_TYPE_INIT)
+    { }
+
+    GpuTextureHandle(int id)
+        :
+        GpuObjectHandle(id)
+    { }
+
+    GpuTextureType TextureType() const { return m_TextureType; }
+
+
+protected:
+    GpuTextureType m_TextureType;
 };
 
 class GpuTexture2DHandle : public GpuTextureHandle
 {
+public:
+    GpuTexture2DHandle()
+    {
+        m_TextureType = GPU_TEXTURE_2D;
+    }
+
+    GpuTexture2DHandle(const GpuTextureHandle& handle)
+        :
+        GpuTextureHandle(handle.Id())
+    {
+        m_TextureType = GPU_TEXTURE_2D;
+    }
 };
 
 class GpuAttributeDataHandle : public GpuObjectHandle
 {
+};
+
+
+template<typename H, typename T>
+class IndexedContainer
+{
+public:
+    IndexedContainer()
+    {
+        m_List.push_back(T()); // Unused Object(0)
+    }
+
+
+    T& Get(H handle) const { return m_List[handle.Id()]; }
+
+    void Destory(H handle)
+    {
+        m_UnusedIndices.push_back(handle.Id());
+        m_List[handle.Id()] = T(); // Clean it
+    }
+
+    H New()
+    {
+        if (m_UnusedIndices.empty())
+        {
+            m_List.push_back(T());
+            return H(m_List.size() - 1);
+        }
+        else
+        {
+            auto ret = m_UnusedIndices.back();
+            m_UnusedIndices.pop_back();
+            return H(ret);
+        }
+    }
+
+
+private:
+    ToyUtility::List<T> m_List;
+
+    ToyUtility::List<int> m_UnusedIndices;
 };
 
 
