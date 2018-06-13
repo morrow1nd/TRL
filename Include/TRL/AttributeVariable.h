@@ -2,7 +2,7 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/String/String.h"
-#include "TRL/CommonType.h"
+#include "TRL/TRLCommonType.h"
 
 
 namespace TRL

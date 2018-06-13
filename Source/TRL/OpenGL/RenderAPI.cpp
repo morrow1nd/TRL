@@ -117,12 +117,12 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     return 0;
 }
 
-TRLNativeApi RenderAPI::GetUsedNativeApi() const
+TRLNativeAPIType RenderAPI::GetUsedNativeApi() const
 {
 #if defined(TRL_OPENGL)
-    return TRLNativeApi::OpenGL;
+    return TRLNativeAPIType::OpenGL;
 #elif defined(TRL_OPENGLES)
-    return TRLNativeApi::OpenGLES;
+    return TRLNativeAPIType::OpenGLES;
 #else
 # error TRL: Unknow Native Api.
 #endif
