@@ -52,11 +52,12 @@ public:
     virtual void GpuBufferDestory(GpuBufferHandle buffer) override;
     virtual GpuShaderHandle GpuShaderCreate(const String & rawSourceCode, GpuShaderType type) override;
     virtual bool GpuShaderIsCompiledSucc(GpuShaderHandle shader) const override;
-    virtual const String & GpuShaderGetCompileLogInfo(GpuShaderHandle shader) const override;
+    virtual const String & GpuShaderGetCompileErrorInfo(GpuShaderHandle shader) const override;
     virtual GpuShaderType GpuShaderGetType(GpuShaderHandle shader) const override;
     virtual void GpuShaderDestory(GpuShaderHandle shader) override;
     virtual GpuProgramHandle GpuProgramCreate(GpuShaderHandle vertShader, GpuShaderHandle fragShader) override;
     virtual bool GpuProgramIsLinkedSucc(GpuProgramHandle program) const override;
+    virtual const String & GpuProgramGetLinkErrorInfo(GpuProgramHandle program) const override;
     virtual const AttributeUniformInfo & GpuProgramGetAttributeUniformInfo(GpuProgramHandle program) const override;
     virtual void GpuProgramSetUniform(GpuProgramHandle program, const UniformVariable & variable, float x) override;
     virtual void GpuProgramSetUniform(GpuProgramHandle program, const UniformVariable & variable, float x, float y) override;

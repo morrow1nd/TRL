@@ -22,7 +22,7 @@ SET(TRL_INC_FILES
     "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
     "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
     "${TRL_INCLUDE_DIR}/TRL/GpuObjectHandles.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
+    #"${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
     "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
     "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
 )
@@ -30,7 +30,7 @@ SET(TRL_INC_FILES
 SET(TRL_SRC_FILES
 	"${TRL_SOURCE_DIR}/TRL/AttributeVariable.cpp"
 	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
-	"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
+	#"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
 	"${TRL_SOURCE_DIR}/TRL/UniformVariable.cpp"
 )
 

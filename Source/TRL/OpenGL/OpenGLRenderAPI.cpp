@@ -66,7 +66,7 @@ bool OpenGLRenderAPI::GpuShaderIsCompiledSucc(GpuShaderHandle shader) const
     return s.IsCompiledSucc();
 }
 
-const String& OpenGLRenderAPI::GpuShaderGetCompileLogInfo(GpuShaderHandle shader) const
+const String& OpenGLRenderAPI::GpuShaderGetCompileErrorInfo(GpuShaderHandle shader) const
 {
     auto& s = m_ShaderMgr.Get(shader);
     return s.GetCompileLogInfo();
@@ -100,6 +100,11 @@ GpuProgramHandle OpenGLRenderAPI::GpuProgramCreate(GpuShaderHandle vertShader, G
 bool OpenGLRenderAPI::GpuProgramIsLinkedSucc(GpuProgramHandle program) const
 {
     return m_ProgramMgr.Get(program).IsLinkSucc();
+}
+
+const String & OpenGLRenderAPI::GpuProgramGetLinkErrorInfo(GpuProgramHandle program) const
+{
+    return m_ProgramMgr.Get(program).GetLinkErrorInfo();
 }
 
 const AttributeUniformInfo & OpenGLRenderAPI::GpuProgramGetAttributeUniformInfo(GpuProgramHandle program) const

@@ -52,7 +52,7 @@ public:
 
     virtual GpuShaderHandle         GpuShaderCreate(const String& rawSourceCode, GpuShaderType type) = 0;
     virtual bool                    GpuShaderIsCompiledSucc(GpuShaderHandle shader) const = 0;
-    virtual const String&           GpuShaderGetCompileLogInfo(GpuShaderHandle shader) const = 0;
+    virtual const String&           GpuShaderGetCompileErrorInfo(GpuShaderHandle shader) const = 0;
     virtual GpuShaderType           GpuShaderGetType(GpuShaderHandle shader) const = 0;
     virtual void                    GpuShaderDestory(GpuShaderHandle shader) = 0;
 
@@ -61,6 +61,7 @@ public:
 
     virtual GpuProgramHandle        GpuProgramCreate(GpuShaderHandle vertShader, GpuShaderHandle fragShader) = 0;
     virtual bool                    GpuProgramIsLinkedSucc(GpuProgramHandle program) const = 0;
+    virtual const String&           GpuProgramGetLinkErrorInfo(GpuProgramHandle program) const = 0;
     virtual const AttributeUniformInfo&
                                     GpuProgramGetAttributeUniformInfo(GpuProgramHandle program) const = 0;
     virtual void                    GpuProgramSetUniform(GpuProgramHandle program, const UniformVariable& variable,
@@ -116,7 +117,7 @@ public:
     virtual void                    GpuProgramDestory(GpuProgramHandle program) = 0;
 
     /////////////////////////////////////////////////////////////////////////////////
-    // GpuAttributeData
+    // GpuAttributeData(VAO)
 
     virtual GpuAttributeDataHandle  GpuAttributeDataCreate() = 0;
     virtual void                    GpuAttributeDataSetIndicesBuffer(GpuAttributeDataHandle attributeData,

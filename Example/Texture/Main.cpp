@@ -85,12 +85,12 @@ void main()
 
     if (renderAPI->GpuShaderIsCompiledSucc(vertShader) == false)
     {
-        std::cout << "vert: " + renderAPI->GpuShaderGetCompileLogInfo(vertShader) << std::endl;
+        std::cout << "vert: " + renderAPI->GpuShaderGetCompileErrorInfo(vertShader) << std::endl;
     }
 
     if (renderAPI->GpuShaderIsCompiledSucc(fragShader) == false)
     {
-        std::cout << "frag: " + renderAPI->GpuShaderGetCompileLogInfo(fragShader) << std::endl;
+        std::cout << "frag: " + renderAPI->GpuShaderGetCompileErrorInfo(fragShader) << std::endl;
     }
 
     auto program = renderAPI->GpuProgramCreate(vertShader, fragShader);
