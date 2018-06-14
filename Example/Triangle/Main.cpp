@@ -1,9 +1,10 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
-#include "TRL/AttributeVariable.h"
 #include <cstdlib>
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
+#include <Windows.h>
 
 
 using namespace ToyUtility;
@@ -81,56 +82,55 @@ void main()
 }
 )";
 
-    GpuShader vertShader, fragShader;
-    vertShader.Init(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
-    if (vertShader.IsCompiledSucc() == false)
+    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
+
+    auto vertShader = renderAPI->GpuShaderCreate(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
+    auto fragShader = renderAPI->GpuShaderCreate(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
+
+    if (renderAPI->GpuShaderIsCompiledSucc(vertShader) == false)
     {
-        std::cout << "vert: " + vertShader.GetCompileLogInfo() << std::endl;
+        std::cout << "vert: " + renderAPI->GpuShaderGetCompileLogInfo(vertShader) << std::endl;
     }
 
-    fragShader.Init(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
-    if (fragShader.IsCompiledSucc() == false)
+    if (renderAPI->GpuShaderIsCompiledSucc(fragShader) == false)
     {
-        std::cout << "frag: " + fragShader.GetCompileLogInfo() << std::endl;
+        std::cout << "frag: " + renderAPI->GpuShaderGetCompileLogInfo(fragShader) << std::endl;
     }
 
-    GpuProgram program;
-    program.Init(vertShader, fragShader);
+    auto program = renderAPI->GpuProgramCreate(vertShader, fragShader);
 
     // Prepare data
-    GpuBuffer vbo;
-    vbo.Init();
-    vbo.Bind(GPU_ARRAY_BUFFER);
-    vbo.UploadData(vertices, 24 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
+    auto vbo = renderAPI->GpuBufferCreate();
+    renderAPI->GpuBufferSendData(vbo, GPU_ARRAY_BUFFER, vertices, 24 * sizeof(float), GpuBufferDataType::GPU_STATIC_DRAW);
 
-    GpuBuffer ebo;
-    ebo.Init();
-    ebo.Bind(GPU_ELEMENT_ARRAY_BUFFER);
-    ebo.UploadData(indices, 3 * sizeof(GpuUInt), GpuBufferDataType::GPU_STATIC_DRAW);
+    auto ebo = renderAPI->GpuBufferCreate();
+    renderAPI->GpuBufferSendData(ebo, GPU_ELEMENT_ARRAY_BUFFER, indices, 3 * sizeof(uint32), GpuBufferDataType::GPU_STATIC_DRAW);
 
-    AttributeData attrib;
-    attrib.Init();
-    attrib.Active();
-    auto var = program.FindAttribute("aPos");
-    auto aColor = program.FindAttribute("aColor");
-    if (var == AttributeVariable::None || aColor == AttributeVariable::None)
+    auto attrib = renderAPI->GpuAttributeDataCreate();
+
+    auto aPos = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindAttribute("aPos");
+    auto aColor = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindAttribute("aColor");
+    if (aPos == AttributeVariable::None)
     {
-        std::cout << "can't find ...";
+        std::cout << "can't find aPos";
+        return -3;
+    }
+    if (aColor == AttributeVariable::None)
+    {
+        std::cout << "can't find aColor";
         return -3;
     }
 
-    attrib.SetAttributeArray(var, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 6*sizeof(float), 0);
-    attrib.SetAttributeArray(aColor, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 6*sizeof(float), 3 * sizeof(float));
-    attrib.SetIndicesBuffer(ebo, 3, GPU_UNSIGNED_INT);
-    attrib.Inactive();
+    renderAPI->SetAttributeArray(attrib, aPos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT,
+        NormalizeActionType::NotNeedNormalize,
+        6*sizeof(float), 0);
+    renderAPI->SetAttributeArray(attrib, aColor, vbo, GpuVariableComponentSize::_3, GPU_FLOAT,
+        NormalizeActionType::NotNeedNormalize, 6*sizeof(float), 3 * sizeof(float));
+    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 3, GPU_UNSIGNED_INT);
     
-    RenderAPI renderAPI;
-
     while (true)
     {
-        attrib.Active();
-        renderAPI.ActiveGpuProgram(program);
-        renderAPI.DrawIndices(GpuPrimitiveType::GPU_TRIANGLES, attrib, 0);
+        renderAPI->DrawIndices(program, attrib, GpuPrimitiveType::GPU_TRIANGLES, 0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

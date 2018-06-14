@@ -4,6 +4,7 @@
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/Container/List.h"
 #include "ToyUtility/Math/Matrix4.h"
+
 #include "TRLConfig.h"
 #include "TRL/TRLCommonType.h"
 #include "TRL/GpuObjectHandles.h"
@@ -40,10 +41,9 @@ public:
     virtual GpuBufferHandle         GpuBufferCreate() = 0;
     virtual void                    GpuBufferSendData(GpuBufferHandle buffer,
                                         GpuBufferType bufferType,
-                                        const void* data, int size, GpuBufferDataType dataType) = 0;
+                                        const void* data, int byteSize, GpuBufferDataType dataType) = 0;
     virtual void                    GpuBufferSendSubData(GpuBufferHandle buffer,
-                                        const void* data, int size, int offset) = 0;
-    virtual int                     GpuBufferGetDataSize(GpuBufferHandle buffer) const = 0;
+                                        const void* data, int byteSize, int offset) = 0;
     virtual void                    GpuBufferCleanData(GpuBufferHandle buffer) const = 0;
     virtual void                    GpuBufferDestory(GpuBufferHandle buffer) = 0;
 

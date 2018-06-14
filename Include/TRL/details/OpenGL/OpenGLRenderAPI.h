@@ -48,7 +48,6 @@ public:
     virtual GpuBufferHandle GpuBufferCreate() override;
     virtual void GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int size, GpuBufferDataType dataType) override;
     virtual void GpuBufferSendSubData(GpuBufferHandle buffer, const void * data, int size, int offset) override;
-    virtual int GpuBufferGetDataSize(GpuBufferHandle buffer) const override;
     virtual void GpuBufferCleanData(GpuBufferHandle buffer) const override;
     virtual void GpuBufferDestory(GpuBufferHandle buffer) override;
     virtual GpuShaderHandle GpuShaderCreate(const String & rawSourceCode, GpuShaderType type) override;

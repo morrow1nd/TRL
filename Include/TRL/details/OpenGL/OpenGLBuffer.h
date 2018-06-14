@@ -43,7 +43,7 @@ public:
 
     void UploadData(const void* data, int size, GpuBufferDataType dataType)
     {
-        glBufferData(TRL_GL_NATIVE(m_BufferType), size, data, dataType);
+        glBufferData(TRL_GL_NATIVE(m_BufferType), size, data, TRL_GL_NATIVE(dataType));
         m_DataSize = size;
     }
 

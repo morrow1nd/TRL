@@ -43,16 +43,28 @@ private:
     int m_Id;
 };
 
-class GpuBufferHandle : public GpuObjectHandle
+struct GpuBufferHandle : public GpuObjectHandle
 {
+    GpuBufferHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
 };
 
-class GpuProgramHandle : public GpuObjectHandle
+struct GpuProgramHandle : public GpuObjectHandle
 {
+    GpuProgramHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
 };
 
-class GpuShaderHandle : public GpuObjectHandle
+struct GpuShaderHandle : public GpuObjectHandle
 {
+    GpuShaderHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
 };
 
 class GpuTextureHandle : public GpuObjectHandle
@@ -65,7 +77,8 @@ public:
 
     GpuTextureHandle(int id)
         :
-        GpuObjectHandle(id)
+        GpuObjectHandle(id),
+        m_TextureType(GPU_TEXTURE_TYPE_INIT)
     { }
 
     GpuTextureType TextureType() const { return m_TextureType; }
@@ -83,6 +96,13 @@ public:
         m_TextureType = GPU_TEXTURE_2D;
     }
 
+    GpuTexture2DHandle(int id)
+        :
+        GpuTextureHandle(id)
+    {
+        m_TextureType = GPU_TEXTURE_2D;
+    }
+
     GpuTexture2DHandle(const GpuTextureHandle& handle)
         :
         GpuTextureHandle(handle.Id())
@@ -91,8 +111,12 @@ public:
     }
 };
 
-class GpuAttributeDataHandle : public GpuObjectHandle
+struct GpuAttributeDataHandle : public GpuObjectHandle
 {
+    GpuAttributeDataHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
 };
 
 
@@ -106,7 +130,9 @@ public:
     }
 
 
-    T& Get(H handle) const { return m_List[handle.Id()]; }
+    T& Get(H handle) { return m_List[handle.Id()]; }
+
+    const T& Get(H handle) const { return m_List[handle.Id()]; }
 
     void Destory(H handle)
     {

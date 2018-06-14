@@ -63,7 +63,7 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
         case GPU_TRIANGLE_FAN:
             return GL_TRIANGLE_FAN;
         case GPU_TRIANGLES:
-            return GPU_TRIANGLES;
+            return GL_TRIANGLES;
         default:
             assert(false);
         }
@@ -96,7 +96,7 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
         case GPU_INT:
             return GL_INT;
         case GPU_UNSIGNED_INT:
-            return GPU_UNSIGNED_INT;
+            return GL_UNSIGNED_INT;
         case GPU_HALF_FLOAT:
             return GL_HALF_FLOAT;
         case GPU_FLOAT:

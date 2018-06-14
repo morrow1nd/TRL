@@ -1,12 +1,7 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
-#include "TRL/GpuBuffer.h"
-#include "TRL/AttributeData.h"
-#include "TRL/AttributeVariable.h"
-#include "TRL/GpuProgram.h"
-#include "TRL/GpuShader.h"
-#include "TRL/GpuTexture2D.h"
 #include <cstdlib>
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
@@ -83,55 +78,56 @@ void main()
 }
 )";
 
-    GpuShader vertShader, fragShader;
-    vertShader.Init(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
-    if (vertShader.IsCompiledSucc() == false)
+    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
+
+    auto vertShader = renderAPI->GpuShaderCreate(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
+    auto fragShader = renderAPI->GpuShaderCreate(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
+
+    if (renderAPI->GpuShaderIsCompiledSucc(vertShader) == false)
     {
-        std::cout << "vert: " + vertShader.GetCompileLogInfo() << std::endl;
+        std::cout << "vert: " + renderAPI->GpuShaderGetCompileLogInfo(vertShader) << std::endl;
     }
 
-    fragShader.Init(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
-    if (fragShader.IsCompiledSucc() == false)
+    if (renderAPI->GpuShaderIsCompiledSucc(fragShader) == false)
     {
-        std::cout << "frag: " + fragShader.GetCompileLogInfo() << std::endl;
+        std::cout << "frag: " + renderAPI->GpuShaderGetCompileLogInfo(fragShader) << std::endl;
     }
 
-    GpuProgram program;
-    program.Init(vertShader, fragShader);
+    auto program = renderAPI->GpuProgramCreate(vertShader, fragShader);
 
     // Texture
 
-    const GpuUByte textureData[] = 
+    const uint8 textureData[] = 
     {
         255,0,0,255,
         0,255,0,255,
         0,0,255,255,
         255,255,255,255,
     };
-    GpuTexture2D texture2D, texture2D_2;
-    texture2D.Init();
-    texture2D.UploadImage(GpuTextureBaseFormat::GPU_RGBA, 2, 2, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
-        textureData);
-    texture2D.GenerateMipmap();
-    texture2D.SetMagFilter(GpuTextureMagFilterMode::NEAREST);
-    texture2D.SetMinFilter(GpuTextureMinFilterMode::NEAREST);
 
-    texture2D_2.Init();
+    auto texture2D = renderAPI->GpuTexture2DCreate();
+    auto texture2D_2 = renderAPI->GpuTexture2DCreate();
+
+    renderAPI->GpuTexture2DSendImage(texture2D, GpuTextureBaseFormat::GPU_RGBA, 2, 2, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
+        textureData);
+    renderAPI->GpuTexture2DGenerateMipmap(texture2D);
+    renderAPI->GpuTexture2DSetMagFilter(texture2D, GpuTextureMagFilterMode::NEAREST);
+    renderAPI->GpuTexture2DSetMinFilter(texture2D, GpuTextureMinFilterMode::NEAREST);
+
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
     int width, height, nrChannels;
     unsigned char* data = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
     if (data)
-    {    
-        texture2D_2.UploadImage(GpuTextureBaseFormat::GPU_RGBA, width, height, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
-             data);
-        texture2D_2.GenerateMipmap();
-        texture2D_2.SetMagFilter(GpuTextureMagFilterMode::NEAREST);
-        texture2D_2.SetMinFilter(GpuTextureMinFilterMode::NEAREST);
+    {
+        renderAPI->GpuTexture2DSendImage(texture2D_2, GpuTextureBaseFormat::GPU_RGBA, width, height, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
+            data);
+        renderAPI->GpuTexture2DGenerateMipmap(texture2D_2);
+        renderAPI->GpuTexture2DSetMagFilter(texture2D_2, GpuTextureMagFilterMode::NEAREST);
+        renderAPI->GpuTexture2DSetMinFilter(texture2D_2, GpuTextureMinFilterMode::NEAREST);
     }
     else
     {
         std::cout << "Failed to load texture" << std::endl;
-        system("pause");
         return -6;
     }
 
@@ -149,56 +145,45 @@ void main()
         1, 2, 3   // second Triangle
     };
 
-    GpuBuffer vbo;
-    vbo.Init();
-    vbo.Bind(GPU_ARRAY_BUFFER);
-    vbo.UploadData(vertices, 20 * sizeof(GpuFloat), GpuBufferDataType::GPU_STATIC_DRAW);
+    auto vbo = renderAPI->GpuBufferCreate();
+    renderAPI->GpuBufferSendData(vbo, GPU_ARRAY_BUFFER, vertices, 20 * sizeof(float), GpuBufferDataType::GPU_STATIC_DRAW);
 
-    GpuBuffer ebo;
-    ebo.Init();
-    ebo.Bind(GPU_ELEMENT_ARRAY_BUFFER);
-    ebo.UploadData(indices, 6 * sizeof(GpuUInt), GpuBufferDataType::GPU_STATIC_DRAW);
+    auto ebo = renderAPI->GpuBufferCreate();
+    renderAPI->GpuBufferSendData(ebo, GPU_ELEMENT_ARRAY_BUFFER, indices, 6 * sizeof(uint32), GpuBufferDataType::GPU_STATIC_DRAW);
 
-    AttributeData attrib;
-    attrib.Init();
-    attrib.Active();
-    auto pos = program.FindAttribute("aPos");
-    auto aTextCoord = program.FindAttribute("a_texCoord");
-    if (pos == AttributeVariable::None || aTextCoord == AttributeVariable::None)
+    auto attrib = renderAPI->GpuAttributeDataCreate();
+
+    auto aPos = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindAttribute("aPos");
+    auto aTextCoord = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindAttribute("a_texCoord");
+    if (aPos == AttributeVariable::None || aTextCoord == AttributeVariable::None)
     {
-        std::cout << "can't find ...";
+        std::cout << "can't find attribute ...";
         return -3;
     }
 
-    attrib.SetAttributeArray(pos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 5*sizeof(float), 0);
-    attrib.SetAttributeArray(aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, AttributeData::NormalizeAction::NotNeedNormalize, 5 * sizeof(float), 3*sizeof(float));
-    attrib.SetIndicesBuffer(ebo, 6, GPU_UNSIGNED_INT);
-    attrib.Inactive();
+    renderAPI->SetAttributeArray(attrib, aPos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5*sizeof(float), 0);
+    renderAPI->SetAttributeArray(attrib, aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5 * sizeof(float), 3*sizeof(float));
+    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 6, GPU_UNSIGNED_INT);
 
-    auto textureUniform = program.FindUniform("s_texture");
+    auto textureUniform = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindUniform("s_texture");
     if (textureUniform == UniformVariable::None)
     {
         std::cout << "can't find s_texture";
         return -4;
     }
 
-    auto textureUniform2 = program.FindUniform("s_texture2");
+    auto textureUniform2 = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindUniform("s_texture2");
     if (textureUniform2 == UniformVariable::None)
     {
         std::cout << "can't find s_texture";
         return -4;
     }
 
-    RenderAPI renderAPI;
-
     while (true)
     {
-        attrib.Active();
-        renderAPI.ActiveGpuProgram(program);
-        
-        program.SetUniformTex(textureUniform, texture2D, 0);
-        program.SetUniformTex(textureUniform2, texture2D_2, 1);
-        renderAPI.DrawIndices(GpuPrimitiveType::GPU_TRIANGLES, attrib, 0);
+        renderAPI->GpuProgramSetUniformTexture(program, textureUniform, texture2D, GPU_TEXTURE_UNIT0);
+        renderAPI->GpuProgramSetUniformTexture(program, textureUniform2, texture2D_2, GPU_TEXTURE_UNIT1);
+        renderAPI->DrawIndices(program, attrib, GpuPrimitiveType::GPU_TRIANGLES, 0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

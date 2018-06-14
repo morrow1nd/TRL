@@ -4,7 +4,7 @@
 #include "ToyUtility/DataStream/DataStream.h"
 #include "ToyUtility/String/String.h"
 #include "ToyUtility/Container/List.h"
-#include "TRL/CommonType.h"
+#include "TRL/TRLCommonType.h"
 #include "TRL/TRLSL/Token.h"
 
 

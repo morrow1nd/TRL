@@ -39,11 +39,6 @@ void OpenGLRenderAPI::GpuBufferSendSubData(GpuBufferHandle buffer, const void * 
     b.UploadSubData(data, size, offset);
 }
 
-int OpenGLRenderAPI::GpuBufferGetDataSize(GpuBufferHandle buffer) const
-{
-    return m_BufferMgr.Get(buffer).GetDataSize();
-}
-
 void OpenGLRenderAPI::GpuBufferCleanData(GpuBufferHandle buffer) const
 {
     m_BufferMgr.Get(buffer).CleanData();
@@ -245,55 +240,55 @@ void OpenGLRenderAPI::GpuProgramSetUniformArray(GpuProgramHandle program, const 
     }
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix2fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix3fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix4fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix2x3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix2x3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix2x3fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix3x2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix3x2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix3x2fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix2x4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix2x4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix2x4fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix4x2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix4x2Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix4x2fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix3x4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix3x4Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix3x4fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
 }
 
-void OpenGLRenderAPI::GpuProgramSetUniformMatrix4x3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose = false)
+void OpenGLRenderAPI::GpuProgramSetUniformMatrix4x3Array(GpuProgramHandle program, const UniformVariable & variable, uint32 arrayLength, const float * values, bool needTranspose)
 {
     _ActiveGpuProgram(program);
     glUniformMatrix4x3fv(variable.GetLocation(), arrayLength, needTranspose ? GL_TRUE : GL_FALSE, values);
@@ -325,9 +320,11 @@ void OpenGLRenderAPI::GpuProgramSetUniformTexture(GpuProgramHandle program, cons
     switch (textureType)
     {
     case GPU_TEXTURE_2D:
+    {
         auto& t = m_Texture2DMgr.Get(GpuTexture2DHandle(texture));
         t.ActiveTextureUnit(textureUnit);
         break;
+    }
     default:
         assert(false);
         break;
@@ -569,7 +566,7 @@ void OpenGLRenderAPI::DrawIndices(GpuProgramHandle program, GpuAttributeDataHand
     _ActiveGpuAttributeData(attributeData_);
     _ActiveGpuProgram(program);
 
-    glDrawElements(TRL_GL_NATIVE(mode), attributeData_.GetEBOInfo().IndicesNumber, attributeData_.GetEBOInfo().DataType,
+    glDrawElements(TRL_GL_NATIVE(mode), attributeData_.GetEBOInfo().IndicesNumber, TRL_GL_NATIVE(attributeData_.GetEBOInfo().DataType),
         (const void*)offset);
 }
 

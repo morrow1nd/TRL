@@ -28,8 +28,10 @@ SET(TRL_INC_FILES
 )
 
 SET(TRL_SRC_FILES
+	"${TRL_SOURCE_DIR}/TRL/AttributeVariable.cpp"
 	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
 	"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
+	"${TRL_SOURCE_DIR}/TRL/UniformVariable.cpp"
 )
 
 set(TRL_INC_DETAIL_OPENGL
