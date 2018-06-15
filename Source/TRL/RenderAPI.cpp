@@ -19,19 +19,19 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     case GPU_INT8:
         return sizeof(int8);
         break;
-    case GPU_UNSIGNED_BYTE:
+    case GPU_UINT8:
         return sizeof(uint8);
         break;
-    case GPU_SHORT:
+    case GPU_INT16:
         return sizeof(int16);
         break;
-    case GPU_UNSIGNED_SHORT:
+    case GPU_UINT16:
         return sizeof(uint16);
         break;
-    case GPU_INT:
+    case GPU_INT32:
         return sizeof(int32);
         break;
-    case GPU_UNSIGNED_INT:
+    case GPU_UINT32:
         return sizeof(uint32);
         break;
     case GPU_HALF_FLOAT:
@@ -49,22 +49,22 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     case GPU_FLOAT_VEC4:
         return sizeof(float[4]);
         break;
-    case GPU_INT_VEC2:
+    case GPU_INT32_VEC2:
         return sizeof(int32[2]);
         break;
-    case GPU_INT_VEC3:
+    case GPU_INT32_VEC3:
         return sizeof(int32[3]);
         break;
-    case GPU_INT_VEC4:
+    case GPU_INT32_VEC4:
         return sizeof(int32[4]);
         break;
-    case GPU_UNSIGNED_INT_VEC2:
+    case GPU_UINT32_VEC2:
         return sizeof(uint32[2]);
         break;
-    case GPU_UNSIGNED_INT_VEC3:
+    case GPU_UINT32_VEC3:
         return sizeof(uint32[3]);
         break;
-    case GPU_UNSIGNED_INT_VEC4:
+    case GPU_UINT32_VEC4:
         return sizeof(uint32[4]);
         break;
     case GPU_BOOL_VEC2:

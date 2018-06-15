@@ -87,15 +87,15 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
             return GL_BOOL;
         case GPU_INT8:
             return GL_BYTE;
-        case GPU_UNSIGNED_BYTE:
+        case GPU_UINT8:
             return GL_UNSIGNED_BYTE;
-        case GPU_SHORT:
+        case GPU_INT16:
             return GL_SHORT;
-        case GPU_UNSIGNED_SHORT:
+        case GPU_UINT16:
             return GL_UNSIGNED_SHORT;
-        case GPU_INT:
+        case GPU_INT32:
             return GL_INT;
-        case GPU_UNSIGNED_INT:
+        case GPU_UINT32:
             return GL_UNSIGNED_INT;
         case GPU_HALF_FLOAT:
             return GL_HALF_FLOAT;
@@ -107,17 +107,17 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
             return GL_FLOAT_VEC3;
         case GPU_FLOAT_VEC4:
             return GL_FLOAT_VEC4;
-        case GPU_INT_VEC2:
+        case GPU_INT32_VEC2:
             return GL_INT_VEC2;
-        case GPU_INT_VEC3:
+        case GPU_INT32_VEC3:
             return GL_INT_VEC3;
-        case GPU_INT_VEC4:
+        case GPU_INT32_VEC4:
             return GL_INT_VEC4;
-        case GPU_UNSIGNED_INT_VEC2:
+        case GPU_UINT32_VEC2:
             return GL_UNSIGNED_INT_VEC2;
-        case GPU_UNSIGNED_INT_VEC3:
+        case GPU_UINT32_VEC3:
             return GL_UNSIGNED_INT_VEC3;
-        case GPU_UNSIGNED_INT_VEC4:
+        case GPU_UINT32_VEC4:
             return GL_UNSIGNED_INT_VEC4;
         case GPU_BOOL_VEC2:
             return GL_BOOL_VEC2;

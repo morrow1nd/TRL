@@ -126,7 +126,7 @@ void main()
         6*sizeof(float), 0);
     renderAPI->SetAttributeArray(attrib, aColor, vbo, GpuVariableComponentSize::_3, GPU_FLOAT,
         NormalizeActionType::NotNeedNormalize, 6*sizeof(float), 3 * sizeof(float));
-    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 3, GPU_UNSIGNED_INT);
+    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 3, GPU_UINT32);
     
     while (true)
     {

@@ -116,7 +116,7 @@ void main()
     auto texture2D = renderAPI->GpuTexture2DCreate();
     auto texture2D_2 = renderAPI->GpuTexture2DCreate();
 
-    renderAPI->GpuTexture2DSendImage(texture2D, GpuTextureBaseFormat::GPU_RGBA, 2, 2, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
+    renderAPI->GpuTexture2DSendImage(texture2D, GpuTextureBaseFormat::GPU_RGBA, 2, 2, PixelFormat::RGBA, PixelDataType::UINT8,
         textureData);
     renderAPI->GpuTexture2DGenerateMipmap(texture2D);
     renderAPI->GpuTexture2DSetMagFilter(texture2D, GpuTextureMagFilterMode::NEAREST);
@@ -127,7 +127,7 @@ void main()
     unsigned char* data = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
     if (data)
     {
-        renderAPI->GpuTexture2DSendImage(texture2D_2, GpuTextureBaseFormat::GPU_RGBA, width, height, PixelFormat::RGBA, PixelDataType::UNSIGNED_BYTE,
+        renderAPI->GpuTexture2DSendImage(texture2D_2, GpuTextureBaseFormat::GPU_RGBA, width, height, PixelFormat::RGBA, PixelDataType::UINT8,
             data);
         renderAPI->GpuTexture2DGenerateMipmap(texture2D_2);
         renderAPI->GpuTexture2DSetMagFilter(texture2D_2, GpuTextureMagFilterMode::NEAREST);
@@ -171,7 +171,7 @@ void main()
 
     renderAPI->SetAttributeArray(attrib, aPos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5*sizeof(float), 0);
     renderAPI->SetAttributeArray(attrib, aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5 * sizeof(float), 3*sizeof(float));
-    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 6, GPU_UNSIGNED_INT);
+    renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 6, GPU_UINT32);
 
     auto textureUniform = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindUniform("s_texture");
     if (textureUniform == UniformVariable::None)
