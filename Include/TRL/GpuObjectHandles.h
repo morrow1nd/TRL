@@ -15,13 +15,11 @@ class GpuObjectHandle
 public:
     GpuObjectHandle()
         : m_Id(0)
-    {
-    }
+    {}
 
     GpuObjectHandle(int id)
         : m_Id(id)
-    {
-    }
+    {}
 
     int Id() const
     {
@@ -73,13 +71,13 @@ public:
     GpuTextureHandle()
         :
         m_TextureType(GPU_TEXTURE_TYPE_INIT)
-    { }
+    {}
 
     GpuTextureHandle(int id)
         :
         GpuObjectHandle(id),
         m_TextureType(GPU_TEXTURE_TYPE_INIT)
-    { }
+    {}
 
     GpuTextureType TextureType() const { return m_TextureType; }
 
@@ -114,6 +112,30 @@ public:
 struct GpuAttributeDataHandle : public GpuObjectHandle
 {
     GpuAttributeDataHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
+};
+
+struct WindowHandle : public GpuObjectHandle
+{
+    WindowHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
+};
+
+struct MonitorHandle : public GpuObjectHandle
+{
+    MonitorHandle(int id)
+        :
+        GpuObjectHandle(id)
+    {}
+};
+
+struct AdapterHandle : public GpuObjectHandle
+{
+    AdapterHandle(int id)
         :
         GpuObjectHandle(id)
     {}

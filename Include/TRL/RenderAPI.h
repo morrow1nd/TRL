@@ -11,6 +11,7 @@
 #include "TRL/AttributeUniformInfo.h"
 #include "TRL/AttributeVariable.h"
 #include "TRL/UniformVariable.h"
+#include "TRL/AdapterDesc.h"
 
 
 namespace TRL
@@ -33,7 +34,32 @@ public:
 public:
     virtual ~RenderAPI() = default;
 
+
+public:
+    /////////////////////////////////////////////////////////////////////////////////
+    // RenderAPI
+
     virtual TRLNativeApiType        UsedNativeApiType() const = 0;
+
+    virtual void                    StartUp() = 0;
+    virtual void                    ShutDown() = 0;
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // Adapter(Video card)
+
+    AdapterHandle                   GetDefaultAdapter();
+    const List<AdapterHandle>&      GetAdapters();
+    bool                            AdapterGetDesc(AdapterHandle adapter, AdapterDesc& desc);
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // Monitor
+
+    const List<MonitorHandle>&      AdapterGetMonitors(AdapterHandle adapter);
+
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    // Window
+
 
     /////////////////////////////////////////////////////////////////////////////////
     // GpuBuffer
@@ -122,6 +148,8 @@ public:
     virtual GpuAttributeDataHandle  GpuAttributeDataCreate() = 0;
     virtual void                    GpuAttributeDataSetIndicesBuffer(GpuAttributeDataHandle attributeData,
                                         GpuBufferHandle ebo, int indicesNumber, GpuDataType type) = 0;
+    // @stride: in bytes
+    // @beginOffset: in bytes
     virtual void                    SetAttributeArray(GpuAttributeDataHandle attributeData,
                                         const AttributeVariable& variable,
                                         GpuBufferHandle vbo,

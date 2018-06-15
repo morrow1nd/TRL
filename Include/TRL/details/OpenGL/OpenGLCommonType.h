@@ -85,7 +85,7 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
         {
         case GPU_BOOL:
             return GL_BOOL;
-        case GPU_BYTE:
+        case GPU_INT8:
             return GL_BYTE;
         case GPU_UNSIGNED_BYTE:
             return GL_UNSIGNED_BYTE;

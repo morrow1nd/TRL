@@ -38,25 +38,6 @@ enum class NormalizeActionType
     NeedNormalize,
 };
 
-//
-//using GpuBool = bool;
-//using GpuVoid = GLvoid;
-//using GpuByte = GLbyte;
-//using GpuShort = GLshort;
-//using GpuInt = GLint;
-//using GpuClampx = GLclampx;
-//using GpuUByte = GLubyte;
-//using GpuUShort = GLushort;
-//using GpuUInt = GLuint;
-//using GpuSizei = GLsizei;
-//using GpuFloat = GLfloat;
-//using GpuHalf = GLhalf;
-//using GpuFixed = GLfixed;
-//using GpuClampf = GLclampf;
-//using GpuDouble = GLdouble;
-//using GpuClampd = GLclampd;
-//using GpuFloat = GLfloat;
-
 
 enum GpuPrimitiveType
 {
@@ -77,7 +58,7 @@ enum GpuDataType
 
     GPU_BOOL,
 
-    GPU_BYTE,
+    GPU_INT8,
     GPU_UNSIGNED_BYTE,
     GPU_SHORT,
     GPU_UNSIGNED_SHORT,
@@ -199,7 +180,7 @@ enum class PixelDataType
     PIXEL_DATA_TYPE_INIT = 0,
 
     UNSIGNED_BYTE = GpuDataType::GPU_UNSIGNED_BYTE,
-    BYTE = GpuDataType::GPU_BYTE,
+    BYTE = GpuDataType::GPU_INT8,
     UNSIGNED_SHORT = GpuDataType::GPU_UNSIGNED_SHORT,
     SHORT = GpuDataType::GPU_SHORT,
     UNSIGNED_INT = GpuDataType::GPU_UNSIGNED_INT,

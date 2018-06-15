@@ -18,6 +18,7 @@ SET(TRL_SRC_SL
 )
 
 SET(TRL_INC_FILES
+	"${TRL_INCLUDE_DIR}/TRL/AdapterDesc.h"
 	"${TRL_INCLUDE_DIR}/TRL/AttributeUniformInfo.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
     "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"

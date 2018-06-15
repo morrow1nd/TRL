@@ -1,7 +1,7 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
 #include <cstdlib>
-#include "glad/glad.h"
+#include "glad/glad.h" // glad must be placed before the GLFW header. http://www.glfw.org/docs/latest/quick_guide.html#quick_include
 #include "GLFW/glfw3.h"
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
@@ -47,6 +47,14 @@ int main()
         // std::cout << "Failed to initialize GLAD" << std::endl;
         return -2;
     }
+
+
+
+
+    // tem code
+    GLFWvidmode
+
+
 
 
     // Shader Program

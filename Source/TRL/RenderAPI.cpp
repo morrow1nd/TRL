@@ -16,7 +16,7 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
     case GPU_BOOL:
         return sizeof(bool);
         break;
-    case GPU_BYTE:
+    case GPU_INT8:
         return sizeof(int8);
         break;
     case GPU_UNSIGNED_BYTE:
@@ -126,7 +126,7 @@ ToyUtility::SPtr<RenderAPI> RenderAPI::CreateRenderAPI(TRLNativeApiType type)
     switch (type)
     {
     case TRLNativeApiType::DX11:
-        
+        return ToyUtility::SPtr<RenderAPI>(new TRL::details::DX11RenderAPI());
         break;
     case TRLNativeApiType::OpenGL:
         return ToyUtility::SPtr<RenderAPI>(new TRL::details::OpenGLRenderAPI());
