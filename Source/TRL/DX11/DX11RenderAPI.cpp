@@ -10,12 +10,12 @@ namespace details
 
 TRLNativeApiType DX11RenderAPI::UsedNativeApiType() const
 {
-    return TRLNativeApiType();
+    return TRLNativeApiType::DX11;
 }
 
 GpuBufferHandle DX11RenderAPI::GpuBufferCreate()
 {
-    return GpuBufferHandle();
+    return GpuBufferHandle(0);
 }
 
 void DX11RenderAPI::GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int byteSize, GpuBufferDataType dataType)
@@ -36,7 +36,7 @@ void DX11RenderAPI::GpuBufferDestory(GpuBufferHandle buffer)
 
 GpuShaderHandle DX11RenderAPI::GpuShaderCreate(const String & rawSourceCode, GpuShaderType type)
 {
-    return GpuShaderHandle();
+    return GpuShaderHandle(0);
 }
 
 bool DX11RenderAPI::GpuShaderIsCompiledSucc(GpuShaderHandle shader) const
@@ -60,7 +60,7 @@ void DX11RenderAPI::GpuShaderDestory(GpuShaderHandle shader)
 
 GpuProgramHandle DX11RenderAPI::GpuProgramCreate(GpuShaderHandle vertShader, GpuShaderHandle fragShader)
 {
-    return GpuProgramHandle();
+    return GpuProgramHandle(0);
 }
 
 bool DX11RenderAPI::GpuProgramIsLinkedSucc(GpuProgramHandle program) const
@@ -184,7 +184,7 @@ void DX11RenderAPI::GpuProgramDestory(GpuProgramHandle program)
 
 GpuAttributeDataHandle DX11RenderAPI::GpuAttributeDataCreate()
 {
-    return GpuAttributeDataHandle();
+    return GpuAttributeDataHandle(0);
 }
 
 void DX11RenderAPI::GpuAttributeDataSetIndicesBuffer(GpuAttributeDataHandle attributeData, GpuBufferHandle ebo, int indicesNumber, GpuDataType type)

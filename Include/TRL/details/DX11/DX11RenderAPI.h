@@ -1,5 +1,10 @@
 #pragma once
 
+#include <windows.h>
+#include <d3d11.h>
+#include <d3dx11.h>
+#include <d3dcompiler.h>
+
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
 
@@ -13,6 +18,22 @@ namespace details
 
 class DX11RenderAPI : public RenderAPI
 {
+public:
+    DX11RenderAPI()
+    {}
+
+
+private:
+    HINSTANCE                           m_HInst = NULL;
+    HWND                                m_HWND = NULL;
+    D3D_DRIVER_TYPE                     m_DriverType = D3D_DRIVER_TYPE_NULL;
+    D3D_FEATURE_LEVEL                   m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
+    ID3D11Device*                       m_D3DDevice = NULL;
+    ID3D11DeviceContext*                m_ImmediateContext = NULL;
+    IDXGISwapChain*                     m_SwapChain = NULL;
+
+
+public:
     virtual TRLNativeApiType UsedNativeApiType() const override;
     virtual GpuBufferHandle GpuBufferCreate() override;
     virtual void GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int byteSize, GpuBufferDataType dataType) override;

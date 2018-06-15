@@ -53,7 +53,14 @@ set(TRL_SRC_OPENGL
 )
 
 set(TRL_INC_DETAIL_DX11
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11AttributeData.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Buffer.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11CommonType.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Program.h"
 	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11RenderAPI.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Shader.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Texture.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Texture2D.h"
 )
 
 set(TRL_SRC_DX11
