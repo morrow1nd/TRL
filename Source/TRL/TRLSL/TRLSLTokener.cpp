@@ -1,8 +1,8 @@
-#include "TRL/TRLSL/TRLSLTokener.h"
+#include "TRL/details/TRLSL/TRLSLTokener.h"
 
 #include <cstring>
 #include <cctype>
-#include "TRL/TRLSL/trlsl_token_id.h"
+#include "TRL/details/TRLSL/trlsl_token_id.h"
 
 
 namespace TRL

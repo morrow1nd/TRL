@@ -26,8 +26,8 @@
 /************ Begin %include sections from the grammar ************************/
 
     #include <cassert>
-    #include "TRL/TRLSL/Token.h"
-    #include "TRL/TRLSL/TRLSLGenerator.h"
+    #include "TRL/details/TRLSL/Token.h"
+    #include "TRL/details/TRLSL/TRLSLGenerator.h"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless

@@ -67,6 +67,11 @@ target_link_libraries(TRL
 	${TOY_UTILITY_LIBRARIES}
 	glfw
 	${GLFW_LIBRARIES}
+
+	d3d11 # TODOH: Window DX11
+	d3dcompiler
+	dxguid
+	dxgi
 )
 
 

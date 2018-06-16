@@ -20,8 +20,80 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+#include "TRL/RenderAPI.h"
 
-int main()
+
+
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+
+
+//--------------------------------------------------------------------------------------
+// Entry point to the program. Initializes everything and goes into a message processing 
+// loop. Idle time is used to render the scene.
+//--------------------------------------------------------------------------------------
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+{
+    UNREFERENCED_PARAMETER(hPrevInstance);
+    UNREFERENCED_PARAMETER(lpCmdLine);
+
+    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
+    
+    renderAPI->StartUp(hInstance, WndProc);
+
+    WINDOW_CREATE_DESC desc;
+    desc.Title = "One Window";
+    desc.Windowed = false;
+    desc.WindowRect = ToyUtility::Rect2I(0, 0, 800, 600);
+    desc.BufferCount = 1;
+    desc.BufferDesc.Height = 600;
+    desc.BufferDesc.Width = 800;
+    desc.BufferDesc.RefreshRate = ToyUtility::Rational(1, 60);
+    desc.SampleDesc = SampleDesc::NoMultiSampling;
+    auto window = renderAPI->WindowCreate(desc);
+    renderAPI->WindowSetMain(window);
+    renderAPI->WindowSetVisible(window, true);
+
+    // Main message loop
+    MSG msg = {0};
+    while (WM_QUIT != msg.message)
+    {
+        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+    }
+
+    return (int)msg.wParam;
+}
+
+//--------------------------------------------------------------------------------------
+// Called every time the application receives a message
+//--------------------------------------------------------------------------------------
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    PAINTSTRUCT ps;
+    HDC hdc;
+
+    switch (message)
+    {
+    case WM_PAINT:
+        hdc = BeginPaint(hWnd, &ps);
+        EndPaint(hWnd, &ps);
+        break;
+
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+
+    return 0;
+}
+
+int _a__main()
 {
     // glfw: initialize and configure
     glfwInit();
@@ -47,12 +119,6 @@ int main()
         // std::cout << "Failed to initialize GLAD" << std::endl;
         return -2;
     }
-
-
-
-
-    // tem code
-    GLFWvidmode
 
 
 

@@ -1,8 +1,8 @@
-#include "TRL/TRLSL/Token.h"
+#include "TRL/details/TRLSL/Token.h"
 
 #include <cassert>
 #include <limits>
-#include "TRL/TRLSL/trlsl_token_id.h"
+#include "TRL/details/TRLSL/trlsl_token_id.h"
 
 
 namespace TRL

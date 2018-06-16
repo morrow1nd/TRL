@@ -1,10 +1,10 @@
-#include "TRL/TRLSL/TRLSLParser.h"
+#include "TRL/details/TRLSL/TRLSLParser.h"
 
 #include "./trlsl_parser.cpp"
 #include <cstdlib>
 
-#include "TRL/TRLSL/TRLSLTokener.h"
-#include "TRL/TRLSL/TRLSLGenerator.h"
+#include "TRL/details/TRLSL/TRLSLTokener.h"
+#include "TRL/details/TRLSL/TRLSLGenerator.h"
 
 
 namespace TRL

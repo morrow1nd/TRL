@@ -142,7 +142,7 @@ struct AdapterHandle : public GpuObjectHandle
 };
 
 
-template<typename H, typename T>
+template<typename H, typename T, bool ReuseId = true>
 class IndexedContainer
 {
 public:
@@ -164,16 +164,24 @@ public:
 
     H New()
     {
-        if (m_UnusedIndices.empty())
+        if (ReuseId)
         {
-            m_List.push_back(T());
-            return H(m_List.size() - 1);
+            if (m_UnusedIndices.empty())
+            {
+                m_List.push_back(T());
+                return H(m_List.size() - 1);
+            }
+            else
+            {
+                auto ret = m_UnusedIndices.back();
+                m_UnusedIndices.pop_back();
+                return H(ret);
+            }
         }
         else
         {
-            auto ret = m_UnusedIndices.back();
-            m_UnusedIndices.pop_back();
-            return H(ret);
+            m_List.push_back(T());
+            return H(m_List.size() - 1);
         }
     }
 
@@ -182,6 +190,36 @@ private:
     ToyUtility::List<T> m_List;
 
     ToyUtility::List<int> m_UnusedIndices;
+};
+
+template<typename HandleType>
+class ContainHandle
+{
+public:
+    ContainHandle()
+        :
+        m_Handle(0)
+    {}
+
+    ContainHandle(ToyUtility::uint32 id)
+        :
+        m_Handle(id)
+    {}
+
+
+    HandleType GetHandle() const
+    {
+        return m_Handle;
+    }
+
+    void SetHandle(HandleType handle)
+    {
+        m_Handle = handle;
+    }
+
+
+private:
+    HandleType m_Handle;
 };
 
 

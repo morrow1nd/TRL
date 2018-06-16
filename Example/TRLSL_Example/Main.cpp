@@ -2,10 +2,10 @@
 #include <iostream>
 
 #include "ToyUtility/DataStream/MemoryDataStream.h"
-#include "TRL/TRLSL/DebugGenerator.h"
-#include "TRL/TRLSL/GLSLGenerator.h"
-#include "TRL/TRLSL/TRLSLParser.h"
-#include "TRL/TRLSL/TRLSLTokener.h"
+#include "TRL/details/TRLSL/DebugGenerator.h"
+#include "TRL/details/TRLSL/GLSLGenerator.h"
+#include "TRL/details/TRLSL/TRLSLParser.h"
+#include "TRL/details/TRLSL/TRLSLTokener.h"
 
 
 using namespace ToyUtility;

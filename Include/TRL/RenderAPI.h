@@ -9,11 +9,10 @@
 #include "TRL/TRLCommonType.h"
 #include "TRL/GpuObjectHandles.h"
 #include "TRL/AttributeUniformInfo.h"
-#include "TRL/AttributeVariable.h"
-#include "TRL/UniformVariable.h"
-#include "TRL/AdapterDesc.h"
+#include "TRL/DataClasses.h"
+#include "TRL/details/VGI/VGI.h"
 
-
+#include <Windows.h>
 namespace TRL
 {
 
@@ -41,25 +40,44 @@ public:
 
     virtual TRLNativeApiType        UsedNativeApiType() const = 0;
 
-    virtual void                    StartUp() = 0;
-    virtual void                    ShutDown() = 0;
+    virtual void                    StartUp(HINSTANCE hInstance, WNDPROC wndProc);
+    virtual void                    ShutDown();
 
     /////////////////////////////////////////////////////////////////////////////////
-    // Adapter(Video card)
+    // Adapter(Video card), Monitor
 
     AdapterHandle                   GetDefaultAdapter();
     const List<AdapterHandle>&      GetAdapters();
     bool                            AdapterGetDesc(AdapterHandle adapter, AdapterDesc& desc);
 
-    /////////////////////////////////////////////////////////////////////////////////
-    // Monitor
+    List<MonitorHandle>             AdapterGetMonitors(AdapterHandle adapter);
+    void                            MonitorGetDesc(MonitorHandle monitor, MonitorDesc& desc);
 
-    const List<MonitorHandle>&      AdapterGetMonitors(AdapterHandle adapter);
-
-    
     /////////////////////////////////////////////////////////////////////////////////
     // Window
 
+    WindowHandle                    WindowCreate(const WINDOW_CREATE_DESC& desc);
+    void                            WindowDestory(WindowHandle window);
+    void                            WindowSetMain(WindowHandle window);
+    WindowHandle                    WindowGetMain() const;
+    void                            WindowSetTitle(WindowHandle window, const String& title);
+    void                            WindowSetSize(WindowHandle window, uint32 width, uint32 height);
+    void                            WindowGetSize(WindowHandle window, uint32* width, uint32* height) const;
+    void                            WindowSetPosition(WindowHandle window, int32 x, int32 y);
+    void                            WindowGetPosition(WindowHandle window, int32* x, int32* y);
+    void                            WindowSetVisible(WindowHandle window, bool visible);
+    void                            WindowFocus(WindowHandle window);
+    // @syncInterval: An integer that specifies the how to synchronize presentation of a frame with the
+    //      vertical blank.Values are :
+    //      0 - The presentation occurs immediately, there is no synchronization.
+    //      1, 2, 3, 4 - Synchronize presentation after the n'th vertical blank. 
+    void                            WindowPresent(WindowHandle window, uint32 syncInterval);
+
+    // TODO: SDL:ScreenSaver, 
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // --
+    void                            SetViewport(uint32 topLeftX, uint32 topLeftY, uint32 width, uint32 height);
 
     /////////////////////////////////////////////////////////////////////////////////
     // GpuBuffer
@@ -221,6 +239,13 @@ public:
 
     // Contain a default matrix into a matrix suitable for use by this specific render system.
     virtual void                    ConvertProjectionMatrix(const ToyUtility::Matrix4& matrix, ToyUtility::Matrix4& dest) const = 0;
+
+
+private:
+    ToyUtility::SPtr<details::VGI> m_VGI;
+    IndexedContainer<AdapterHandle, details::Adapter*> m_AdapterMgr;
+    List<AdapterHandle> m_AdapterHandles;
+    List<details::Adapter*> m_Adapters;
 };
 
 

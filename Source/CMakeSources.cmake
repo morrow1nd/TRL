@@ -1,12 +1,12 @@
 
 SET(TRL_INC_SL
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/DebugGenerator.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/GLSLGenerator.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLGenerator.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/Token.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLTokener.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/trlsl_token_id.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLSL/TRLSLParser.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/DebugGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/GLSLGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/TRLSLGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/Token.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/TRLSLTokener.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/trlsl_token_id.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/TRLSLParser.h"
 )
 SET(TRL_SRC_SL
     "${TRL_SOURCE_DIR}/TRL/TRLSL/DebugGenerator.cpp"
@@ -18,54 +18,88 @@ SET(TRL_SRC_SL
 )
 
 SET(TRL_INC_FILES
-	"${TRL_INCLUDE_DIR}/TRL/AdapterDesc.h"
 	"${TRL_INCLUDE_DIR}/TRL/AttributeUniformInfo.h"
+    "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
+    "${TRL_INCLUDE_DIR}/TRL/DataClasses.h"
     "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
     "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
     "${TRL_INCLUDE_DIR}/TRL/GpuObjectHandles.h"
     #"${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
-    "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
     "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
 )
 
 SET(TRL_SRC_FILES
 	"${TRL_SOURCE_DIR}/TRL/AttributeVariable.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DataClasses.cpp"
 	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
 	#"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
 	"${TRL_SOURCE_DIR}/TRL/UniformVariable.cpp"
 )
 
-set(TRL_INC_DETAIL_OPENGL
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLRenderAPI.h"
 
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLAttributeData.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLBuffer.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLCommonType.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLProgram.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLShader.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLTexture.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/OpenGL/OpenGLTexture2D.h"
+###############################################################################
+## VGI
+
+SET(TRL_INC_DETAIL_VGI
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/VGI.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Window.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Adapter.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Monitor.h"
 )
 
-set(TRL_SRC_OPENGL
-	"${TRL_SOURCE_DIR}/TRL/OpenGL/OpenGLRenderAPI.cpp"
+SET(TRL_SRC_DETAIL_VGI
+)
+
+SET(TRL_INC_DETAIL_VGI_WINDX
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXVGI.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXCommon.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXWindow.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXAdapter.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXMonitor.h"
+)
+
+SET(TRL_SRC_DETAIL_VGI_WINDX
+    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXVGI.cpp"
+    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXWindow.cpp"
+    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXAdapter.cpp"
+    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXMonitor.cpp"
+)
+
+
+###############################################################################
+## RenderAPI Impl
+
+set(TRL_INC_DETAIL_RENDERAPI_IMPL_OPENGL
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLRenderAPI.h"
+
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLAttributeData.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLBuffer.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLCommonType.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLProgram.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLShader.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLTexture.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/OpenGL/OpenGLTexture2D.h"
+)
+
+set(TRL_SRC_DETAIL_RENDERAPI_IMPL_OPENGL
+	"${TRL_SOURCE_DIR}/TRL/RenderAPIImpl/OpenGL/OpenGLRenderAPI.cpp"
 
 	"${TRL_SOURCE_DIR}/ThirdParty/GLAD/glad-c/src/glad.c"
 )
 
-set(TRL_INC_DETAIL_DX11
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11AttributeData.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Buffer.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11CommonType.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Program.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11RenderAPI.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Shader.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Texture.h"
-	"${TRL_INCLUDE_DIR}/TRL/details/DX11/DX11Texture2D.h"
+set(TRL_INC_DETAIL_RENDERAPI_IMPL_DX11
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11AttributeData.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11Buffer.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11CommonType.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11Program.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11RenderAPI.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11Shader.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11Texture.h"
+	"${TRL_INCLUDE_DIR}/TRL/details/RenderAPIImpl/DX11/DX11Texture2D.h"
 )
 
-set(TRL_SRC_DX11
-	"${TRL_SOURCE_DIR}/TRL/DX11/DX11RenderAPI.cpp"
+set(TRL_SRC_DETAIL_RENDERAPI_IMPL_DX11
+	"${TRL_SOURCE_DIR}/TRL/RenderAPIImpl/DX11/DX11RenderAPI.cpp"
 )
 
 
@@ -73,14 +107,19 @@ source_group("CMake"									FILES "${TRL_SOURCE_DIR}/../CMakeLists.txt")
 source_group("CMake\\Source"                            FILES "CMakeSources.cmake" "CMakeLists.txt")
 source_group("CMake\\Source\\ThirdParty"				FILES "${TRL_SOURCE_DIR}/ThirdParty/CMakeLists.txt")
 
-source_group("Header Files"                             FILES ${TRL_INC_FILES})
-source_group("Source Files"								FILES ${TRL_SRC_FILES})
-source_group("Header Files\\TRL_SL"						FILES ${TRL_INC_SL})
-source_group("Source Files\\TRL_SL"                     FILES ${TRL_SRC_SL})
-source_group("Header Files\\details\\OpenGL"			FILES ${TRL_INC_DETAIL_OPENGL})
-source_group("Source Files\\OpenGL"						FILES ${TRL_SRC_OPENGL})
-source_group("Header Files\\details\\DX11"				FILES ${TRL_INC_DETAIL_DX11})
-source_group("Source Files\\DX11"						FILES ${TRL_SRC_DX11})
+source_group("Header Files"												FILES ${TRL_INC_FILES})
+source_group("Header Files\\details\\TRL_SL"							FILES ${TRL_INC_SL})
+source_group("Header Files\\details\\VGI" 								FILES ${TRL_INC_DETAIL_VGI})
+source_group("Header Files\\details\\VGI\\WinDX"						FILES ${TRL_INC_DETAIL_VGI_WINDX})
+source_group("Header Files\\details\\RenderAPIImpl\\OpenGL"				FILES ${TRL_INC_DETAIL_RENDERAPI_IMPL_OPENGL})
+source_group("Header Files\\details\\RenderAPIImpl\\DX11"				FILES ${TRL_INC_DETAIL_RENDERAPI_IMPL_DX11})
+
+source_group("Source Files"												FILES ${TRL_SRC_FILES})
+source_group("Source Files\\TRL_SL"										FILES ${TRL_SRC_SL})
+source_group("Source Files\\VGI" 										FILES ${TRL_SRC_DETAIL_VGI})
+source_group("Source Files\\VGI\\WinDX" 								FILES ${TRL_SRC_DETAIL_VGI_WINDX})
+source_group("Source Files\\RenderAPIImpl\\OpenGL"						FILES ${TRL_SRC_DETAIL_RENDERAPI_IMPL_OPENGL})
+source_group("Source Files\\RenderAPIImpl\\DX11"						FILES ${TRL_SRC_DETAIL_RENDERAPI_IMPL_DX11})
 
 
 set(TRL_SRC
@@ -92,9 +131,13 @@ set(TRL_SRC
     ${TRL_SRC_FILES}
     ${TRL_INC_SL}
 	${TRL_SRC_SL}
+	${TRL_INC_DETAIL_VGI}
+	${TRL_SRC_DETAIL_VGI}
+	${TRL_INC_DETAIL_VGI_WINDX}
+	${TRL_SRC_DETAIL_VGI_WINDX}
 
-	${TRL_INC_DETAIL_OPENGL}
-	${TRL_SRC_OPENGL}
-	${TRL_INC_DETAIL_DX11}
-	${TRL_SRC_DX11}
+	${TRL_INC_DETAIL_RENDERAPI_IMPL_OPENGL}
+	${TRL_SRC_DETAIL_RENDERAPI_IMPL_OPENGL}
+	${TRL_INC_DETAIL_RENDERAPI_IMPL_DX11}
+	${TRL_SRC_DETAIL_RENDERAPI_IMPL_DX11}
 )

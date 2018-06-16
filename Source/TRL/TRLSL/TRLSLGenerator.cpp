@@ -1,4 +1,4 @@
-#include "TRL/TRLSL/TRLSLGenerator.h"
+#include "TRL/details/TRLSL/TRLSLGenerator.h"
 
 #include <exception>
 
