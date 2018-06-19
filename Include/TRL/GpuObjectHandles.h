@@ -13,6 +13,10 @@ namespace TRL
 class GpuObjectHandle
 {
 public:
+    static int EmptyId;
+
+
+public:
     GpuObjectHandle()
         : m_Id(0)
     {}
@@ -24,6 +28,11 @@ public:
     int Id() const
     {
         return m_Id;
+    }
+
+    bool Empty()
+    {
+        
     }
 
     bool operator==(const GpuObjectHandle& rhs) const
@@ -112,30 +121,6 @@ public:
 struct GpuAttributeDataHandle : public GpuObjectHandle
 {
     GpuAttributeDataHandle(int id)
-        :
-        GpuObjectHandle(id)
-    {}
-};
-
-struct WindowHandle : public GpuObjectHandle
-{
-    WindowHandle(int id)
-        :
-        GpuObjectHandle(id)
-    {}
-};
-
-struct MonitorHandle : public GpuObjectHandle
-{
-    MonitorHandle(int id)
-        :
-        GpuObjectHandle(id)
-    {}
-};
-
-struct AdapterHandle : public GpuObjectHandle
-{
-    AdapterHandle(int id)
         :
         GpuObjectHandle(id)
     {}

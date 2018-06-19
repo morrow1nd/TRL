@@ -1,3 +1,22 @@
+SET(TRL_INC_FILES
+	"${TRL_INCLUDE_DIR}/TRL/AttributeUniformInfo.h"
+    "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
+    "${TRL_INCLUDE_DIR}/TRL/DataClasses.h"
+    "${TRL_INCLUDE_DIR}/TRL/GpuObjectHandles.h"
+    "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
+    "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
+    #"${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
+    "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
+)
+
+SET(TRL_SRC_FILES
+	"${TRL_SOURCE_DIR}/TRL/AttributeVariable.cpp"
+	"${TRL_SOURCE_DIR}/TRL/DataClasses.cpp"
+	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
+	#"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
+	"${TRL_SOURCE_DIR}/TRL/UniformVariable.cpp"
+	"${TRL_SOURCE_DIR}/TRL/GpuObjectHandles.cpp"
+)
 
 SET(TRL_INC_SL
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/DebugGenerator.h"
@@ -16,55 +35,6 @@ SET(TRL_SRC_SL
     "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLTokener.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/Token.cpp"
 )
-
-SET(TRL_INC_FILES
-	"${TRL_INCLUDE_DIR}/TRL/AttributeUniformInfo.h"
-    "${TRL_INCLUDE_DIR}/TRL/AttributeVariable.h"
-    "${TRL_INCLUDE_DIR}/TRL/DataClasses.h"
-    "${TRL_INCLUDE_DIR}/TRL/TRLCommonType.h"
-    "${TRL_INCLUDE_DIR}/TRL/RenderAPI.h"
-    "${TRL_INCLUDE_DIR}/TRL/GpuObjectHandles.h"
-    #"${TRL_INCLUDE_DIR}/TRL/TRLShader.h"
-    "${TRL_INCLUDE_DIR}/TRL/UniformVariable.h"
-)
-
-SET(TRL_SRC_FILES
-	"${TRL_SOURCE_DIR}/TRL/AttributeVariable.cpp"
-	"${TRL_SOURCE_DIR}/TRL/DataClasses.cpp"
-	"${TRL_SOURCE_DIR}/TRL/RenderAPI.cpp"
-	#"${TRL_SOURCE_DIR}/TRL/TRLShader.cpp"
-	"${TRL_SOURCE_DIR}/TRL/UniformVariable.cpp"
-)
-
-
-###############################################################################
-## VGI
-
-SET(TRL_INC_DETAIL_VGI
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/VGI.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Window.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Adapter.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/Monitor.h"
-)
-
-SET(TRL_SRC_DETAIL_VGI
-)
-
-SET(TRL_INC_DETAIL_VGI_WINDX
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXVGI.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXCommon.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXWindow.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXAdapter.h"
-    "${TRL_INCLUDE_DIR}/TRL/details/VGI/WinDX/WinDXMonitor.h"
-)
-
-SET(TRL_SRC_DETAIL_VGI_WINDX
-    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXVGI.cpp"
-    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXWindow.cpp"
-    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXAdapter.cpp"
-    "${TRL_SOURCE_DIR}/TRL/VGI/WinDX/WinDXMonitor.cpp"
-)
-
 
 ###############################################################################
 ## RenderAPI Impl
@@ -109,15 +79,11 @@ source_group("CMake\\Source\\ThirdParty"				FILES "${TRL_SOURCE_DIR}/ThirdParty/
 
 source_group("Header Files"												FILES ${TRL_INC_FILES})
 source_group("Header Files\\details\\TRL_SL"							FILES ${TRL_INC_SL})
-source_group("Header Files\\details\\VGI" 								FILES ${TRL_INC_DETAIL_VGI})
-source_group("Header Files\\details\\VGI\\WinDX"						FILES ${TRL_INC_DETAIL_VGI_WINDX})
 source_group("Header Files\\details\\RenderAPIImpl\\OpenGL"				FILES ${TRL_INC_DETAIL_RENDERAPI_IMPL_OPENGL})
 source_group("Header Files\\details\\RenderAPIImpl\\DX11"				FILES ${TRL_INC_DETAIL_RENDERAPI_IMPL_DX11})
 
 source_group("Source Files"												FILES ${TRL_SRC_FILES})
 source_group("Source Files\\TRL_SL"										FILES ${TRL_SRC_SL})
-source_group("Source Files\\VGI" 										FILES ${TRL_SRC_DETAIL_VGI})
-source_group("Source Files\\VGI\\WinDX" 								FILES ${TRL_SRC_DETAIL_VGI_WINDX})
 source_group("Source Files\\RenderAPIImpl\\OpenGL"						FILES ${TRL_SRC_DETAIL_RENDERAPI_IMPL_OPENGL})
 source_group("Source Files\\RenderAPIImpl\\DX11"						FILES ${TRL_SRC_DETAIL_RENDERAPI_IMPL_DX11})
 
@@ -131,10 +97,6 @@ set(TRL_SRC
     ${TRL_SRC_FILES}
     ${TRL_INC_SL}
 	${TRL_SRC_SL}
-	${TRL_INC_DETAIL_VGI}
-	${TRL_SRC_DETAIL_VGI}
-	${TRL_INC_DETAIL_VGI_WINDX}
-	${TRL_SRC_DETAIL_VGI_WINDX}
 
 	${TRL_INC_DETAIL_RENDERAPI_IMPL_OPENGL}
 	${TRL_SRC_DETAIL_RENDERAPI_IMPL_OPENGL}

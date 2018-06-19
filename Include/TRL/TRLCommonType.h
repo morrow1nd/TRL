@@ -93,27 +93,29 @@ enum GpuDataType
     GPU_SAMPLER_CUBE,
 };
 
-enum GpuBufferDataType
+enum class GpuBufferModifyHint
 {
-    GPU_BUFFER_DATA_TYPE_INIT = 0,
+    Stream, // The data store contents will be modified once and used at most a few times.
+    Static, // The data store contents will be modified once and used many times.
+    Dynamic, // The data store contents will be modified repeatedly and used many times.
+};
 
-    GPU_STREAM_DRAW,
-    GPU_STREAM_READ,
-    GPU_STREAM_COPY,
-    GPU_STATIC_DRAW,
-    GPU_STATIC_READ,
-    GPU_STATIC_COPY,
-    GPU_DYNAMIC_DRAW,
-    GPU_DYNAMIC_READ,
-    GPU_DYNAMIC_COPY,
+enum class GpuBufferAccessType
+{
+    // D3D11_USAGE: mk:@MSITStore:C:\Program%20Files%20(x86)\Microsoft%20DirectX%20SDK%20(June%202010)\Documentation\DirectX9\windows_graphics.chm::/direct3d11/d3d11_usage.htm
+    // gl: http://docs.gl/es3/glBufferData
+
+    GpuRead, // After inited, can only be readed by Gpu
+    CpuWrite_GpuRead, // After inited, can update the data
+    GpuWrite_CpuRead, // Used to transfor data from gpu to cpu
 };
 
 enum GpuBufferType
 {
     GPU_BUFFER_TYPE_INIT = 0,
 
-    GPU_ARRAY_BUFFER,
-    GPU_ELEMENT_ARRAY_BUFFER,
+    GPU_VERTEX_BUFFER,
+    GPU_INDEX_BUFFER,
     // and more...
 };
 

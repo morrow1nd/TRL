@@ -38,7 +38,6 @@ endif()
 ## Third Party Libs
 ADD_SUBDIRECTORY(ThirdParty)
 
-
 ## Configure file
 CONFIGURE_FILE(
     "${TRL_SOURCE_DIR}/TRLConfig.h.in"
@@ -59,6 +58,15 @@ INCLUDE_DIRECTORIES(
 	${TRL_THIRD_PARTY_INCLUDE_GLFW}
 )
 
+if(TOY_WINDOWS AND TRL_USING_DX11)
+set(TOY_WINDOW_DX11_EXTRN_LIB
+	d3d11
+	d3dcompiler
+	dxguid
+	dxgi
+)
+endif()
+
 ADD_LIBRARY(TRL
     ${TRL_SRC}
     TRLConfig.h.in
@@ -67,11 +75,7 @@ target_link_libraries(TRL
 	${TOY_UTILITY_LIBRARIES}
 	glfw
 	${GLFW_LIBRARIES}
-
-	d3d11 # TODOH: Window DX11
-	d3dcompiler
-	dxguid
-	dxgi
+	${TOY_WINDOW_DX11_EXTRN_LIB}
 )
 
 

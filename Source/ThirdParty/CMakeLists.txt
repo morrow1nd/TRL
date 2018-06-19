@@ -19,7 +19,7 @@ SET_PROPERTY(TARGET glfw PROPERTY FOLDER ThirdParty)
 SET(TRL_DEPS_INCLUDE
     CACHE INTERNAL "TRL ThirdParty Libs Include Paths"
 )
-if(TRL_USING_OPENGL OR TRL_USING_OPENGLES)
+#if(TRL_USING_OPENGL OR TRL_USING_OPENGLES)
     # GLAD
     SET(TRL_THIRD_PARTY_INCLUDE_GLAD
         "${TRL_SOURCE_DIR}/ThirdParty/GLAD/glad-c/include"
@@ -31,7 +31,7 @@ if(TRL_USING_OPENGL OR TRL_USING_OPENGLES)
         ${TRL_THIRD_PARTY_INCLUDE_GLAD}
         CACHE INTERNAL "TRL ThirdParty Libs Include Paths"
     )
-endif()
+#endif()
 
 
 ## sqlite-lemon

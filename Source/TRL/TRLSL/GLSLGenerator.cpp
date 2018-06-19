@@ -1,4 +1,4 @@
-#include "TRL/TRLSL/GLSLGenerator.h"
+#include "TRL/details/TRLSL/GLSLGenerator.h"
 
 #include <sstream>
 #include "ToyUtility/DataStream/DataStream.h"

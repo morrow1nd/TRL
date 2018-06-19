@@ -13,30 +13,30 @@ TRLNativeApiType OpenGLRenderAPI::UsedNativeApiType() const
     return TRLNativeApiType::OpenGL;
 }
 
-GpuBufferHandle OpenGLRenderAPI::GpuBufferCreate()
+GpuBufferHandle OpenGLRenderAPI::GpuBufferCreate(const GPU_BUFFER_DESC& desc)
 {
     auto h = m_BufferMgr.New();
     auto& buffer = m_BufferMgr.Get(h);
 
-    buffer.Init();
+    buffer.Init(desc);
 
     return h;
 }
 
-void OpenGLRenderAPI::GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int size, GpuBufferDataType dataType)
-{
-    auto& b = m_BufferMgr.Get(buffer);
-
-    b.Bind(bufferType);
-    b.UploadData(data, size, dataType);
-}
-
-void OpenGLRenderAPI::GpuBufferSendSubData(GpuBufferHandle buffer, const void * data, int size, int offset)
+void OpenGLRenderAPI::GpuBufferSendData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data)
 {
     auto& b = m_BufferMgr.Get(buffer);
 
     b.Bind();
-    b.UploadSubData(data, size, offset);
+    b.UploadData(data.SysMem, data.Size);
+}
+
+void OpenGLRenderAPI::GpuBufferSendSubData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data, int offset)
+{
+    auto& b = m_BufferMgr.Get(buffer);
+
+    b.Bind();
+    b.UploadSubData(data.SysMem, data.Size, offset);
 }
 
 void OpenGLRenderAPI::GpuBufferCleanData(GpuBufferHandle buffer) const
@@ -50,12 +50,12 @@ void OpenGLRenderAPI::GpuBufferDestory(GpuBufferHandle buffer)
     m_BufferMgr.Destory(buffer);
 }
 
-GpuShaderHandle OpenGLRenderAPI::GpuShaderCreate(const String & rawSourceCode, GpuShaderType type)
+GpuShaderHandle OpenGLRenderAPI::GpuShaderCreate(const GPU_SHADER_DESC& desc)
 {
     auto h = m_ShaderMgr.New();
     auto& shader = m_ShaderMgr.Get(h);
 
-    shader.Init(rawSourceCode, type);
+    shader.Init(desc.SourceCode, desc.ShaderType);
 
     return h;
 }

@@ -45,12 +45,12 @@ class OpenGLRenderAPI : public RenderAPI
 {
 public:
     virtual TRLNativeApiType UsedNativeApiType() const override;
-    virtual GpuBufferHandle GpuBufferCreate() override;
-    virtual void GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int size, GpuBufferDataType dataType) override;
-    virtual void GpuBufferSendSubData(GpuBufferHandle buffer, const void * data, int size, int offset) override;
+    virtual GpuBufferHandle GpuBufferCreate(const GPU_BUFFER_DESC& desc) override;
+    virtual void GpuBufferSendData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data) override;
+    virtual void GpuBufferSendSubData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data, int offset) override;
     virtual void GpuBufferCleanData(GpuBufferHandle buffer) const override;
     virtual void GpuBufferDestory(GpuBufferHandle buffer) override;
-    virtual GpuShaderHandle GpuShaderCreate(const String & rawSourceCode, GpuShaderType type) override;
+    virtual GpuShaderHandle GpuShaderCreate(const GPU_SHADER_DESC& desc) override;
     virtual bool GpuShaderIsCompiledSucc(GpuShaderHandle shader) const override;
     virtual const String & GpuShaderGetCompileErrorInfo(GpuShaderHandle shader) const override;
     virtual GpuShaderType GpuShaderGetType(GpuShaderHandle shader) const override;

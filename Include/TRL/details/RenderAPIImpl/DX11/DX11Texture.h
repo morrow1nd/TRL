@@ -11,6 +11,10 @@ namespace details
 {
 
 
+struct DX11Texture
+{
+
+};
 
 
 } // end of namespace details

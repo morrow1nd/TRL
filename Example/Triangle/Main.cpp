@@ -101,10 +101,10 @@ void main()
 
     // Prepare data
     auto vbo = renderAPI->GpuBufferCreate();
-    renderAPI->GpuBufferSendData(vbo, GPU_ARRAY_BUFFER, vertices, 24 * sizeof(float), GpuBufferDataType::GPU_STATIC_DRAW);
+    renderAPI->GpuBufferSendData(vbo, GPU_VERTEX_BUFFER, vertices, 24 * sizeof(float), GpuBufferDataType::GPU_STATIC_DRAW);
 
     auto ebo = renderAPI->GpuBufferCreate();
-    renderAPI->GpuBufferSendData(ebo, GPU_ELEMENT_ARRAY_BUFFER, indices, 3 * sizeof(uint32), GpuBufferDataType::GPU_STATIC_DRAW);
+    renderAPI->GpuBufferSendData(ebo, GPU_INDEX_BUFFER, indices, 3 * sizeof(uint32), GpuBufferDataType::GPU_STATIC_DRAW);
 
     auto attrib = renderAPI->GpuAttributeDataCreate();
 

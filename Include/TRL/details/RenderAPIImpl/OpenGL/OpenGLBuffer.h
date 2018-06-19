@@ -25,9 +25,17 @@ public:
 
 
 public:
-    void Init()
+    void Init(const GPU_BUFFER_DESC& desc)
     {
         glGenBuffers(1, &m_BufferObject);
+        auto bufferType = TRL_GL_NATIVE(desc.BufferType);
+        glBindBuffer(bufferType, m_BufferObject);
+        glBufferData(bufferType, desc.InitData.Size, desc.InitData.SysMem, _GetBufferDataType(desc.ModifyHint, desc.Access));
+
+        m_BufferType = desc.BufferType;
+        m_DataSize = desc.InitData.Size;
+        m_Access = desc.Access;
+        m_ModifyHint = desc.ModifyHint;
     }
 
     void Bind(GpuBufferType bufferType)
@@ -41,9 +49,9 @@ public:
         glBindBuffer(TRL_GL_NATIVE(m_BufferType), m_BufferObject);
     }
 
-    void UploadData(const void* data, int size, GpuBufferDataType dataType)
+    void UploadData(const void* data, int size)
     {
-        glBufferData(TRL_GL_NATIVE(m_BufferType), size, data, TRL_GL_NATIVE(dataType));
+        glBufferData(TRL_GL_NATIVE(m_BufferType), size, data, _GetBufferDataType(m_ModifyHint, m_Access));
         m_DataSize = size;
     }
 
@@ -71,9 +79,38 @@ public:
 
 
 private:
+    GLenum _GetBufferDataType(GpuBufferModifyHint modifyHint, GpuBufferAccessType access) const
+    {
+        static ToyUtility::List<ToyUtility::List<GLenum>> data =
+        {
+        {
+            GL_STREAM_DRAW,
+            GL_STREAM_DRAW,
+            GL_STREAM_READ,
+        },
+        {
+            GL_STATIC_DRAW,
+            GL_STATIC_DRAW,
+            GL_STATIC_READ,
+        },
+        {
+            GL_DYNAMIC_DRAW,
+            GL_DYNAMIC_DRAW,
+            GL_DYNAMIC_READ,
+        },
+        };
+
+        return data[(int)modifyHint][(int)access];
+    }
+
+
+private:
     GLuint m_BufferObject;
     GpuBufferType m_BufferType;
-    int m_DataSize;
+    int m_DataSize; // (in bytes)
+
+    GpuBufferAccessType             m_Access;
+    GpuBufferModifyHint             m_ModifyHint;
 };
 
 

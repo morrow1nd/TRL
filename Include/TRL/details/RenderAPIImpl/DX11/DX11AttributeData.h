@@ -11,6 +11,10 @@ namespace details
 {
 
 
+struct DX11AttributeData
+{
+
+};
 
 
 } // end of namespace details

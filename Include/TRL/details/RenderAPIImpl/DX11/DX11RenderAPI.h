@@ -6,6 +6,11 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
+#include "TRL/details/RenderAPIImpl/DX11/DX11CommonType.h"
+#include "TRL/details/RenderAPIImpl/DX11/DX11Buffer.h"
+#include "TRL/details/RenderAPIImpl/DX11/DX11Shader.h"
+#include "TRL/details/RenderAPIImpl/DX11/DX11Program.h"
+#include "TRL/details/RenderAPIImpl/DX11/DX11AttributeData.h"
 
 
 namespace TRL
@@ -23,23 +28,27 @@ public:
 
 
 private:
-    HINSTANCE                           m_HInst = NULL;
-    HWND                                m_HWND = NULL;
-    D3D_DRIVER_TYPE                     m_DriverType = D3D_DRIVER_TYPE_NULL;
-    D3D_FEATURE_LEVEL                   m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
-    ID3D11Device*                       m_D3DDevice = NULL;
-    ID3D11DeviceContext*                m_ImmediateContext = NULL;
-    IDXGISwapChain*                     m_SwapChain = NULL;
+    //HINSTANCE                           m_HInst;
+    //HWND                                m_HWND;
+    //D3D_DRIVER_TYPE                     m_DriverType;
+    //D3D_FEATURE_LEVEL                   m_FeatureLevel;
+    //ID3D11Device*                       m_D3DDevice;
+    //ID3D11DeviceContext*                m_D3DDeviceContext;
+    //IDXGISwapChain*                     m_SwapChain;
+
+    IndexedContainer<GpuBufferHandle, DX11Buffer> m_BufferMgr;
+    IndexedContainer<GpuShaderHandle, DX11Shader> m_ShaderMgr;
+    IndexedContainer<GpuProgramHandle, DX11Program> m_ProgramMgr;
 
 
 public:
     virtual TRLNativeApiType UsedNativeApiType() const override;
-    virtual GpuBufferHandle GpuBufferCreate() override;
-    virtual void GpuBufferSendData(GpuBufferHandle buffer, GpuBufferType bufferType, const void * data, int byteSize, GpuBufferDataType dataType) override;
-    virtual void GpuBufferSendSubData(GpuBufferHandle buffer, const void * data, int byteSize, int offset) override;
+    virtual GpuBufferHandle GpuBufferCreate(const GPU_BUFFER_DESC& desc) override;
+    virtual void GpuBufferSendData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data) override;
+    virtual void GpuBufferSendSubData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data, int offset) override;
     virtual void GpuBufferCleanData(GpuBufferHandle buffer) const override;
     virtual void GpuBufferDestory(GpuBufferHandle buffer) override;
-    virtual GpuShaderHandle GpuShaderCreate(const String & rawSourceCode, GpuShaderType type) override;
+    virtual GpuShaderHandle GpuShaderCreate(const GPU_SHADER_DESC& desc) override;
     virtual bool GpuShaderIsCompiledSucc(GpuShaderHandle shader) const override;
     virtual const String & GpuShaderGetCompileErrorInfo(GpuShaderHandle shader) const override;
     virtual GpuShaderType GpuShaderGetType(GpuShaderHandle shader) const override;

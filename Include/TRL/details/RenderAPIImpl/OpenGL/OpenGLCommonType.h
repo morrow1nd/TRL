@@ -158,43 +158,6 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
 #endif
     }
 
-    GLuint ToNative(GpuBufferDataType value)
-    {
-        return GpuBufferDataTypeToNativeValue(value);
-    }
-
-    GLuint GpuBufferDataTypeToNativeValue(GpuBufferDataType type)
-    {
-#if TRL_MORE_RUNTIME_CHECK
-        switch (type)
-        {
-        case GPU_STREAM_DRAW:
-            return GL_STREAM_DRAW;
-        case GPU_STREAM_READ:
-            return GL_STREAM_READ;
-        case GPU_STREAM_COPY:
-            return GL_STREAM_COPY;
-        case GPU_STATIC_DRAW:
-            return GL_STATIC_DRAW;
-        case GPU_STATIC_READ:
-            return GL_STATIC_READ;
-        case GPU_STATIC_COPY:
-            return GL_STATIC_COPY;
-        case GPU_DYNAMIC_DRAW:
-            return GL_DYNAMIC_DRAW;
-        case GPU_DYNAMIC_READ:
-            return GL_DYNAMIC_READ;
-        case GPU_DYNAMIC_COPY:
-            return GL_DYNAMIC_COPY;
-        default:
-            assert(false);
-        }
-        return 0;
-#else
-        // TODOM: using a array to convert
-#endif
-    }
-
     GLuint ToNative(GpuBufferType value)
     {
         return GpuBufferTypeToNativeValue(value);
@@ -204,9 +167,9 @@ struct TRLCommonTypeToNative : ToyUtility::ISingleton<TRLCommonTypeToNative>
     {
         switch (type)
         {
-        case GPU_ARRAY_BUFFER:
+        case GPU_VERTEX_BUFFER:
             return GL_ARRAY_BUFFER;
-        case GPU_ELEMENT_ARRAY_BUFFER:
+        case GPU_INDEX_BUFFER:
             return GL_ELEMENT_ARRAY_BUFFER;
         default:
             assert(false);

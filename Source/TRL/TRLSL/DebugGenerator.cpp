@@ -1,4 +1,4 @@
-#include "TRL/TRLSL/DebugGenerator.h"
+#include "TRL/details/TRLSL/DebugGenerator.h"
 #include "ToyUtility/Log/Logger.h"
 
 
