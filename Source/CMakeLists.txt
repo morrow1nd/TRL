@@ -17,6 +17,9 @@ endif()
 ### ToyUtility Path
 set(OPTION_TOY_UTILITY_PATH "${PROJECT_SOURCE_DIR}/../ToyUtility" CACHE PATH "path/to/ToyUtility" FORCE)
 
+### ToyXWindow Path
+set(OPTION_TOY_XWINDOW_PATH "${PROJECT_SOURCE_DIR}/../ToyXWindow" CACHE PATH "path/to/ToyXWindow" FORCE)
+
 
 ### RenderAPI to use
 set(TRL_DX11         "(1 << 0)")
@@ -48,15 +51,17 @@ CONFIGURE_FILE(
     "${PROJECT_BINARY_DIR}/TRLConfig.h"
     )
 
-## include ToyUtility
+## load ToyUtility project
 ADD_SUBDIRECTORY(${OPTION_TOY_UTILITY_PATH} ToyUtility.out)
-INCLUDE_DIRECTORIES(${TOY_UTILITY_INCLUDE_PATHS})
+
 
 # Source files and their filters
 INCLUDE(CMakeSources.cmake)
 
 
 INCLUDE_DIRECTORIES(
+    ${TOY_UTILITY_INCLUDE_PATHS}
+
     ${TRL_INCLUDE_DIR}
     ${PROJECT_BINARY_DIR}
 	${TRL_DEPS_INCLUDE}
