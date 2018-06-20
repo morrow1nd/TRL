@@ -21,8 +21,8 @@ if(NOT TRL_LOADED)
 
     ADD_SUBDIRECTORY(Source)
 
-	option(OPTION_TRL_BUILD_EXAMPLES "Build TRL examples" ON)
-	if(OPTION_TRL_BUILD_EXAMPLES)
+	option(OPTION_TRL_Build_Examples "Build TRL examples" ON)
+	if(OPTION_TRL_Build_Examples)
 		ADD_SUBDIRECTORY(Example)
 	endif()
 
