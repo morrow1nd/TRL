@@ -1,14 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "glad/glad.h" // glad must be placed before the GLFW header. http://www.glfw.org/docs/latest/quick_guide.html#quick_include
-
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
 #include "ToyXWindow/XWindowAPI.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "GLFW/../../../../stb/include/stb_image.h"
+#include "glad/../../../../stb/include/stb_image.h"
 
 #include <Windows.h> // Sleep
 #undef CreateWindow
@@ -24,7 +22,7 @@ int main()
     auto& xwindowAPI = XWindowAPI::Instance();
 
     XWINDOW_API_STARTUP_DESC desc;
-    desc.WindowContextNativeApi = WindowContextNativeApiType::Win_DX11;
+    desc.WindowContextNativeApi = WindowContextNativeApiType::Win_WGL;
 
     auto res = xwindowAPI.StartUp(desc);
 
@@ -35,7 +33,7 @@ int main()
     }
 
     WINDOW_DESC wd;
-    wd.Title = "One Window";
+    wd.Title = "TRL Example Texture";
     wd.Windowed = true;
     wd.WindowRect = ToyUtility::Rect2I(0, 0, 800, 600);
     wd.BufferCount = 1;
@@ -56,7 +54,7 @@ int main()
     ToyXWindow::PlatformDependentData xwindowData;
     xwindowAPI.GetPlatformDependentData(xwindowData);
 
-    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
+    auto renderAPI = RenderAPI::FactoryCreate(TRLNativeApiType::OpenGL);
 
     RENDER_API_STARTUP_DESC renderAPIDesc;
     memcpy(&renderAPIDesc.PlatformData, &xwindowData, sizeof(TRL::PlatformDependentData));
@@ -92,8 +90,14 @@ void main()
 }
 )";
 
-    auto vertShader = renderAPI->GpuShaderCreate(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
-    auto fragShader = renderAPI->GpuShaderCreate(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
+    GPU_SHADER_DESC sd;
+    sd.ShaderType = GpuShaderType::GPU_VERTEX_SHADER;
+    sd.SourceCode = vertexShaderSource;
+    auto vertShader = renderAPI->GpuShaderCreate(sd);
+
+    sd.ShaderType = GpuShaderType::GPU_FRAGMENT_SHADER;
+    sd.SourceCode = fragmentShaderSource;
+    auto fragShader = renderAPI->GpuShaderCreate(sd);
 
     if (renderAPI->GpuShaderIsCompiledSucc(vertShader) == false)
     {
@@ -157,11 +161,21 @@ void main()
         1, 2, 3   // second Triangle
     };
 
-    auto vbo = renderAPI->GpuBufferCreate();
-    renderAPI->GpuBufferSendData(vbo, GPU_VERTEX_BUFFER, vertices, 20 * sizeof(float), GpuBufferDataType::GPU_STATIC_DRAW);
+    GPU_BUFFER_DESC bd;
+    bd.BufferType = GPU_VERTEX_BUFFER;
+    bd.Access = GpuBufferAccessType::GpuRead;
+    bd.ModifyHint = GpuBufferModifyHint::Static;
+    bd.InitData.Size = 20 * sizeof(float);
+    bd.InitData.SysMem = vertices;
 
-    auto ebo = renderAPI->GpuBufferCreate();
-    renderAPI->GpuBufferSendData(ebo, GPU_INDEX_BUFFER, indices, 6 * sizeof(uint32), GpuBufferDataType::GPU_STATIC_DRAW);
+    auto vbo = renderAPI->GpuBufferCreate(bd);
+
+    bd.BufferType = GPU_INDEX_BUFFER;
+    bd.Access = GpuBufferAccessType::GpuRead;
+    bd.ModifyHint = GpuBufferModifyHint::Static;
+    bd.InitData.Size = 6 * sizeof(uint32);
+    bd.InitData.SysMem = indices;
+    auto ebo = renderAPI->GpuBufferCreate(bd);
 
     auto attrib = renderAPI->GpuAttributeDataCreate();
 
