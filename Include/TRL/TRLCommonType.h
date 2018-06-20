@@ -24,6 +24,27 @@ enum class TRLNativeApiType
     DX11 = TRL_DX11,
 };
 
+struct PlatformDependentData
+{
+    typedef void* (*WinWGLGetProcAddressFunc)(const char*);
+
+
+    void* DXGIFactory; // IDXGIFactory*
+    void* D3D11Device; // ID3D11Device*
+    void* D3D11DeviceContext; // ID3D11DeviceContext*
+    ToyUtility::uint64 DXGIFeatureLevel; // D3D_FEATURE_LEVEL
+
+    WinWGLGetProcAddressFunc GetProcAddressFuncPtr;
+
+    void* ProgramInstance; // HINSTANCE
+    void* MainWindowHWND; // HWND (only template)
+};
+
+struct RENDER_API_STARTUP_DESC
+{
+    PlatformDependentData PlatformData;
+};
+
 enum class GpuVariableComponentSize
 {
     _1 = 1,

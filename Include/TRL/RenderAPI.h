@@ -26,7 +26,7 @@ public:
     static int GetGpuDataTypeSize(GpuDataType dataType);
 
     static ToyUtility::SPtr<RenderAPI> CreateDefaultRenderAPI();
-    static ToyUtility::SPtr<RenderAPI> CreateRenderAPI(TRLNativeApiType type);
+    static ToyUtility::SPtr<RenderAPI> FactoryCreate(TRLNativeApiType type);
 
 
 public:
@@ -39,7 +39,7 @@ public:
 
     virtual TRLNativeApiType        UsedNativeApiType() const = 0;
 
-    virtual void                    StartUp(HINSTANCE hInstance, WNDPROC wndProc) {}
+    virtual void                    StartUp(const RENDER_API_STARTUP_DESC& desc) {}
     virtual void                    ShutDown() {}
 
     /////////////////////////////////////////////////////////////////////////////////

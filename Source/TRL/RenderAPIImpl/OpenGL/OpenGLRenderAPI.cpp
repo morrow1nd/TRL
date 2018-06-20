@@ -8,6 +8,15 @@ namespace details
 {
 
 
+void OpenGLRenderAPI::StartUp(const RENDER_API_STARTUP_DESC & desc)
+{
+    // Init glad: load all OpenGL function pointers
+    if (!gladLoadGLLoader((GLADloadproc)desc.PlatformData._.OpenGL.GetProcAddressFuncPtr))
+    {
+        // TODOH: error handle
+    }
+}
+
 TRLNativeApiType OpenGLRenderAPI::UsedNativeApiType() const
 {
     return TRLNativeApiType::OpenGL;

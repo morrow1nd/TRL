@@ -28,13 +28,9 @@ public:
 
 
 private:
-    //HINSTANCE                           m_HInst;
-    //HWND                                m_HWND;
-    //D3D_DRIVER_TYPE                     m_DriverType;
-    //D3D_FEATURE_LEVEL                   m_FeatureLevel;
-    //ID3D11Device*                       m_D3DDevice;
-    //ID3D11DeviceContext*                m_D3DDeviceContext;
-    //IDXGISwapChain*                     m_SwapChain;
+    D3D_FEATURE_LEVEL                   m_FeatureLevel;
+    ID3D11Device*                       m_D3DDevice;
+    ID3D11DeviceContext*                m_D3DDeviceContext;
 
     IndexedContainer<GpuBufferHandle, DX11Buffer> m_BufferMgr;
     IndexedContainer<GpuShaderHandle, DX11Shader> m_ShaderMgr;
@@ -42,6 +38,7 @@ private:
 
 
 public:
+    virtual void StartUp(const RENDER_API_STARTUP_DESC& desc) override;
     virtual TRLNativeApiType UsedNativeApiType() const override;
     virtual GpuBufferHandle GpuBufferCreate(const GPU_BUFFER_DESC& desc) override;
     virtual void GpuBufferSendData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data) override;

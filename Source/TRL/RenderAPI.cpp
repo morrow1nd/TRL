@@ -1,5 +1,6 @@
 #include "TRL/RenderAPI.h"
 
+#include "ToyUtilityConfig.h"
 #include "ToyUtility/Random/UUID.h"
 #include "TRL/details/RenderAPIImpl/OpenGL/OpenGLRenderAPI.h"
 #include "TRL/details/RenderAPIImpl/DX11/DX11RenderAPI.h"
@@ -118,21 +119,38 @@ int RenderAPI::GetGpuDataTypeSize(GpuDataType dataType)
 
 ToyUtility::SPtr<RenderAPI> RenderAPI::CreateDefaultRenderAPI()
 {
-    return ToyUtility::SPtr<RenderAPI>(new TRL::details::OpenGLRenderAPI()); // TODOH
+#if TOY_WINDOWS
+    return FactoryCreate(TRLNativeApiType::DX11);
+#elif TOY_LINUX
+    return FactoryCreate(TRLNativeApiType::OpenGL);
+#elif TOY_MACOS
+# error No MacOS RenderAPI impl.
+#else
+# error CreateDefaultRenderAPI: can't find a valid RenderAPI impl.
+#endif
 }
 
-ToyUtility::SPtr<RenderAPI> RenderAPI::CreateRenderAPI(TRLNativeApiType type)
+ToyUtility::SPtr<RenderAPI> RenderAPI::FactoryCreate(TRLNativeApiType type)
 {
     switch (type)
     {
+#if TOY_WINDOWS
     case TRLNativeApiType::DX11:
         return ToyUtility::SPtr<RenderAPI>(new TRL::details::DX11RenderAPI());
         break;
+#endif
+#if (TOY_WINDOWS || TOY_LINUX)
     case TRLNativeApiType::OpenGL:
         return ToyUtility::SPtr<RenderAPI>(new TRL::details::OpenGLRenderAPI());
         break;
+#endif
+#if 0
     case TRLNativeApiType::OpenGLES:
 
+        break;
+#endif
+    default:
+        assert(false && "RenderAPI::FactoryCreate: Unsupported RenderAPI type in this platform");
         break;
     }
 

@@ -1,55 +1,67 @@
+#include <iostream>
+#include <cstdlib>
+
+#include "glad/glad.h" // glad must be placed before the GLFW header. http://www.glfw.org/docs/latest/quick_guide.html#quick_include
+
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "TRL/RenderAPI.h"
-#include <cstdlib>
-#include "glad/glad.h" // glad must be placed before the GLFW header. http://www.glfw.org/docs/latest/quick_guide.html#quick_include
-#include "GLFW/glfw3.h"
-#include <iostream>
+#include "ToyXWindow/XWindowAPI.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "GLFW/../../../../stb/include/stb_image.h"
+
+#include <Windows.h> // Sleep
+#undef CreateWindow
 
 
 using namespace ToyUtility;
 using namespace TRL;
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
-}
+using namespace ToyXWindow;
 
 
 int main()
 {
-    // glfw: initialize and configure
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    auto& xwindowAPI = XWindowAPI::Instance();
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "TRL Texture Example", NULL, NULL);
-    if (window == NULL)
+    XWINDOW_API_STARTUP_DESC desc;
+    desc.WindowContextNativeApi = WindowContextNativeApiType::Win_DX11;
+
+    auto res = xwindowAPI.StartUp(desc);
+
+    if (res != ToyXResult::Success)
     {
-        // TODO: showErrorMsgBox(...)
-        glfwTerminate();
+        std::cout << "XWindowAPI StartUp fail: " << (int)res << std::endl;
         return -1;
     }
 
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    // glad: load all OpenGL function pointers
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    WINDOW_DESC wd;
+    wd.Title = "One Window";
+    wd.Windowed = true;
+    wd.WindowRect = ToyUtility::Rect2I(0, 0, 800, 600);
+    wd.BufferCount = 1;
+    wd.BufferDesc.Height = 600;
+    wd.BufferDesc.Width = 800;
+    wd.BufferDesc.RefreshRate = ToyUtility::Rational(1, 60);
+    wd.SampleDesc = SampleDesc::NoMultiSampling;
+    auto window = xwindowAPI.CreateWindow(wd);
+    if (window == nullptr)
     {
-        // TODO: showErrorMsgBox(...)
-        // std::cout << "Failed to initialize GLAD" << std::endl;
-        return -2;
+        std::cout << "Create window fail" << std::endl;
+        return -1;
     }
 
+    xwindowAPI.SetMainWindow(window);
 
 
+    ToyXWindow::PlatformDependentData xwindowData;
+    xwindowAPI.GetPlatformDependentData(xwindowData);
+
+    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
+
+    RENDER_API_STARTUP_DESC renderAPIDesc;
+    memcpy(&renderAPIDesc.PlatformData, &xwindowData, sizeof(TRL::PlatformDependentData));
+
+    renderAPI->StartUp(renderAPIDesc);
 
     // Shader Program
     const char *vertexShaderSource = R"(
@@ -80,8 +92,6 @@ void main()
 }
 )";
 
-    auto renderAPI = RenderAPI::CreateDefaultRenderAPI();
-
     auto vertShader = renderAPI->GpuShaderCreate(vertexShaderSource, GpuShaderType::GPU_VERTEX_SHADER);
     auto fragShader = renderAPI->GpuShaderCreate(fragmentShaderSource, GpuShaderType::GPU_FRAGMENT_SHADER);
 
@@ -99,7 +109,7 @@ void main()
 
     // Texture
 
-    const uint8 textureData[] = 
+    const uint8 textureData[] =
     {
         255,0,0,255,
         0,255,0,255,
@@ -136,7 +146,7 @@ void main()
     // Vertex Data
 
     float vertices[] = {
-   //   #pos                 #textCoord
+        //   #pos                 #textCoord
         0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
         0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
         -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, // bottom left
@@ -163,8 +173,8 @@ void main()
         return -3;
     }
 
-    renderAPI->SetAttributeArray(attrib, aPos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5*sizeof(float), 0);
-    renderAPI->SetAttributeArray(attrib, aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5 * sizeof(float), 3*sizeof(float));
+    renderAPI->SetAttributeArray(attrib, aPos, vbo, GpuVariableComponentSize::_3, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5 * sizeof(float), 0);
+    renderAPI->SetAttributeArray(attrib, aTextCoord, vbo, GpuVariableComponentSize::_2, GPU_FLOAT, NormalizeActionType::NotNeedNormalize, 5 * sizeof(float), 3 * sizeof(float));
     renderAPI->GpuAttributeDataSetIndicesBuffer(attrib, ebo, 6, GPU_UINT32);
 
     auto textureUniform = renderAPI->GpuProgramGetAttributeUniformInfo(program).FindUniform("s_texture");
@@ -181,19 +191,19 @@ void main()
         return -4;
     }
 
-    while (true)
+    while (window->ShouldClose() == false)
     {
+        Sleep(33);
+
         renderAPI->GpuProgramSetUniformTexture(program, textureUniform, texture2D, GPU_TEXTURE_UNIT0);
         renderAPI->GpuProgramSetUniformTexture(program, textureUniform2, texture2D_2, GPU_TEXTURE_UNIT1);
         renderAPI->DrawIndices(program, attrib, GpuPrimitiveType::GPU_TRIANGLES, 0);
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-
-        Sleep(100); // 0.1 second
-        //std::cout << "-" << std::endl;
+        window->PresentBackBuffer(0);
+        xwindowAPI.PollEvents();
     }
 
-    system("pause");
+    xwindowAPI.ShutDown();
+
     return 0;
 }

@@ -10,6 +10,13 @@ namespace details
 {
 
 
+void DX11RenderAPI::StartUp(const RENDER_API_STARTUP_DESC & desc)
+{
+    m_FeatureLevel = (D3D_FEATURE_LEVEL)desc.PlatformData._.DX11.FeatureLevel;
+    m_D3DDevice = (ID3D11Device*)desc.PlatformData._.DX11.D3D11Device;
+    m_D3DDeviceContext = (ID3D11DeviceContext*)desc.PlatformData._.DX11.D3D11DeviceContext;
+}
+
 TRLNativeApiType DX11RenderAPI::UsedNativeApiType() const
 {
     return TRLNativeApiType::DX11;

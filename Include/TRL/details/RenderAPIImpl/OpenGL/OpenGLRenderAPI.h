@@ -44,6 +44,7 @@ private:
 class OpenGLRenderAPI : public RenderAPI
 {
 public:
+    virtual void StartUp(const RENDER_API_STARTUP_DESC& desc) override;
     virtual TRLNativeApiType UsedNativeApiType() const override;
     virtual GpuBufferHandle GpuBufferCreate(const GPU_BUFFER_DESC& desc) override;
     virtual void GpuBufferSendData(GpuBufferHandle buffer, const BYTE_DATA_DESC& data) override;

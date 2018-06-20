@@ -1,5 +1,4 @@
 # Example
 
-ADD_SUBDIRECTORY(Triangle)
 ADD_SUBDIRECTORY(Texture)
 ADD_SUBDIRECTORY(TRLSL_Example)
