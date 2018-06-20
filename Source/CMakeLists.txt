@@ -14,6 +14,10 @@ else()
 endif()
 
 
+### ToyUtility Path
+set(OPTION_TOY_UTILITY_PATH "${PROJECT_SOURCE_DIR}/../ToyUtility" CACHE PATH "path/to/ToyUtility" FORCE)
+
+
 ### RenderAPI to use
 set(TRL_DX11         "(1 << 0)")
 set(TRL_OPENGL       "(1 << 1)")
@@ -44,7 +48,8 @@ CONFIGURE_FILE(
     "${PROJECT_BINARY_DIR}/TRLConfig.h"
     )
 
-ADD_SUBDIRECTORY(ToyUtility)
+## include ToyUtility
+ADD_SUBDIRECTORY(${OPTION_TOY_UTILITY_PATH} ToyUtility.out)
 INCLUDE_DIRECTORIES(${TOY_UTILITY_INCLUDE_PATHS})
 
 # Source files and their filters
@@ -71,7 +76,7 @@ ADD_LIBRARY(TRL
     ${TRL_SRC}
     TRLConfig.h.in
 )
-target_link_libraries(TRL
+TARGET_LINK_LIBRARIES(TRL
 	${TOY_UTILITY_LIBRARIES}
 	glfw
 	${GLFW_LIBRARIES}
@@ -80,7 +85,7 @@ target_link_libraries(TRL
 
 
 # IDE specific
-set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
+SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS TRUE)
 SET_PROPERTY(TARGET TRL PROPERTY FOLDER Libs)
 
 ## For lib user
@@ -94,8 +99,8 @@ SET(TRL_INCLUDE_PATHS
 )
 
 SET(TRL_LIBRARIES
+    ${TOY_UTILITY_LIBRARIES}
     TRL
-    ToyUtility
     glfw
     ${GLFW_LIBRARIES}
     CACHE INTERNAL "TRL Librarys"

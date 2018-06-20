@@ -1,17 +1,5 @@
 # Source/ThirdParty
 
-## GLFW
-option(GLFW_BUILD_DOCS OFF)
-option(GLFW_BUILD_EXAMPLES OFF)
-option(GLFW_BUILD_TESTS OFF)
-ADD_SUBDIRECTORY(GLFW/glfw-3.2.1)
-SET(TRL_THIRD_PARTY_INCLUDE_GLFW
-    "${TRL_SOURCE_DIR}/ThirdParty/GLFW/glfw-3.2.1/include"
-    CACHE INTERNAL "TRL ThirdParty glfw Include Paths"
-)
-# IDE specific
-SET_PROPERTY(TARGET glfw PROPERTY FOLDER ThirdParty)
-
 
 ## OpenGL Needed Libs
 
@@ -19,6 +7,7 @@ SET_PROPERTY(TARGET glfw PROPERTY FOLDER ThirdParty)
 SET(TRL_DEPS_INCLUDE
     CACHE INTERNAL "TRL ThirdParty Libs Include Paths"
 )
+# TODOH
 #if(TRL_USING_OPENGL OR TRL_USING_OPENGLES)
     # GLAD
     SET(TRL_THIRD_PARTY_INCLUDE_GLAD
