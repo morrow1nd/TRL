@@ -63,10 +63,13 @@ bool TRLSLTokener::_ScanAll()
 {
     int i = 0;
     const char* c;
+    int currLineNumber = 1;
 
     while (i < m_BinaryDataSize)
     {
-        i = _ConsumeSpace(i);
+        int lineSkiped;
+        i = _ConsumeSpace(i, &lineSkiped);
+        currLineNumber += lineSkiped;
 
         c = m_Begin + i;
 
@@ -183,7 +186,9 @@ bool TRLSLTokener::_ScanAll()
                 auto num = strtod(c, &numberEnd);
                 if (numberEnd == c)
                 {
-                    m_Error.ErrorInfo = "uninvalid number found at pos: "
+                    m_Error.ErrorInfo = "Invalid number found at L:"
+                        + std::to_string(currLineNumber)
+                        + " pos: "
                         + std::to_string(c - m_Begin)
                         + "\n" + ToyUtility::String(c);
                     return false;
@@ -192,7 +197,7 @@ bool TRLSLTokener::_ScanAll()
                 {
                     // TODOH
                     m_Tokens.push_back(Token(TRLSL_T_FLOATCONSTANT, c, numberEnd - c));
-                    i += (numberEnd - m_Begin);
+                    i = numberEnd - m_Begin;
                 }
             }
             else
@@ -207,6 +212,19 @@ bool TRLSLTokener::_ScanAll()
             CHECK_PUSH_BREAK(c, STAR);
             break;
         case '/':
+            if (*(c + 1) == '/')
+            {
+                // handle c++ type comment
+                int endi = 1;
+                while((i + endi < m_BinaryDataSize)
+                    &&
+                    *(c + endi) != '\n')
+                    ++endi;
+                
+                currLineNumber++;
+                i += endi + 1;
+                break;
+            }
             CHECK_PUSH_BREAK(c, DIV_ASSIGN);
             CHECK_PUSH_BREAK(c, SLASH);
             break;
@@ -281,6 +299,9 @@ bool TRLSLTokener::_ScanAll()
         case '}':
             CHECK_PUSH_BREAK(c, RB);
             break;
+        case '~':
+            CHECK_PUSH_BREAK(c, TILDE);
+            break;
         default:
             if (std::isalpha(*c) || *c == '_')
             {
@@ -292,7 +313,8 @@ bool TRLSLTokener::_ScanAll()
                 auto num = strtod(c, &numberEnd);
                 if (numberEnd == c)
                 {
-                    m_Error.ErrorInfo = "uninvalid number found at pos: "
+                    m_Error.ErrorInfo = "Invalid number found at L:" + std::to_string(currLineNumber)
+                        + " pos: "
                         + std::to_string(c - m_Begin)
                         + "\n" + ToyUtility::String(c);
                     return false;
@@ -304,6 +326,13 @@ bool TRLSLTokener::_ScanAll()
                     i = numberEnd - m_Begin;
                 }
             }
+            else
+            {
+                m_Error.ErrorInfo = "Unknown char: " + std::to_string((char)(*c))
+                    + " founded at L:" + std::to_string(currLineNumber)
+                    + " pos:" + std::to_string(i);
+                return false;
+            }
             break;
         }
     }
@@ -311,8 +340,10 @@ bool TRLSLTokener::_ScanAll()
     return true; // Success
 }
 
-int TRLSLTokener::_ConsumeSpace(int i) const
+int TRLSLTokener::_ConsumeSpace(int i, int* lineSkiped) const
 {
+    *lineSkiped = 0;
+
     while (i < m_BinaryDataSize
         && (isspace(*(m_Begin + i))
             || iscntrl(*(m_Begin + i))
@@ -320,6 +351,9 @@ int TRLSLTokener::_ConsumeSpace(int i) const
             )
         )
     {
+        if(*(m_Begin + i) == '\n')
+            (*lineSkiped)++;
+
         ++i;
     }
     return i;

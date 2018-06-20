@@ -1,0 +1,7 @@
+
+void func_expression()
+{
+
+    1;
+    -1;
+}

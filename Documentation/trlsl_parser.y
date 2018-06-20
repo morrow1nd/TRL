@@ -57,17 +57,17 @@
 
 %include {
     #include <cassert>
-    #include "TRL/TRLSL/Token.h"
-    #include "TRL/TRLSL/TRLSLGenerator.h"
+    #include "TRL/details/TRLSL/Token.h"
+    #include "TRL/details/TRLSL/TRLSLGenerator.h"
 }
 
 %name TrlSLParser_  // Functions in generated code all begins with this string.
 %token_prefix TRLSL_T_
-%token_type {TRL::Token*}
+%token_type {TRL::details::Token*}
 
-%extra_context { TRL::TRLSLGenerator* generator }
+%extra_context { TRL::details::TRLSLGenerator* generator }
 
-// Copied a lot from GLSL ES Specification, Chapter 10. Shading Language Grammar.
+// grammer copied from GLSL ES Specification, Chapter 10. Shading Language Grammar.
 // https://www.khronos.org/registry/OpenGL/specs/es/3.2/GLSL_ES_Specification_3.20.pdf
 
 

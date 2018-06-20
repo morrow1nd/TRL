@@ -57,7 +57,7 @@ public:
 private:
     bool _ScanAll();
 
-    inline int _ConsumeSpace(int i) const;
+    inline int _ConsumeSpace(int i, int* lineSkiped) const;
 
     bool _StrCmp(const char* str1, const char* str2, int length) const;
 

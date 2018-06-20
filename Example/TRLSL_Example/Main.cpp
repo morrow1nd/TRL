@@ -1,9 +1,11 @@
-#include "ToyUtility/Prerequisites/PreDefine.h"
 #include <iostream>
 
+#include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/DataStream/MemoryDataStream.h"
+#include "ToyUtility/DataStream/FileDataStream.h"
 #include "TRL/details/TRLSL/DebugGenerator.h"
 #include "TRL/details/TRLSL/GLSLGenerator.h"
+#include "TRL/details/TRLSL/HLSLGenerator.h"
 #include "TRL/details/TRLSL/TRLSLParser.h"
 #include "TRL/details/TRLSL/TRLSLTokener.h"
 
@@ -31,26 +33,28 @@ void main()
 
 
     TRL::TRLSLTokener tokener;
-    bool res = tokener.Prepare(MemoryDataStream((void*)code.c_str(), code.size() + 1, false));
+    //bool res = tokener.Prepare(MemoryDataStream((void*)code.c_str(), code.size() + 1, false));
+    bool res = tokener.Prepare(FileDataStream("trlsl_full_example.trlsl"));
     if (!res)
     {
-        std::cout << "tokener: " << tokener.GetError().ErrorInfo << std::endl;
+        std::cout << "tokener error: " << tokener.GetError().ErrorInfo << std::endl;
         return 2;
     }
 
     {
-        MemoryDataStream stream(1024);
+        MemoryDataStream stream(102400);
 
-        //DebugGenerator generator;
-        GLSLGenerator generator;
+        DebugGenerator generator;
+        //GLSLGenerator generator;
 
         TRLSLParser parser(generator);
         parser.Parse(tokener);
-        generator.GenerateCode(stream);
-        std::cout << stream.GetAsString() << std::endl;
+        //generator.GenerateCode(stream);
+        //std::cout << stream.GetAsString() << std::endl;
     }
 
     std::cout << "TRL SL Example >> End" << std::endl;
+
     system("pause");
     return 0;
 }

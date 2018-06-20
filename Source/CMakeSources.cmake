@@ -21,6 +21,7 @@ SET(TRL_SRC_FILES
 SET(TRL_INC_SL
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/DebugGenerator.h"
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/GLSLGenerator.h"
+    "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/HLSLGenerator.h"
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/TRLSLGenerator.h"
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/Token.h"
     "${TRL_INCLUDE_DIR}/TRL/details/TRLSL/TRLSLTokener.h"
@@ -30,6 +31,7 @@ SET(TRL_INC_SL
 SET(TRL_SRC_SL
     "${TRL_SOURCE_DIR}/TRL/TRLSL/DebugGenerator.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/GLSLGenerator.cpp"
+    "${TRL_SOURCE_DIR}/TRL/TRLSL/HLSLGenerator.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLParser.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLGenerator.cpp"
     "${TRL_SOURCE_DIR}/TRL/TRLSL/TRLSLTokener.cpp"
