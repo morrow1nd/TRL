@@ -1,7 +1,339 @@
+// TRL Shader Lanuage Full Example
+
+
+// function_definition
+
+void func1() {}
+float func2() {}
+int func3(){}
+uint func4(){}
+bool func5(){}
+vec2 func6(){}
+vec3 func7(){}
+// TODOM: more...   trlsl_grammer.txt:L231
+
+highp float func8(){}
+mediump int func9(){}
+lowp float func10(){}
+
+// Error Example
+// float[3] func_ret_arr() {}
+
+
+// declaration
+
+
+int ;
+float ;
+highp int ;
+
+int var1;
+int var2[4];
+int var3[4][3];
+int var4[2] = 1; // @assignment_expression
+int var5[2][3] = 1; // @assignment_expression
+int var6 = 1; // @assignment_expression
+
+int var10, var11;
+int var12[4], var13[3][2];
+int var14 = 5, var15 = 6;
+
+
+
+// compound_statement
+
+void func_compound_statement()
+{
+    // statement_list
+
+    // another compound_statement
+    {}
+
+
+    // # simple_statement
+
+    // ## declaration_statement
+    // same as declaration
+
+    {
+        int var1;
+        int var2[4];
+        int var3[4][3];
+        int var4[2] = 1; // @assignment_expression
+        int var5[2][3] = 1; // @assignment_expression
+        int var6 = 1; // @assignment_expression
+
+        int var10, var11;
+        int var12[4], var13[3][2];
+        int var14 = 5, var15 = 6;
+    }
+
+    // ## expression_statement
+
+    {
+        ;
+        1;
+        1 + 2;
+    }
+
+    // ## selection_statement
+
+    {
+        {
+            if( true )
+                ;
+        }
+
+        if( true )
+            ;
+        else
+            ;
+
+        if(true)
+        {
+            ;
+        }
+        else
+            ;
+
+        if(true)
+            ;
+        else
+        {
+        }
+
+        if(false)
+        {
+        }
+        else
+        {
+        }
+
+        if(true)
+        {
+            int a;
+        }
+        else if(1)
+        {
+            float b;
+        }
+        else
+        {
+            uint c;
+        }
+    }
+
+    // ## iteration_statement
+
+    {
+        // while
+
+        while( true )
+            ;
+
+        // Error Example
+        // while( int a = 3 ) ;
+
+        while(true)
+        {
+            while(false)
+                ;
+        }
+
+
+        // for
+
+        for(;;)
+        {}
+
+        for(int a = 3; true; )
+            ;
+
+        int a;
+        for(a = 3; true; )
+            ;
+
+        for(int a = 3; ; )
+            ;
+
+        for(int a = 3; true; a = 4)
+            ;
+
+        for(int a = 3; a < 10; a = a + 1)
+        {
+            for(int j = 1; j < 5; j = j + 1)
+                ;
+        }
+
+
+        while(true)
+        {
+            for(;;)
+                ;
+        }
+
+        for(;;)
+            while(true)
+                ;
+    }
+
+    // ## jump_statement
+
+    {
+        while(true)
+        {
+            continue;
+        }
+
+        while(true)
+        {
+            break;
+        }
+
+        while(true)
+        {
+            while(1)
+            {
+                break;
+            }
+        }
+
+        return;
+    }
+}
+
+int func_compound_statement2()
+{
+    return 1 + 1;
+}
+
+void func_compound_statement3()
+{
+    discard; // fragment shader only
+}
+
+
+// expression
 
 void func_expression()
 {
+    int a,b,c,d,e,f,g,h;
 
+    b = 4, a = 3;
+    1+2, 3+4, 5+6;
+
+    a = b = c = 5; 
+    a = b = 5, c = 6;
+    a = 6, b = c = 9;
+
+    // assignment_operator
+    a = 1;
+    a *= 2;
+    a /= 3;
+    a %= 4;
+    a += 5;
+    a -= 6;
+    a <<= 7;
+    a >>= 8;
+    a &= 9;
+    a ^= 10;
+    a |= 11;
+
+    // conditional_expression
+    true ? 1 : b;
+    a = b ? c : 1;
+    
+    a = b ? (c ? d : e) : f;
+    h = b ? c ? d : e : f;
+    a = b ? c : d ? e : f;
+    a = b ? c ? d : e : f ? g : h;
+
+    // logical_or_expression
+    a = 1 || 2;
+    3 || 4;
+    a = 1 || 2 || 3;
+
+    // logical_and_expression
+    a = 1 && 2;
+    3 && 4;
+    a = 1 && 2 && 3;
+
+    a = 1 && 2 || 3;
+    b = 1 && (2 || 3);
+    c = (1 && 2) || 3;
+    d = 1 || 2 && 3;
+    e = 1 || (2 && 3);
+    f = (1 || 2) && 3;
+
+    // inclusive_or_expression
+    1 | 2;
+    1 | 2 | 3;
+
+    // exclusive_or_expression
+    1 ^ 2;
+    1 ^ 2 ^ 3;
+
+    // and_expression
+    1 & 2;
+
+    // equality_expression
+    a == b;
+    c != d;
+
+    a == b == c;
+    a == (b == c);
+    (a == b) == c;
+
+    // relational_expression
+    a < b;
+    c > d;
+    a <= b;
+    c >= d;
+
+    // shift_expression
+    a << b;
+    a >> b;
+
+    // additive_expression
+    1 + 2;
+    2 - 1;
+    1 + 2 + 3;
+    1 + 2 - 3;
+
+    // multiplicative_expression
+    1 * 2;
+    1 + 2 * 3;
+    1 / 4;
+    2 / 0;
+    1 * 3 / 4;
+    4 / 2 * 2;
+    4 % 2;
+
+    // unary_expression
+    + 1;
+    // - 2; // TODO
+    !true;
+    ~1;
+
+    // postfix_expression
+
+    a[3];
+    (a)[4];
+    func();
+    func2(void);
+    func3(1);
+    func4(a = 3, b = 4);
+    func5(func6(1, 2));
+    func7(func8(), func9());
+
+    primary_expression
+    a;
     1;
     -1;
+    1.2;
+    true;
+    false;
+    (1);
+    (true);
+    ((1.2));
 }

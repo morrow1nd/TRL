@@ -42,15 +42,24 @@ void main()
     }
 
     {
-        MemoryDataStream stream(102400);
+        MemoryDataStream stream(10240);
 
-        DebugGenerator generator;
-        //GLSLGenerator generator;
+        if (1)
+        {
+            GLSLGenerator generator;
 
-        TRLSLParser parser(generator);
-        parser.Parse(tokener);
-        //generator.GenerateCode(stream);
-        //std::cout << stream.GetAsString() << std::endl;
+            TRLSLParser parser(generator);
+            parser.Parse(tokener);
+            generator.GenerateCode(stream);
+            std::cout << stream.GetAsString() << std::endl;
+        }
+        else
+        {
+            DebugGenerator generator;
+
+            TRLSLParser parser(generator);
+            parser.Parse(tokener);
+        }
     }
 
     std::cout << "TRL SL Example >> End" << std::endl;

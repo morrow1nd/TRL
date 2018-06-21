@@ -20,7 +20,8 @@ Token::Token(ToyUtility::uint16 type, const char* str)
 }
 
 
-Token Token::None = Token(0);
+Token Token::__None = Token(0);
+Token Token::__Empty = Token(TRLSL_T___EMPTY);
 Token Token::LS = Token(TRLSL_T_LS, "(");
 Token Token::RS = Token(TRLSL_T_RS, ")");
 Token Token::LM = Token(TRLSL_T_LM, "[");
@@ -119,7 +120,7 @@ Token Token::FALSE_ = Token(TRLSL_T_BOOLCONSTANT, "false");
 
 bool Token::IsTerminalSymbol() const
 {
-    return Type >= 1 && Type <= TRLSL_T_DISCARD; // TODOL: has a better way ?
+    return Type >= 1 && Type < TRLSL_T___LAST; // TODOL: has a better way ?
 }
 
 

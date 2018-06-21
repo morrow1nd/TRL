@@ -27,7 +27,7 @@ void GLSLGenerator::SetAllTokens(const ToyUtility::List<Token>& tokens)
     m_TokenPool.clear();
 
     m_TokenHelpers.push_back(TokenHelper());
-    m_TokenPool.push_back(Token::None);
+    m_TokenPool.push_back(Token::__None);
 
     for each(auto token in tokens)
     {
@@ -150,6 +150,7 @@ Token& GLSLGenerator::_NewToken(Token t)
     m_TokenHelpers.push_back(TokenHelper());
     m_TokenPool.push_back(t);
     m_TokenPool.back().SetUserData((void*)(m_TokenHelpers.size() - 1));
+    m_TokenHelpers.back().TokenIndex = m_TokenPool.size() - 1;
     return m_TokenPool.back();
 }
 
@@ -1236,7 +1237,7 @@ TRLSLGenerator::RetType GLSLGenerator::condition_opt__To__condition(TRLSLGenerat
 
 TRLSLGenerator::RetType GLSLGenerator::condition_opt__To__Empty(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
 {
-    *_ = &_NewToken(Token::None);
+    *_ = &_NewToken(Token::__Empty);
 }
 
 TRLSLGenerator::RetType GLSLGenerator::for_rest_statement__To__condition_opt___SEMICOLON(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)

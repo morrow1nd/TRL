@@ -30,7 +30,7 @@ bool TRLSLTokener::Prepare(const ToyUtility::String & inputCode)
 const Token& TRLSLTokener::NextToken()
 {
     if(m_CurrToken >= m_Tokens.size())
-        return Token::None;
+        return Token::__None;
 
     return m_Tokens[m_CurrToken++];
 }
@@ -70,6 +70,8 @@ bool TRLSLTokener::_ScanAll()
         int lineSkiped;
         i = _ConsumeSpace(i, &lineSkiped);
         currLineNumber += lineSkiped;
+        if(i >= m_BinaryDataSize)
+            break;
 
         c = m_Begin + i;
 

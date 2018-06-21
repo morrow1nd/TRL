@@ -27,7 +27,7 @@ void HLSLGenerator::SetAllTokens(const ToyUtility::List<Token>& tokens)
     m_TokenPool.clear();
 
     m_TokenHelpers.push_back(TokenHelper());
-    m_TokenPool.push_back(Token::None);
+    m_TokenPool.push_back(Token::__None);
 
     for each(auto token in tokens)
     {
@@ -1183,7 +1183,7 @@ TRLSLGenerator::RetType HLSLGenerator::condition_opt__To__condition(TRLSLGenerat
 
 TRLSLGenerator::RetType HLSLGenerator::condition_opt__To__Empty(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
 {
-    *_ = &_NewToken(Token::None);
+    *_ = &_NewToken(Token::__None);
 }
 
 TRLSLGenerator::RetType HLSLGenerator::for_rest_statement__To__condition_opt___SEMICOLON(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)

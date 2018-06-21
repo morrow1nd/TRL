@@ -59,7 +59,8 @@ public:
 
     // Static Tokens
 public:
-    static Token None;
+    static Token __None;
+    static Token __Empty;
     static Token LS;
     static Token RS;
     static Token LM;
