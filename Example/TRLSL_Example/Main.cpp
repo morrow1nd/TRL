@@ -46,7 +46,8 @@ void main()
 
         if (1)
         {
-            GLSLGenerator generator;
+            //GLSLGenerator generator;
+            HLSLGenerator generator;
 
             TRLSLParser parser(generator);
             parser.Parse(tokener);

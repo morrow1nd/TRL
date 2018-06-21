@@ -97,6 +97,7 @@ Token& HLSLGenerator::_NewToken(Token t)
     m_TokenHelpers.push_back(TokenHelper());
     m_TokenPool.push_back(t);
     m_TokenPool.back().SetUserData((void*)(m_TokenHelpers.size() - 1));
+    m_TokenHelpers.back().TokenIndex = m_TokenPool.size() - 1;
     return m_TokenPool.back();
 }
 

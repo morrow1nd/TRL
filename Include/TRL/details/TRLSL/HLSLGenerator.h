@@ -45,10 +45,6 @@ private:
         int TokenIndex;
     };
 
-    Token* _GetLastOne(Token* t);
-
-    int _GetLastOneId(Token* t);
-
     Token* _GetToken(int tokenIndex)
     {
         return &m_TokenPool[tokenIndex];
@@ -81,7 +77,7 @@ private:
 
     int m_RootToken;
 
-    int m_CurrToken;
+    int m_CurrToken; // Used for NextToken
 
     // TODOM: use a FrameAllocator to replace this String List
     ToyUtility::List<ToyUtility::String> m_StrPool; // Used to manage generated strings
