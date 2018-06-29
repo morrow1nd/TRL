@@ -33,3 +33,5 @@
 
 ## Custom
 _build/
+Script/lempar.c
+Script/trlsl_parser.y

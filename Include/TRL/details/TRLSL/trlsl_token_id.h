@@ -96,5 +96,5 @@
 #define TRLSL_T_BREAK                           96
 #define TRLSL_T_RETURN                          97
 #define TRLSL_T_DISCARD                         98
-#define TRLSL_T___EMPTY                         99
-#define TRLSL_T___LAST                          100
+#define TRLSL_T___EMPTY                         250 
+#define TRLSL_T___LAST                          251 

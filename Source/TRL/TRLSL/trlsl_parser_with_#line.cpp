@@ -27,8 +27,8 @@
 #line 58 "trlsl_parser.y"
 
     #include <cassert>
-    #include "TRL/TRLSL/Token.h"
-    #include "TRL/TRLSL/TRLSLGenerator.h"
+    #include "TRL/details/TRLSL/Token.h"
+    #include "TRL/details/TRLSL/TRLSLGenerator.h"
 #line 33 "trlsl_parser.c"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols

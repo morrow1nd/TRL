@@ -13,7 +13,7 @@ Token* GLSLGenerator::NextToken(bool restart)
     if(restart)
         m_CurrToken = 0;
 
-    if (m_CurrToken < m_Tokens.size())
+    if (m_CurrToken < (int) m_Tokens.size())
     {
         return (Token*)&m_TokenPool[m_Tokens[m_CurrToken++]];
     }
