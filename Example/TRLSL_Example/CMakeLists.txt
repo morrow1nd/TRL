@@ -14,3 +14,4 @@ set_property(TARGET TRL_Example_TRL_SL_Example PROPERTY FOLDER Example)
 
 # Set up VS working directory
 set_target_properties(TRL_Example_TRL_SL_Example PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${TRL_SOURCE_DIR}/../Documentation/")
+set_target_properties(TRL_Example_TRL_SL_Example PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${TRL_SOURCE_DIR}/../Test/TRLSL_Examples/")

@@ -1,0 +1,31 @@
+
+struct VS_INPUT
+{
+    vec4 color;
+    vec3 pos;
+};
+
+struct VS_OUTPUT
+{
+    vec3 pos;
+};
+
+
+// VS
+
+struct VS_OUTPUT VS_main(struct VS_INPUT input)
+{
+    struct VS_OUTPUT output;
+
+    output.pos = input.pos;
+
+    return output;
+}
+
+
+// FS
+
+vec4 FS_main(struct VS_OUTPUT input)
+{
+    return input.pos;
+}

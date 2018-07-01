@@ -34,7 +34,8 @@ void main()
 
     TRL::TRLSLTokener tokener;
     //bool res = tokener.Prepare(MemoryDataStream((void*)code.c_str(), code.size() + 1, false));
-    bool res = tokener.Prepare(FileDataStream("trlsl_full_example.trlsl"));
+    bool res = tokener.Prepare(FileDataStream("simple.trlsl"));
+    //bool res = tokener.Prepare(FileDataStream("trlsl_full_example.trlsl"));
     if (!res)
     {
         std::cout << "tokener error: " << tokener.GetError().ErrorInfo << std::endl;

@@ -1266,5 +1266,30 @@ TRLSLGenerator::RetType HLSLGenerator::function_definition__To__function_prototy
     
 }
 
+TRL::TRLSLGenerator::RetType HLSLGenerator::external_declaration__To__struct_definition(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    return TRL::TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType HLSLGenerator::struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    return TRL::TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType HLSLGenerator::type_specifier_nonarray__To__STRUCT__IDENTIFIER(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    return TRL::TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType HLSLGenerator::declaration_list__To__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    return TRL::TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType HLSLGenerator::declaration_list__To__declaration_list__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    return TRL::TRLSLGenerator::RetType();
+}
+
 
 } // end of namespace TRL

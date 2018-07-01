@@ -36,6 +36,7 @@ Token Token::DASH = Token(TRLSL_T_DASH, "-");
 Token Token::BANG = Token(TRLSL_T_BANG, "!");
 Token Token::TILDE = Token(TRLSL_T_TILDE, "~");
 Token Token::STAR = Token(TRLSL_T_STAR, "*");
+Token Token::STRUCT = Token(TRLSL_T_STRUCT, "struct");
 Token Token::SLASH = Token(TRLSL_T_SLASH, "/");
 Token Token::PERCENT = Token(TRLSL_T_PERCENT, "%");
 Token Token::LEFT_OP = Token(TRLSL_T_LEFT_OP, "<<");

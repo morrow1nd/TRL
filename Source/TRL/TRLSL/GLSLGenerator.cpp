@@ -875,6 +875,12 @@ TRLSLGenerator::RetType GLSLGenerator::array_specifier__To__array_specifier___LM
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
 }
 
+TRL::TRLSLGenerator::RetType GLSLGenerator::type_specifier_nonarray__To__STRUCT__IDENTIFIER(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    *_ = _1;
+    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+}
+
 TRLSLGenerator::RetType GLSLGenerator::type_specifier_nonarray__To__VOID(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
 {
     *_ = _1;
@@ -1313,7 +1319,31 @@ TRLSLGenerator::RetType GLSLGenerator::external_declaration__To__declaration(TRL
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
 }
 
+TRLSLGenerator::RetType GLSLGenerator::external_declaration__To__struct_definition(TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    *_ = _1;
+    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+}
+
 TRLSLGenerator::RetType GLSLGenerator::function_definition__To__function_prototype___compound_statement(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
+{
+    *_ = _1;
+    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+}
+
+TRL::TRLSLGenerator::RetType GLSLGenerator::declaration_list__To__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    *_ = _1;
+    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+}
+
+TRL::TRLSLGenerator::RetType GLSLGenerator::declaration_list__To__declaration_list__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    *_ = _1;
+    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+}
+
+TRL::TRLSLGenerator::RetType GLSLGenerator::struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
 {
     *_ = _1;
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);

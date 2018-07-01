@@ -52,7 +52,8 @@ _StrCmp((StrPtr), Token::TokenName.Str, Token::TokenName.StrLen)
 
 #define CHECK_PUSH_BREAK(StrPtr, TokenName) \
 { \
-    if(CMP_WITH_TOKEN(StrPtr, TokenName)) /* 1. Check */ \
+    if(CMP_WITH_TOKEN(StrPtr, TokenName) /* 1. Check */ \
+        && !((std::isalnum(*Token::TokenName.Str)) && (std::isalnum(*(StrPtr + Token::TokenName.StrLen))))) \
     { \
         PUSH_TOKEN(TokenName); /* 2. Push */ \
         break; /* 3. Break */ \
@@ -144,6 +145,7 @@ bool TRLSLTokener::_ScanAll()
             _CheckIdentifier(c, &i);
             break;
         case 's':
+            CHECK_PUSH_BREAK(c, STRUCT);
             CHECK_PUSH_BREAK(c, SAMPLER2D);
             CHECK_PUSH_BREAK(c, SAMPLER3D);
             CHECK_PUSH_BREAK(c, SAMPLERCUBE);

@@ -75,6 +75,7 @@ public:
     static Token BANG;
     static Token TILDE;
     static Token STAR;
+    static Token STRUCT;
     static Token SLASH;
     static Token PERCENT;
     static Token LEFT_OP;

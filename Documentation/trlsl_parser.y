@@ -246,6 +246,7 @@ array_specifier(A) ::= LM(B) constant_expression(C) RM(D). { generator->array_sp
 array_specifier(A) ::= array_specifier(B) LM(C) RM(D). { generator->array_specifier__To__array_specifier___LM___RM(&A, B, C, D); }
 array_specifier(A) ::= array_specifier(B) LM(C) constant_expression(D) RM(E). { generator->array_specifier__To__array_specifier___LM___constant_expression___RM(&A, B, C, D, E); }
 
+type_specifier_nonarray(A) ::= STRUCT(B) IDENTIFIER(C). { generator->type_specifier_nonarray__To__STRUCT__IDENTIFIER(&A, B, C); }
 type_specifier_nonarray(A) ::= VOID(B). { generator->type_specifier_nonarray__To__VOID(&A, B); }
 type_specifier_nonarray(A) ::= FLOAT(B). { generator->type_specifier_nonarray__To__FLOAT(&A, B); }
 type_specifier_nonarray(A) ::= INT(B). { generator->type_specifier_nonarray__To__INT(&A, B); }
@@ -338,5 +339,11 @@ external_declaration_list(A) ::= external_declaration_list(B) external_declarati
 
 external_declaration(A) ::= function_definition(B). { generator->external_declaration__To__function_definition(&A, B); }
 external_declaration(A) ::= declaration(B). { generator->external_declaration__To__declaration(&A, B); }
+external_declaration(A) ::= struct_definition(B). { generator->external_declaration__To__struct_definition(&A, B); }
 
 function_definition(A) ::= function_prototype(B) compound_statement(C). { generator->function_definition__To__function_prototype___compound_statement(&A, B, C); }
+
+declaration_list(A) ::= declaration(B). { generator->declaration_list__To__declaration(&A, B); }
+declaration_list(A) ::= declaration_list(B) declaration(C). { generator->declaration_list__To__declaration_list__declaration(&A, B, C); }
+
+struct_definition(A) ::= STRUCT(B) IDENTIFIER(C) LB(D) declaration_list(E) RB(F) SEMICOLON(G). { generator->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&A, B, C, D, E, F, G); }

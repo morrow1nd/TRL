@@ -631,6 +631,11 @@ TRLSLGenerator::RetType DebugGenerator::array_specifier__To__array_specifier___L
     Log(__FUNCTION__); return TRLSLGenerator::RetType();
 }
 
+TRLSLGenerator::RetType DebugGenerator::type_specifier_nonarray__To__STRUCT__IDENTIFIER(TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    Log(__FUNCTION__); return TRLSLGenerator::RetType();
+}
+
 TRLSLGenerator::RetType DebugGenerator::type_specifier_nonarray__To__VOID(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
 {
     Log(__FUNCTION__); return TRLSLGenerator::RetType();
@@ -997,6 +1002,26 @@ TRLSLGenerator::RetType DebugGenerator::external_declaration__To__declaration(TR
 }
 
 TRLSLGenerator::RetType DebugGenerator::function_definition__To__function_prototype___compound_statement(TRLSLGenerator::InType* _, TRLSLGenerator::InType _1, TRLSLGenerator::InType _2, TRLSLGenerator::InType _3, TRLSLGenerator::InType _4, TRLSLGenerator::InType _5, TRLSLGenerator::InType _6, TRLSLGenerator::InType _7)
+{
+    Log(__FUNCTION__); return TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType DebugGenerator::external_declaration__To__struct_definition(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    Log(__FUNCTION__); return TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType DebugGenerator::declaration_list__To__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    Log(__FUNCTION__); return TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType DebugGenerator::declaration_list__To__declaration_list__declaration(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
+{
+    Log(__FUNCTION__); return TRLSLGenerator::RetType();
+}
+
+TRL::TRLSLGenerator::RetType DebugGenerator::struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(TRL::TRLSLGenerator::InType *_, TRL::TRLSLGenerator::InType _1, TRL::TRLSLGenerator::InType _2, TRL::TRLSLGenerator::InType _3, TRL::TRLSLGenerator::InType _4, TRL::TRLSLGenerator::InType _5, TRL::TRLSLGenerator::InType _6, TRL::TRLSLGenerator::InType _7)
 {
     Log(__FUNCTION__); return TRLSLGenerator::RetType();
 }

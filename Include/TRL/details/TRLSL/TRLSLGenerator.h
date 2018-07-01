@@ -166,6 +166,7 @@ public:
     TRLSL_RULE_HANDLER_DECL(array_specifier__To__LM___constant_expression___RM)
     TRLSL_RULE_HANDLER_DECL(array_specifier__To__array_specifier___LM___RM)
     TRLSL_RULE_HANDLER_DECL(array_specifier__To__array_specifier___LM___constant_expression___RM)
+    TRLSL_RULE_HANDLER_DECL(type_specifier_nonarray__To__STRUCT__IDENTIFIER)
     TRLSL_RULE_HANDLER_DECL(type_specifier_nonarray__To__VOID)
     TRLSL_RULE_HANDLER_DECL(type_specifier_nonarray__To__FLOAT)
     TRLSL_RULE_HANDLER_DECL(type_specifier_nonarray__To__INT)
@@ -239,7 +240,11 @@ public:
     TRLSL_RULE_HANDLER_DECL(external_declaration_list__To__external_declaration_list___external_declaration)
     TRLSL_RULE_HANDLER_DECL(external_declaration__To__function_definition)
     TRLSL_RULE_HANDLER_DECL(external_declaration__To__declaration)
+    TRLSL_RULE_HANDLER_DECL(external_declaration__To__struct_definition)
     TRLSL_RULE_HANDLER_DECL(function_definition__To__function_prototype___compound_statement)
+    TRLSL_RULE_HANDLER_DECL(declaration_list__To__declaration)
+    TRLSL_RULE_HANDLER_DECL(declaration_list__To__declaration_list__declaration)
+    TRLSL_RULE_HANDLER_DECL(struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON)
 };
 
 
