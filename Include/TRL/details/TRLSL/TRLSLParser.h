@@ -8,21 +8,18 @@ namespace TRL
 
 
 class TRLSLTokener;
-class TRLSLGenerator;
+class TRLCodeGenerator;
 
 
 class TRLSLParser
 {
 public:
-    TRLSLParser(TRLSLGenerator& generator);
+    TRLSLParser(TRLSLTokener& tokener);
     ~TRLSLParser();
-
-    bool Parse(TRLSLTokener& tokener);
 
 
 private:
-    TRLSLGenerator& m_Generator;
-    void* m_InnerParser;
+    void* m_InnerParser; // lemon parser
 };
 
 

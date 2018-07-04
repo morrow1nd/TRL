@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 #include "TRL/details/TRLSL/TRLSLTokener.h"
-#include "TRL/details/TRLSL/TRLSLGenerator.h"
+#include "TRL/details/TRLSL/TRLSLCodeGenerator.h"
 
 
 namespace TRL

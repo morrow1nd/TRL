@@ -45,7 +45,7 @@ void main()
     {
         MemoryDataStream stream(10240);
 
-        if (1)
+        if (0)
         {
             GLSLGenerator generator;
             //HLSLGenerator generator;
