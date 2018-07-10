@@ -11,6 +11,37 @@
 namespace TRL
 {
 
+template<typename T, int chunkSize = 8>
+class Pool
+{
+public:
+	using ElementType = T;
+
+	T* New()
+	{
+		if (m_Chunks.size() == 0 || m_SizeOfEveryChunk.back() == chunkSize)
+		{
+			m_Chunks.push_back(new T[chunkSize]);
+			m_SizeOfEveryChunk.push_back(0);
+		}
+
+		return m_Chunks.back()[m_SizeOfEveryChunk.back()++];
+	}
+
+	~Pool()
+	{
+		for each(auto p in m_Chunks)
+		{
+			delete[] p;
+		}
+	}
+
+
+private:
+	ToyUtility::List<T*> m_Chunks;
+	ToyUtility::List<int> m_SizeOfEveryChunk;
+};
+
 
 // TRL Shader Language Intermediate Representation
 class TRLSL_IR
@@ -61,7 +92,7 @@ public:
         void SetTag(TypeBitsets t, bool value) { m_Bitset.set(t, value); }
 
         GpuDataType DataType;
-        ToyUtility::uint8 Arrays[4];
+        ToyUtility::uint8 Arrays[4]; // Example: arr[4][4][4][4]
 
 
     private:
@@ -84,7 +115,7 @@ public:
     {
         StringPtr Name;
         Type Type;
-        // init value
+        // init value // TODO
     };
 
     struct FunctionParam
@@ -301,12 +332,17 @@ public:
     TRLSL_IR()
     {}
 
+	const ToyUtility::List<Struct>& GetStructs() const { return m_Structs; }
+
 
 private:
     ToyUtility::List<Struct> m_Structs;
     ToyUtility::List<UniformVariable> m_UniformVariables;
     ToyUtility::List<Function> m_Functions;
     ToyUtility::List<Pragma> m_Pragmas;
+
+	Pool<Statement> m_StatementPool;
+	Pool<Expression> m_ExpressionPool;
 };
 
 

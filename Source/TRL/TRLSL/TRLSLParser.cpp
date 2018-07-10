@@ -11,12 +11,11 @@ namespace TRL
 {
 
 
-TRLSLParser::TRLSLParser(TRLSLGenerator& generator)
+TRLSLParser::TRLSLParser()
     :
-    m_Generator(generator),
     m_InnerParser(nullptr)
 {
-    m_InnerParser = TrlSLParser_Alloc(malloc, &generator);
+    m_InnerParser = TrlSLParser_Alloc(malloc, &m_IRGenerator);
 }
 
 TRLSLParser::~TRLSLParser()
@@ -24,20 +23,21 @@ TRLSLParser::~TRLSLParser()
     TrlSLParser_Free(m_InnerParser, free);
 }
 
-
-bool TRLSLParser::Parse(TRLSLTokener & tokener)
+void TRLSLParser::GenerateTRLSL_IR(TRLSLTokener & tokener, TRLSL_IR & ir)
 {
-    m_Generator.SetAllTokens(tokener.GetAllTokens());
+    m_IRGenerator.SetAllTokens(tokener.GetAllTokens());
 
-    for (Token* t = m_Generator.NextToken(true);
+    for (Token* t = m_IRGenerator.NextToken(true);
         t != nullptr;
-        t = m_Generator.NextToken())
+        t = m_IRGenerator.NextToken())
     {
         TrlSLParser_(m_InnerParser, t->Type, t);
     }
     TrlSLParser_(m_InnerParser, 0, nullptr); // End token
 
-    return true; // TODOH
+	m_IRGenerator.GenerateIR(ir);
+
+    //return true; // TODOH
 }
 
 

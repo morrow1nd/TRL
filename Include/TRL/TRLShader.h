@@ -4,7 +4,7 @@
 #include "ToyUtility/Memory/SmartPtr.h"
 #include "ToyUtility/String/String.h"
 #include "TRL/TRLCommonType.h"
-#include "TRL/TRLSL/TRLSLTokener.h"
+//#include "TRL/TRLSL/TRLSLTokener.h"
 
 
 namespace TRL

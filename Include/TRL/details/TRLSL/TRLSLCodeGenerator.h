@@ -3,12 +3,13 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/DataStream/DataStream.h"
 #include "TRL/TRLShader.h"
+#include "TRL/details/TRLSL/TRLSL_IR.h"
 
 
 namespace TRL
 {
 
-
+// Interface: Code generator for every native shader language
 class TRLSLCodeGenerator
 {
 public:
@@ -16,8 +17,8 @@ public:
 
 
 public:
-    virtual void GenerateCode(ToyUtility::DataStream& stream) = 0;
-    virtual ToyUtility::SPtr<TRLShader> GenerateCode() = 0;
+    virtual void GenerateCode(TRLSL_IR& ir, ToyUtility::DataStream& stream) = 0;
+    virtual ToyUtility::SPtr<TRLShader> GenerateCode(TRLSL_IR& ir) = 0;
 };
 
 

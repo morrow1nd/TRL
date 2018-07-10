@@ -27,7 +27,7 @@
 
     #include <cassert>
     #include "TRL/details/TRLSL/Token.h"
-    #include "TRL/details/TRLSL/TRLSLGenerator.h"
+    #include "TRL/details/TRLSL/TRLSLGrammarRuleHandler.h"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless
@@ -106,11 +106,11 @@ typedef union {
 #define TrlSLParser_ARG_PARAM
 #define TrlSLParser_ARG_FETCH
 #define TrlSLParser_ARG_STORE
-#define TrlSLParser_CTX_SDECL  TRL::TRLSLGenerator* generator ;
-#define TrlSLParser_CTX_PDECL , TRL::TRLSLGenerator* generator 
-#define TrlSLParser_CTX_PARAM ,generator 
-#define TrlSLParser_CTX_FETCH  TRL::TRLSLGenerator* generator =yypParser->generator ;
-#define TrlSLParser_CTX_STORE yypParser->generator =generator ;
+#define TrlSLParser_CTX_SDECL  TRL::TRLSLGrammarRuleHandler* ruleHandler ;
+#define TrlSLParser_CTX_PDECL , TRL::TRLSLGrammarRuleHandler* ruleHandler 
+#define TrlSLParser_CTX_PARAM ,ruleHandler 
+#define TrlSLParser_CTX_FETCH  TRL::TRLSLGrammarRuleHandler* ruleHandler =yypParser->ruleHandler ;
+#define TrlSLParser_CTX_STORE yypParser->ruleHandler =ruleHandler ;
 #define YYNSTATE             133
 #define YYNRULE              199
 #define YYNTOKEN             100
@@ -1701,7 +1701,7 @@ static void yyStackOverflow(yyParser *yypParser){
    ** stack every overflows */
 /******** Begin %stack_overflow code ******************************************/
 
-    generator->StackOverflow();
+    ruleHandler->StackOverflow();
 /******** End %stack_overflow code ********************************************/
    TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument var */
    TrlSLParser_CTX_STORE
@@ -2063,798 +2063,798 @@ static YYACTIONTYPE yy_reduce(
 /********** Begin reduce actions **********************************************/
         YYMINORTYPE yylhsminor;
       case 0: /* variable_identifier ::= IDENTIFIER */
-{ generator->variable_identifier__To__IDENTIFIER(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->variable_identifier__To__IDENTIFIER(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 1: /* primary_expression ::= variable_identifier */
-{ generator->primary_expression__To__variable_identifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__variable_identifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 2: /* primary_expression ::= INTCONSTANT */
-{ generator->primary_expression__To__INTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__INTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 3: /* primary_expression ::= UINTCONSTANT */
-{ generator->primary_expression__To__UINTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__UINTCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 4: /* primary_expression ::= FLOATCONSTANT */
-{ generator->primary_expression__To__FLOATCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__FLOATCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 5: /* primary_expression ::= BOOLCONSTANT */
-{ generator->primary_expression__To__BOOLCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__BOOLCONSTANT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 6: /* primary_expression ::= LS expression RS */
-{ generator->primary_expression__To__LS___expression___RS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->primary_expression__To__LS___expression___RS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 7: /* postfix_expression ::= primary_expression */
-{ generator->postfix_expression__To__primary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__primary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 8: /* postfix_expression ::= postfix_expression LM integer_expression RM */
-{ generator->postfix_expression__To__postfix_expression___LM___integer_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__postfix_expression___LM___integer_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 9: /* postfix_expression ::= function_call */
-{ generator->postfix_expression__To__function_call(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__function_call(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 10: /* postfix_expression ::= postfix_expression DOT FIELD_SELECTION */
-{ generator->postfix_expression__To__postfix_expression___DOT___FIELD_SELECTION(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__postfix_expression___DOT___FIELD_SELECTION(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 11: /* postfix_expression ::= postfix_expression INC_OP */
-{ generator->postfix_expression__To__postfix_expression___INC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__postfix_expression___INC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 12: /* postfix_expression ::= postfix_expression DEC_OP */
-{ generator->postfix_expression__To__postfix_expression___DEC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->postfix_expression__To__postfix_expression___DEC_OP(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 13: /* integer_expression ::= expression */
-{ generator->integer_expression__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->integer_expression__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 14: /* function_call ::= function_call_or_method */
-{ generator->function_call__To__function_call_or_method(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call__To__function_call_or_method(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 15: /* function_call_or_method ::= function_call_generic */
-{ generator->function_call_or_method__To__function_call_generic(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_or_method__To__function_call_generic(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 16: /* function_call_generic ::= function_call_header_with_parameters RS */
-{ generator->function_call_generic__To__function_call_header_with_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_generic__To__function_call_header_with_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 17: /* function_call_generic ::= function_call_header_no_parameters RS */
-{ generator->function_call_generic__To__function_call_header_no_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_generic__To__function_call_header_no_parameters___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 18: /* function_call_header_no_parameters ::= function_call_header VOID */
-{ generator->function_call_header_no_parameters__To__function_call_header___VOID(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_header_no_parameters__To__function_call_header___VOID(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 19: /* function_call_header_no_parameters ::= function_call_header */
-{ generator->function_call_header_no_parameters__To__function_call_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_header_no_parameters__To__function_call_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 20: /* function_call_header_with_parameters ::= function_call_header assignment_expression */
-{ generator->function_call_header_with_parameters__To__function_call_header___assignment_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_header_with_parameters__To__function_call_header___assignment_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 21: /* function_call_header_with_parameters ::= function_call_header_with_parameters COMMA assignment_expression */
-{ generator->function_call_header_with_parameters__To__function_call_header_with_parameters___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_header_with_parameters__To__function_call_header_with_parameters___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 22: /* function_call_header ::= function_identifier LS */
-{ generator->function_call_header__To__function_identifier___LS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_call_header__To__function_identifier___LS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 23: /* function_identifier ::= type_specifier */
-{ generator->function_identifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_identifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 24: /* function_identifier ::= postfix_expression */
-{ generator->function_identifier__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_identifier__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 25: /* unary_expression ::= postfix_expression */
-{ generator->unary_expression__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_expression__To__postfix_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 26: /* unary_expression ::= INC_OP unary_expression */
-{ generator->unary_expression__To__INC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_expression__To__INC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 27: /* unary_expression ::= DEC_OP unary_expression */
-{ generator->unary_expression__To__DEC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_expression__To__DEC_OP___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 28: /* unary_expression ::= unary_operator unary_expression */
-{ generator->unary_expression__To__unary_operator___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_expression__To__unary_operator___unary_expression(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 29: /* unary_operator ::= PLUS */
-{ generator->unary_operator__To__PLUS(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_operator__To__PLUS(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 30: /* unary_operator ::= DASH */
-{ generator->unary_operator__To__DASH(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_operator__To__DASH(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 31: /* unary_operator ::= BANG */
-{ generator->unary_operator__To__BANG(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_operator__To__BANG(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 32: /* unary_operator ::= TILDE */
-{ generator->unary_operator__To__TILDE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->unary_operator__To__TILDE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 33: /* multiplicative_expression ::= unary_expression */
-{ generator->multiplicative_expression__To__unary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->multiplicative_expression__To__unary_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 34: /* multiplicative_expression ::= multiplicative_expression STAR unary_expression */
-{ generator->multiplicative_expression__To__multiplicative_expression___STAR___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->multiplicative_expression__To__multiplicative_expression___STAR___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 35: /* multiplicative_expression ::= multiplicative_expression SLASH unary_expression */
-{ generator->multiplicative_expression__To__multiplicative_expression___SLASH___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->multiplicative_expression__To__multiplicative_expression___SLASH___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 36: /* multiplicative_expression ::= multiplicative_expression PERCENT unary_expression */
-{ generator->multiplicative_expression__To__multiplicative_expression___PERCENT___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->multiplicative_expression__To__multiplicative_expression___PERCENT___unary_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 37: /* additive_expression ::= multiplicative_expression */
-{ generator->additive_expression__To__multiplicative_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->additive_expression__To__multiplicative_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 38: /* additive_expression ::= additive_expression PLUS multiplicative_expression */
-{ generator->additive_expression__To__additive_expression___PLUS___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->additive_expression__To__additive_expression___PLUS___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 39: /* additive_expression ::= additive_expression DASH multiplicative_expression */
-{ generator->additive_expression__To__additive_expression___DASH___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->additive_expression__To__additive_expression___DASH___multiplicative_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 40: /* shift_expression ::= additive_expression */
-{ generator->shift_expression__To__additive_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->shift_expression__To__additive_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 41: /* shift_expression ::= shift_expression LEFT_OP additive_expression */
-{ generator->shift_expression__To__shift_expression___LEFT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->shift_expression__To__shift_expression___LEFT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 42: /* shift_expression ::= shift_expression RIGHT_OP additive_expression */
-{ generator->shift_expression__To__shift_expression___RIGHT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->shift_expression__To__shift_expression___RIGHT_OP___additive_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 43: /* relational_expression ::= shift_expression */
-{ generator->relational_expression__To__shift_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->relational_expression__To__shift_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 44: /* relational_expression ::= relational_expression LEFT_ANGLE shift_expression */
-{ generator->relational_expression__To__relational_expression___LEFT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->relational_expression__To__relational_expression___LEFT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 45: /* relational_expression ::= relational_expression RIGHT_ANGLE shift_expression */
-{ generator->relational_expression__To__relational_expression___RIGHT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->relational_expression__To__relational_expression___RIGHT_ANGLE___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 46: /* relational_expression ::= relational_expression LE_OP shift_expression */
-{ generator->relational_expression__To__relational_expression___LE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->relational_expression__To__relational_expression___LE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 47: /* relational_expression ::= relational_expression GE_OP shift_expression */
-{ generator->relational_expression__To__relational_expression___GE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->relational_expression__To__relational_expression___GE_OP___shift_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 48: /* equality_expression ::= relational_expression */
-{ generator->equality_expression__To__relational_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->equality_expression__To__relational_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 49: /* equality_expression ::= equality_expression EQ_OP relational_expression */
-{ generator->equality_expression__To__equality_expression___EQ_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->equality_expression__To__equality_expression___EQ_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 50: /* equality_expression ::= equality_expression NE_OP relational_expression */
-{ generator->equality_expression__To__equality_expression___NE_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->equality_expression__To__equality_expression___NE_OP___relational_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 51: /* and_expression ::= equality_expression */
-{ generator->and_expression__To__equality_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->and_expression__To__equality_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 52: /* and_expression ::= and_expression AMPERSAND equality_expression */
-{ generator->and_expression__To__and_expression___AMPERSAND___equality_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->and_expression__To__and_expression___AMPERSAND___equality_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 53: /* exclusive_or_expression ::= and_expression */
-{ generator->exclusive_or_expression__To__and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->exclusive_or_expression__To__and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 54: /* exclusive_or_expression ::= exclusive_or_expression CARET and_expression */
-{ generator->exclusive_or_expression__To__exclusive_or_expression___CARET___and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->exclusive_or_expression__To__exclusive_or_expression___CARET___and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 55: /* inclusive_or_expression ::= exclusive_or_expression */
-{ generator->inclusive_or_expression__To__exclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->inclusive_or_expression__To__exclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 56: /* inclusive_or_expression ::= inclusive_or_expression VERTICAL_BAR exclusive_or_expression */
-{ generator->inclusive_or_expression__To__inclusive_or_expression___VERTICAL_BAR___exclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->inclusive_or_expression__To__inclusive_or_expression___VERTICAL_BAR___exclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 57: /* logical_and_expression ::= inclusive_or_expression */
-{ generator->logical_and_expression__To__inclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->logical_and_expression__To__inclusive_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 58: /* logical_and_expression ::= logical_and_expression AND_OP inclusive_or_expression */
-{ generator->logical_and_expression__To__logical_and_expression___AND_OP___inclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->logical_and_expression__To__logical_and_expression___AND_OP___inclusive_or_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 59: /* logical_or_expression ::= logical_and_expression */
-{ generator->logical_or_expression__To__logical_and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->logical_or_expression__To__logical_and_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 60: /* logical_or_expression ::= logical_or_expression OR_OP logical_and_expression */
-{ generator->logical_or_expression__To__logical_or_expression___OR_OP___logical_and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->logical_or_expression__To__logical_or_expression___OR_OP___logical_and_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 61: /* conditional_expression ::= logical_or_expression */
-{ generator->conditional_expression__To__logical_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->conditional_expression__To__logical_or_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 62: /* conditional_expression ::= logical_or_expression QUESTION expression COLON assignment_expression */
-{ generator->conditional_expression__To__logical_or_expression___QUESTION___expression___COLON___assignment_expression(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->conditional_expression__To__logical_or_expression___QUESTION___expression___COLON___assignment_expression(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 63: /* assignment_expression ::= conditional_expression */
-{ generator->assignment_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 64: /* assignment_expression ::= unary_expression assignment_operator assignment_expression */
-{ generator->assignment_expression__To__unary_expression___assignment_operator___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_expression__To__unary_expression___assignment_operator___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 65: /* assignment_operator ::= EQUAL */
-{ generator->assignment_operator__To__EQUAL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__EQUAL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 66: /* assignment_operator ::= MUL_ASSIGN */
-{ generator->assignment_operator__To__MUL_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__MUL_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 67: /* assignment_operator ::= DIV_ASSIGN */
-{ generator->assignment_operator__To__DIV_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__DIV_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 68: /* assignment_operator ::= MOD_ASSIGN */
-{ generator->assignment_operator__To__MOD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__MOD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 69: /* assignment_operator ::= ADD_ASSIGN */
-{ generator->assignment_operator__To__ADD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__ADD_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 70: /* assignment_operator ::= SUB_ASSIGN */
-{ generator->assignment_operator__To__SUB_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__SUB_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 71: /* assignment_operator ::= LEFT_ASSIGN */
-{ generator->assignment_operator__To__LEFT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__LEFT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 72: /* assignment_operator ::= RIGHT_ASSIGN */
-{ generator->assignment_operator__To__RIGHT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__RIGHT_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 73: /* assignment_operator ::= AND_ASSIGN */
-{ generator->assignment_operator__To__AND_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__AND_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 74: /* assignment_operator ::= XOR_ASSIGN */
-{ generator->assignment_operator__To__XOR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__XOR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 75: /* assignment_operator ::= OR_ASSIGN */
-{ generator->assignment_operator__To__OR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->assignment_operator__To__OR_ASSIGN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 76: /* expression ::= assignment_expression */
-{ generator->expression__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->expression__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 77: /* expression ::= expression COMMA assignment_expression */
-{ generator->expression__To__expression___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->expression__To__expression___COMMA___assignment_expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 78: /* constant_expression ::= conditional_expression */
-{ generator->constant_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->constant_expression__To__conditional_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 79: /* declaration ::= init_declarator_list SEMICOLON */
-{ generator->declaration__To__init_declarator_list___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->declaration__To__init_declarator_list___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 80: /* function_prototype ::= function_declarator RS */
-{ generator->function_prototype__To__function_declarator___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_prototype__To__function_declarator___RS(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 81: /* function_declarator ::= function_header */
-{ generator->function_declarator__To__function_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_declarator__To__function_header(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 82: /* function_declarator ::= function_header_with_parameters */
-{ generator->function_declarator__To__function_header_with_parameters(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_declarator__To__function_header_with_parameters(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 83: /* function_header_with_parameters ::= function_header parameter_declaration */
-{ generator->function_header_with_parameters__To__function_header___parameter_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_header_with_parameters__To__function_header___parameter_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 84: /* function_header_with_parameters ::= function_header_with_parameters COMMA parameter_declaration */
-{ generator->function_header_with_parameters__To__function_header_with_parameters___COMMA___parameter_declaration(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_header_with_parameters__To__function_header_with_parameters___COMMA___parameter_declaration(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 85: /* function_header ::= fully_specified_type IDENTIFIER LS */
-{ generator->function_header__To__fully_specified_type___IDENTIFIER___LS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_header__To__fully_specified_type___IDENTIFIER___LS(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 86: /* parameter_declarator ::= type_specifier IDENTIFIER */
-{ generator->parameter_declarator__To__type_specifier___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declarator__To__type_specifier___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 87: /* parameter_declarator ::= type_specifier IDENTIFIER array_specifier */
-{ generator->parameter_declarator__To__type_specifier___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declarator__To__type_specifier___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 88: /* parameter_declaration ::= type_qualifier parameter_declarator */
-{ generator->parameter_declaration__To__type_qualifier___parameter_declarator(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declaration__To__type_qualifier___parameter_declarator(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 89: /* parameter_declaration ::= parameter_declarator */
-{ generator->parameter_declaration__To__parameter_declarator(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declaration__To__parameter_declarator(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 90: /* parameter_declaration ::= type_qualifier parameter_type_specifier */
-{ generator->parameter_declaration__To__type_qualifier___parameter_type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declaration__To__type_qualifier___parameter_type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 91: /* parameter_declaration ::= parameter_type_specifier */
-{ generator->parameter_declaration__To__parameter_type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_declaration__To__parameter_type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 92: /* parameter_type_specifier ::= type_specifier */
-{ generator->parameter_type_specifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->parameter_type_specifier__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 93: /* init_declarator_list ::= single_declaration */
-{ generator->init_declarator_list__To__single_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->init_declarator_list__To__single_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 94: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER */
-{ generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 95: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER array_specifier */
-{ generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 96: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER array_specifier EQUAL initializer */
-{ generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
       case 97: /* init_declarator_list ::= init_declarator_list COMMA IDENTIFIER EQUAL initializer */
-{ generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 98: /* single_declaration ::= fully_specified_type */
-{ generator->single_declaration__To__fully_specified_type(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_declaration__To__fully_specified_type(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 99: /* single_declaration ::= fully_specified_type IDENTIFIER */
-{ generator->single_declaration__To__fully_specified_type___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 100: /* single_declaration ::= fully_specified_type IDENTIFIER array_specifier */
-{ generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 101: /* single_declaration ::= fully_specified_type IDENTIFIER array_specifier EQUAL initializer */
-{ generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier___EQUAL___initializer(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 102: /* single_declaration ::= fully_specified_type IDENTIFIER EQUAL initializer */
-{ generator->single_declaration__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 103: /* fully_specified_type ::= type_specifier */
-{ generator->fully_specified_type__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->fully_specified_type__To__type_specifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 104: /* fully_specified_type ::= type_qualifier type_specifier */
-{ generator->fully_specified_type__To__type_qualifier___type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->fully_specified_type__To__type_qualifier___type_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 105: /* type_qualifier ::= single_type_qualifier */
-{ generator->type_qualifier__To__single_type_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_qualifier__To__single_type_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 106: /* type_qualifier ::= type_qualifier single_type_qualifier */
-{ generator->type_qualifier__To__type_qualifier___single_type_qualifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_qualifier__To__type_qualifier___single_type_qualifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 107: /* single_type_qualifier ::= storage_qualifier */
-{ generator->single_type_qualifier__To__storage_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_type_qualifier__To__storage_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 108: /* single_type_qualifier ::= precision_qualifier */
-{ generator->single_type_qualifier__To__precision_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->single_type_qualifier__To__precision_qualifier(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 109: /* storage_qualifier ::= CONST */
-{ generator->storage_qualifier__To__CONST(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->storage_qualifier__To__CONST(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 110: /* storage_qualifier ::= IN */
-{ generator->storage_qualifier__To__IN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->storage_qualifier__To__IN(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 111: /* storage_qualifier ::= OUT */
-{ generator->storage_qualifier__To__OUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->storage_qualifier__To__OUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 112: /* storage_qualifier ::= INOUT */
-{ generator->storage_qualifier__To__INOUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->storage_qualifier__To__INOUT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 113: /* storage_qualifier ::= UNIFORM */
-{ generator->storage_qualifier__To__UNIFORM(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->storage_qualifier__To__UNIFORM(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 114: /* type_specifier ::= type_specifier_nonarray */
-{ generator->type_specifier__To__type_specifier_nonarray(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier__To__type_specifier_nonarray(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 115: /* type_specifier ::= type_specifier_nonarray array_specifier */
-{ generator->type_specifier__To__type_specifier_nonarray___array_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier__To__type_specifier_nonarray___array_specifier(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 116: /* array_specifier ::= LM RM */
-{ generator->array_specifier__To__LM___RM(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->array_specifier__To__LM___RM(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 117: /* array_specifier ::= LM constant_expression RM */
-{ generator->array_specifier__To__LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->array_specifier__To__LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 118: /* array_specifier ::= array_specifier LM RM */
-{ generator->array_specifier__To__array_specifier___LM___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->array_specifier__To__array_specifier___LM___RM(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 119: /* array_specifier ::= array_specifier LM constant_expression RM */
-{ generator->array_specifier__To__array_specifier___LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->array_specifier__To__array_specifier___LM___constant_expression___RM(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 120: /* type_specifier_nonarray ::= STRUCT IDENTIFIER */
-{ generator->type_specifier_nonarray__To__STRUCT__IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__STRUCT__IDENTIFIER(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 121: /* type_specifier_nonarray ::= VOID */
-{ generator->type_specifier_nonarray__To__VOID(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__VOID(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 122: /* type_specifier_nonarray ::= FLOAT */
-{ generator->type_specifier_nonarray__To__FLOAT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__FLOAT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 123: /* type_specifier_nonarray ::= INT */
-{ generator->type_specifier_nonarray__To__INT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__INT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 124: /* type_specifier_nonarray ::= UINT */
-{ generator->type_specifier_nonarray__To__UINT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__UINT(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 125: /* type_specifier_nonarray ::= BOOL */
-{ generator->type_specifier_nonarray__To__BOOL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__BOOL(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 126: /* type_specifier_nonarray ::= VEC2 */
-{ generator->type_specifier_nonarray__To__VEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__VEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 127: /* type_specifier_nonarray ::= VEC3 */
-{ generator->type_specifier_nonarray__To__VEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__VEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 128: /* type_specifier_nonarray ::= VEC4 */
-{ generator->type_specifier_nonarray__To__VEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__VEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 129: /* type_specifier_nonarray ::= BVEC2 */
-{ generator->type_specifier_nonarray__To__BVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__BVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 130: /* type_specifier_nonarray ::= BVEC3 */
-{ generator->type_specifier_nonarray__To__BVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__BVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 131: /* type_specifier_nonarray ::= BVEC4 */
-{ generator->type_specifier_nonarray__To__BVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__BVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 132: /* type_specifier_nonarray ::= IVEC2 */
-{ generator->type_specifier_nonarray__To__IVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__IVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 133: /* type_specifier_nonarray ::= IVEC3 */
-{ generator->type_specifier_nonarray__To__IVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__IVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 134: /* type_specifier_nonarray ::= IVEC4 */
-{ generator->type_specifier_nonarray__To__IVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__IVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 135: /* type_specifier_nonarray ::= UVEC2 */
-{ generator->type_specifier_nonarray__To__UVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__UVEC2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 136: /* type_specifier_nonarray ::= UVEC3 */
-{ generator->type_specifier_nonarray__To__UVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__UVEC3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 137: /* type_specifier_nonarray ::= UVEC4 */
-{ generator->type_specifier_nonarray__To__UVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__UVEC4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 138: /* type_specifier_nonarray ::= MAT2 */
-{ generator->type_specifier_nonarray__To__MAT2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 139: /* type_specifier_nonarray ::= MAT3 */
-{ generator->type_specifier_nonarray__To__MAT3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 140: /* type_specifier_nonarray ::= MAT4 */
-{ generator->type_specifier_nonarray__To__MAT4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 141: /* type_specifier_nonarray ::= MAT2X2 */
-{ generator->type_specifier_nonarray__To__MAT2X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT2X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 142: /* type_specifier_nonarray ::= MAT2X3 */
-{ generator->type_specifier_nonarray__To__MAT2X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT2X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 143: /* type_specifier_nonarray ::= MAT2X4 */
-{ generator->type_specifier_nonarray__To__MAT2X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT2X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 144: /* type_specifier_nonarray ::= MAT3X2 */
-{ generator->type_specifier_nonarray__To__MAT3X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT3X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 145: /* type_specifier_nonarray ::= MAT3X3 */
-{ generator->type_specifier_nonarray__To__MAT3X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT3X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 146: /* type_specifier_nonarray ::= MAT3X4 */
-{ generator->type_specifier_nonarray__To__MAT3X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT3X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 147: /* type_specifier_nonarray ::= MAT4X2 */
-{ generator->type_specifier_nonarray__To__MAT4X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT4X2(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 148: /* type_specifier_nonarray ::= MAT4X3 */
-{ generator->type_specifier_nonarray__To__MAT4X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT4X3(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 149: /* type_specifier_nonarray ::= MAT4X4 */
-{ generator->type_specifier_nonarray__To__MAT4X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__MAT4X4(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 150: /* type_specifier_nonarray ::= SAMPLER2D */
-{ generator->type_specifier_nonarray__To__SAMPLER2D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__SAMPLER2D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 151: /* type_specifier_nonarray ::= SAMPLER3D */
-{ generator->type_specifier_nonarray__To__SAMPLER3D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__SAMPLER3D(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 152: /* type_specifier_nonarray ::= SAMPLERCUBE */
-{ generator->type_specifier_nonarray__To__SAMPLERCUBE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->type_specifier_nonarray__To__SAMPLERCUBE(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 153: /* precision_qualifier ::= HIGH_PRECISION */
-{ generator->precision_qualifier__To__HIGH_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->precision_qualifier__To__HIGH_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 154: /* precision_qualifier ::= MEDIUM_PRECISION */
-{ generator->precision_qualifier__To__MEDIUM_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->precision_qualifier__To__MEDIUM_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 155: /* precision_qualifier ::= LOW_PRECISION */
-{ generator->precision_qualifier__To__LOW_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->precision_qualifier__To__LOW_PRECISION(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 156: /* initializer ::= assignment_expression */
-{ generator->initializer__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->initializer__To__assignment_expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 157: /* declaration_statement ::= declaration */
-{ generator->declaration_statement__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->declaration_statement__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 158: /* statement ::= compound_statement */
-{ generator->statement__To__compound_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->statement__To__compound_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 159: /* statement ::= simple_statement */
-{ generator->statement__To__simple_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->statement__To__simple_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 160: /* simple_statement ::= declaration_statement */
-{ generator->simple_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->simple_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 161: /* simple_statement ::= expression_statement */
-{ generator->simple_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->simple_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 162: /* simple_statement ::= selection_statement */
-{ generator->simple_statement__To__selection_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->simple_statement__To__selection_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 163: /* simple_statement ::= iteration_statement */
-{ generator->simple_statement__To__iteration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->simple_statement__To__iteration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 164: /* simple_statement ::= jump_statement */
-{ generator->simple_statement__To__jump_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->simple_statement__To__jump_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 165: /* compound_statement ::= LB RB */
-{ generator->compound_statement__To__LB___RB(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->compound_statement__To__LB___RB(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 166: /* compound_statement ::= LB statement_list RB */
-{ generator->compound_statement__To__LB___statement_list___RB(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->compound_statement__To__LB___statement_list___RB(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 167: /* statement_list ::= statement */
-{ generator->statement_list__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->statement_list__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 168: /* statement_list ::= statement_list statement */
-{ generator->statement_list__To__statement_list___statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->statement_list__To__statement_list___statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 169: /* expression_statement ::= SEMICOLON */
-{ generator->expression_statement__To__SEMICOLON(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->expression_statement__To__SEMICOLON(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 170: /* expression_statement ::= expression SEMICOLON */
-{ generator->expression_statement__To__expression___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->expression_statement__To__expression___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 171: /* selection_statement ::= IF LS expression RS selection_rest_statement */
-{ generator->selection_statement__To__IF___LS___expression___RS___selection_rest_statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->selection_statement__To__IF___LS___expression___RS___selection_rest_statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 172: /* selection_rest_statement ::= statement ELSE statement */
-{ generator->selection_rest_statement__To__statement___ELSE___statement(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->selection_rest_statement__To__statement___ELSE___statement(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 173: /* selection_rest_statement ::= statement */
-{ generator->selection_rest_statement__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->selection_rest_statement__To__statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 174: /* condition ::= expression */
-{ generator->condition__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->condition__To__expression(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 175: /* condition ::= fully_specified_type IDENTIFIER EQUAL initializer */
-{ generator->condition__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->condition__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&yylhsminor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 176: /* iteration_statement ::= WHILE LS condition RS statement */
-{ generator->iteration_statement__To__WHILE___LS___condition___RS___statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->iteration_statement__To__WHILE___LS___condition___RS___statement(&yylhsminor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 177: /* iteration_statement ::= FOR LS for_init_statement for_rest_statement RS statement */
-{ generator->iteration_statement__To__FOR___LS___for_init_statement___for_rest_statement___RS___statement(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->iteration_statement__To__FOR___LS___for_init_statement___for_rest_statement___RS___statement(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
       case 178: /* for_init_statement ::= expression_statement */
-{ generator->for_init_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->for_init_statement__To__expression_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 179: /* for_init_statement ::= declaration_statement */
-{ generator->for_init_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->for_init_statement__To__declaration_statement(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 180: /* condition_opt ::= condition */
-{ generator->condition_opt__To__condition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->condition_opt__To__condition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 181: /* condition_opt ::= */
-{ generator->condition_opt__To__Empty(&yymsp[1].minor.yy0); }
+{ ruleHandler->condition_opt__To__Empty(&yymsp[1].minor.yy0); }
         break;
       case 182: /* for_rest_statement ::= condition_opt SEMICOLON */
-{ generator->for_rest_statement__To__condition_opt___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->for_rest_statement__To__condition_opt___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 183: /* for_rest_statement ::= condition_opt SEMICOLON expression */
-{ generator->for_rest_statement__To__condition_opt___SEMICOLON___expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->for_rest_statement__To__condition_opt___SEMICOLON___expression(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 184: /* jump_statement ::= CONTINUE SEMICOLON */
-{ generator->jump_statement__To__CONTINUE___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->jump_statement__To__CONTINUE___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 185: /* jump_statement ::= BREAK SEMICOLON */
-{ generator->jump_statement__To__BREAK___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->jump_statement__To__BREAK___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 186: /* jump_statement ::= RETURN SEMICOLON */
-{ generator->jump_statement__To__RETURN___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->jump_statement__To__RETURN___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 187: /* jump_statement ::= RETURN expression SEMICOLON */
-{ generator->jump_statement__To__RETURN___expression___SEMICOLON(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->jump_statement__To__RETURN___expression___SEMICOLON(&yylhsminor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 188: /* jump_statement ::= DISCARD SEMICOLON */
-{ generator->jump_statement__To__DISCARD___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->jump_statement__To__DISCARD___SEMICOLON(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 189: /* translation_unit ::= external_declaration_list */
-{ generator->translation_unit__To__external_declaration_list(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->translation_unit__To__external_declaration_list(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 190: /* external_declaration_list ::= external_declaration */
-{ generator->external_declaration_list__To__external_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->external_declaration_list__To__external_declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 191: /* external_declaration_list ::= external_declaration_list external_declaration */
-{ generator->external_declaration_list__To__external_declaration_list___external_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->external_declaration_list__To__external_declaration_list___external_declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 192: /* external_declaration ::= function_definition */
-{ generator->external_declaration__To__function_definition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->external_declaration__To__function_definition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 193: /* external_declaration ::= declaration */
-{ generator->external_declaration__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->external_declaration__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 194: /* external_declaration ::= struct_definition */
-{ generator->external_declaration__To__struct_definition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->external_declaration__To__struct_definition(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 195: /* function_definition ::= function_prototype compound_statement */
-{ generator->function_definition__To__function_prototype___compound_statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->function_definition__To__function_prototype___compound_statement(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 196: /* declaration_list ::= declaration */
-{ generator->declaration_list__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->declaration_list__To__declaration(&yylhsminor.yy0, yymsp[0].minor.yy0); }
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 197: /* declaration_list ::= declaration_list declaration */
-{ generator->declaration_list__To__declaration_list__declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->declaration_list__To__declaration_list__declaration(&yylhsminor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 198: /* struct_definition ::= STRUCT IDENTIFIER LB declaration_list RB SEMICOLON */
-{ generator->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
+{ ruleHandler->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&yylhsminor.yy0, yymsp[-5].minor.yy0, yymsp[-4].minor.yy0, yymsp[-3].minor.yy0, yymsp[-2].minor.yy0, yymsp[-1].minor.yy0, yymsp[0].minor.yy0); }
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
       default:
@@ -2900,7 +2900,7 @@ static void yy_parse_failed(
   ** parser fails */
 /************ Begin %parse_failure code ***************************************/
 
-    generator->ParseFailure();
+    ruleHandler->ParseFailure();
 /************ End %parse_failure code *****************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE
@@ -2920,7 +2920,7 @@ static void yy_syntax_error(
 #define TOKEN yyminor
 /************ Begin %syntax_error code ****************************************/
 
-    generator->SyntaxError();
+    ruleHandler->SyntaxError();
 /************ End %syntax_error code ******************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE
@@ -2947,7 +2947,7 @@ static void yy_accept(
   ** parser accepts */
 /*********** Begin %parse_accept code *****************************************/
 
-    generator->ParseAccept();
+    ruleHandler->ParseAccept();
 /*********** End %parse_accept code *******************************************/
   TrlSLParser_ARG_STORE /* Suppress warning about unused %extra_argument variable */
   TrlSLParser_CTX_STORE

@@ -3,9 +3,6 @@
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/DataStream/MemoryDataStream.h"
 #include "ToyUtility/DataStream/FileDataStream.h"
-#include "TRL/details/TRLSL/DebugGenerator.h"
-#include "TRL/details/TRLSL/GLSLGenerator.h"
-#include "TRL/details/TRLSL/HLSLGenerator.h"
 #include "TRL/details/TRLSL/TRLSLParser.h"
 #include "TRL/details/TRLSL/TRLSLTokener.h"
 
@@ -45,23 +42,23 @@ void main()
     {
         MemoryDataStream stream(10240);
 
-        if (0)
-        {
-            GLSLGenerator generator;
-            //HLSLGenerator generator;
+        //if (0)
+        //{
+        //    GLSLGenerator generator;
+        //    //HLSLGenerator generator;
 
-            TRLSLParser parser(generator);
-            parser.Parse(tokener);
-            generator.GenerateCode(stream);
-            std::cout << stream.GetAsString() << std::endl;
-        }
-        else
-        {
-            DebugGenerator generator;
+        //    TRLSLParser parser(generator);
+        //    parser.Parse(tokener);
+        //    generator.GenerateCode(stream);
+        //    std::cout << stream.GetAsString() << std::endl;
+        //}
+        //else
+        //{
+        //    DebugGenerator generator;
 
-            TRLSLParser parser(generator);
-            parser.Parse(tokener);
-        }
+        //    TRLSLParser parser(generator);
+        //    parser.Parse(tokener);
+        //}
     }
 
     std::cout << "TRL SL Example >> End" << std::endl;

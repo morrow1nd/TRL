@@ -8,12 +8,6 @@
 #include "TRL/details/TRLSL/TRLSL_IR.h"
 
 
-namespace ToyUtility
-{
-    class DataStream;
-}
-
-
 namespace TRL
 {
 
@@ -96,10 +90,10 @@ private:
 
     // Handler used by lemon-parser
 public:
-    virtual void SyntaxError() override{ } // TODOH
-    virtual void ParseFailure() override{ }
-    virtual void StackOverflow() override{ }
-    virtual void ParseAccept() override{ }
+	virtual void SyntaxError() override;
+	virtual void ParseFailure() override;
+	virtual void StackOverflow() override;
+	virtual void ParseAccept() override;
 
     virtual TRL::TRLSLGrammarRuleHandler::RetType variable_identifier__To__IDENTIFIER(TRL::TRLSLGrammarRuleHandler::InType*, TRL::TRLSLGrammarRuleHandler::InType _1 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _2 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _3 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _4 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _5 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _6 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _7 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr) override;
     virtual TRL::TRLSLGrammarRuleHandler::RetType primary_expression__To__variable_identifier(TRL::TRLSLGrammarRuleHandler::InType*, TRL::TRLSLGrammarRuleHandler::InType _1 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _2 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _3 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _4 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _5 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _6 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr, TRL::TRLSLGrammarRuleHandler::InType _7 = (TRL::TRLSLGrammarRuleHandler::InType)nullptr) override;

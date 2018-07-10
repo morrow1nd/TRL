@@ -39,33 +39,33 @@
 
 
 %parse_failure {
-    generator->ParseFailure();
+    ruleHandler->ParseFailure();
 }
 
 %stack_overflow {
-    generator->StackOverflow();
+    ruleHandler->StackOverflow();
 }
 
 %parse_accept {
-    generator->ParseAccept();
+    ruleHandler->ParseAccept();
 }
 
 %syntax_error {
-    generator->SyntaxError();
+    ruleHandler->SyntaxError();
 }
 
 
 %include {
     #include <cassert>
     #include "TRL/details/TRLSL/Token.h"
-    #include "TRL/details/TRLSL/TRLSLGenerator.h"
+    #include "TRL/details/TRLSL/TRLSLGrammarRuleHandler.h"
 }
 
 %name TrlSLParser_  // Functions in generated code all begins with this string.
 %token_prefix TRLSL_T_
 %token_type {TRL::Token*}
 
-%extra_context { TRL::TRLSLGenerator* generator }
+%extra_context { TRL::TRLSLGrammarRuleHandler* ruleHandler }
 
 // grammer copied from GLSL ES Specification, Chapter 10. Shading Language Grammar.
 // https://www.khronos.org/registry/OpenGL/specs/es/3.2/GLSL_ES_Specification_3.20.pdf
@@ -74,276 +74,276 @@
 %start_symbol translation_unit
 
 
-variable_identifier(A) ::= IDENTIFIER(B). { generator->variable_identifier__To__IDENTIFIER(&A, B); }
+variable_identifier(A) ::= IDENTIFIER(B). { ruleHandler->variable_identifier__To__IDENTIFIER(&A, B); }
 
-primary_expression(A) ::= variable_identifier(B). { generator->primary_expression__To__variable_identifier(&A, B); }
-primary_expression(A) ::= INTCONSTANT(B). { generator->primary_expression__To__INTCONSTANT(&A, B); }
-primary_expression(A) ::= UINTCONSTANT(B). { generator->primary_expression__To__UINTCONSTANT(&A, B); }
-primary_expression(A) ::= FLOATCONSTANT(B). { generator->primary_expression__To__FLOATCONSTANT(&A, B); }
-primary_expression(A) ::= BOOLCONSTANT(B). { generator->primary_expression__To__BOOLCONSTANT(&A, B); }
-primary_expression(A) ::= LS(B) expression(C) RS(D). { generator->primary_expression__To__LS___expression___RS(&A, B, C, D); }
+primary_expression(A) ::= variable_identifier(B). { ruleHandler->primary_expression__To__variable_identifier(&A, B); }
+primary_expression(A) ::= INTCONSTANT(B). { ruleHandler->primary_expression__To__INTCONSTANT(&A, B); }
+primary_expression(A) ::= UINTCONSTANT(B). { ruleHandler->primary_expression__To__UINTCONSTANT(&A, B); }
+primary_expression(A) ::= FLOATCONSTANT(B). { ruleHandler->primary_expression__To__FLOATCONSTANT(&A, B); }
+primary_expression(A) ::= BOOLCONSTANT(B). { ruleHandler->primary_expression__To__BOOLCONSTANT(&A, B); }
+primary_expression(A) ::= LS(B) expression(C) RS(D). { ruleHandler->primary_expression__To__LS___expression___RS(&A, B, C, D); }
 
-postfix_expression(A) ::= primary_expression(B). { generator->postfix_expression__To__primary_expression(&A, B); }
-postfix_expression(A) ::= postfix_expression(B) LM(C) integer_expression(D) RM(E). { generator->postfix_expression__To__postfix_expression___LM___integer_expression___RM(&A, B, C, D, E); }
-postfix_expression(A) ::= function_call(B). { generator->postfix_expression__To__function_call(&A, B); }
-postfix_expression(A) ::= postfix_expression(B) DOT(C) FIELD_SELECTION(D). { generator->postfix_expression__To__postfix_expression___DOT___FIELD_SELECTION(&A, B, C, D); }
-postfix_expression(A) ::= postfix_expression(B) INC_OP(C). { generator->postfix_expression__To__postfix_expression___INC_OP(&A, B, C); }
-postfix_expression(A) ::= postfix_expression(B) DEC_OP(C). { generator->postfix_expression__To__postfix_expression___DEC_OP(&A, B, C); }
+postfix_expression(A) ::= primary_expression(B). { ruleHandler->postfix_expression__To__primary_expression(&A, B); }
+postfix_expression(A) ::= postfix_expression(B) LM(C) integer_expression(D) RM(E). { ruleHandler->postfix_expression__To__postfix_expression___LM___integer_expression___RM(&A, B, C, D, E); }
+postfix_expression(A) ::= function_call(B). { ruleHandler->postfix_expression__To__function_call(&A, B); }
+postfix_expression(A) ::= postfix_expression(B) DOT(C) FIELD_SELECTION(D). { ruleHandler->postfix_expression__To__postfix_expression___DOT___FIELD_SELECTION(&A, B, C, D); }
+postfix_expression(A) ::= postfix_expression(B) INC_OP(C). { ruleHandler->postfix_expression__To__postfix_expression___INC_OP(&A, B, C); }
+postfix_expression(A) ::= postfix_expression(B) DEC_OP(C). { ruleHandler->postfix_expression__To__postfix_expression___DEC_OP(&A, B, C); }
     // FIELD_SELECTION includes fields in structures, component selection for vectors
     // and the 'length' identifier for the length() method
 
-integer_expression(A) ::= expression(B). { generator->integer_expression__To__expression(&A, B); }
+integer_expression(A) ::= expression(B). { ruleHandler->integer_expression__To__expression(&A, B); }
 
-function_call(A) ::= function_call_or_method(B). { generator->function_call__To__function_call_or_method(&A, B); }
+function_call(A) ::= function_call_or_method(B). { ruleHandler->function_call__To__function_call_or_method(&A, B); }
 
-function_call_or_method(A) ::= function_call_generic(B). { generator->function_call_or_method__To__function_call_generic(&A, B); }
+function_call_or_method(A) ::= function_call_generic(B). { ruleHandler->function_call_or_method__To__function_call_generic(&A, B); }
 
-function_call_generic(A) ::= function_call_header_with_parameters(B) RS(C). { generator->function_call_generic__To__function_call_header_with_parameters___RS(&A, B, C); }
-function_call_generic(A) ::= function_call_header_no_parameters(B) RS(C). { generator->function_call_generic__To__function_call_header_no_parameters___RS(&A, B, C); }
+function_call_generic(A) ::= function_call_header_with_parameters(B) RS(C). { ruleHandler->function_call_generic__To__function_call_header_with_parameters___RS(&A, B, C); }
+function_call_generic(A) ::= function_call_header_no_parameters(B) RS(C). { ruleHandler->function_call_generic__To__function_call_header_no_parameters___RS(&A, B, C); }
 
-function_call_header_no_parameters(A) ::= function_call_header(B) VOID(C). { generator->function_call_header_no_parameters__To__function_call_header___VOID(&A, B, C); }
-function_call_header_no_parameters(A) ::= function_call_header(B). { generator->function_call_header_no_parameters__To__function_call_header(&A, B); }
+function_call_header_no_parameters(A) ::= function_call_header(B) VOID(C). { ruleHandler->function_call_header_no_parameters__To__function_call_header___VOID(&A, B, C); }
+function_call_header_no_parameters(A) ::= function_call_header(B). { ruleHandler->function_call_header_no_parameters__To__function_call_header(&A, B); }
 
-function_call_header_with_parameters(A) ::= function_call_header(B) assignment_expression(C). { generator->function_call_header_with_parameters__To__function_call_header___assignment_expression(&A, B, C); }
-function_call_header_with_parameters(A) ::= function_call_header_with_parameters(B) COMMA(C) assignment_expression(D). { generator->function_call_header_with_parameters__To__function_call_header_with_parameters___COMMA___assignment_expression(&A, B, C, D); }
+function_call_header_with_parameters(A) ::= function_call_header(B) assignment_expression(C). { ruleHandler->function_call_header_with_parameters__To__function_call_header___assignment_expression(&A, B, C); }
+function_call_header_with_parameters(A) ::= function_call_header_with_parameters(B) COMMA(C) assignment_expression(D). { ruleHandler->function_call_header_with_parameters__To__function_call_header_with_parameters___COMMA___assignment_expression(&A, B, C, D); }
 
-function_call_header(A) ::= function_identifier(B) LS(C). { generator->function_call_header__To__function_identifier___LS(&A, B, C); }
+function_call_header(A) ::= function_identifier(B) LS(C). { ruleHandler->function_call_header__To__function_identifier___LS(&A, B, C); }
 
     // Grammar Note: Constructors look like functions, but lexical analysis recognized most of them as
     // keywords. They are now recognized through “type_specifier”.
     // Methods (.length) and identifiers are recognized through postfix_expression.
 
-function_identifier(A) ::= type_specifier(B). { generator->function_identifier__To__type_specifier(&A, B); }
-function_identifier(A) ::= postfix_expression(B). { generator->function_identifier__To__postfix_expression(&A, B); }
+function_identifier(A) ::= type_specifier(B). { ruleHandler->function_identifier__To__type_specifier(&A, B); }
+function_identifier(A) ::= postfix_expression(B). { ruleHandler->function_identifier__To__postfix_expression(&A, B); }
 
-unary_expression(A) ::= postfix_expression(B). { generator->unary_expression__To__postfix_expression(&A, B); }
-unary_expression(A) ::= INC_OP(B) unary_expression(C). { generator->unary_expression__To__INC_OP___unary_expression(&A, B, C); }
-unary_expression(A) ::= DEC_OP(B) unary_expression(C). { generator->unary_expression__To__DEC_OP___unary_expression(&A, B, C); }
-unary_expression(A) ::= unary_operator(B) unary_expression(C). { generator->unary_expression__To__unary_operator___unary_expression(&A, B, C); }
+unary_expression(A) ::= postfix_expression(B). { ruleHandler->unary_expression__To__postfix_expression(&A, B); }
+unary_expression(A) ::= INC_OP(B) unary_expression(C). { ruleHandler->unary_expression__To__INC_OP___unary_expression(&A, B, C); }
+unary_expression(A) ::= DEC_OP(B) unary_expression(C). { ruleHandler->unary_expression__To__DEC_OP___unary_expression(&A, B, C); }
+unary_expression(A) ::= unary_operator(B) unary_expression(C). { ruleHandler->unary_expression__To__unary_operator___unary_expression(&A, B, C); }
     // Grammar Note: No traditional style type casts.
 
-unary_operator(A) ::= PLUS(B). { generator->unary_operator__To__PLUS(&A, B); } // +
-unary_operator(A) ::= DASH(B). { generator->unary_operator__To__DASH(&A, B); } // -
-unary_operator(A) ::= BANG(B). { generator->unary_operator__To__BANG(&A, B); } // !
-unary_operator(A) ::= TILDE(B). { generator->unary_operator__To__TILDE(&A, B); } // ~
+unary_operator(A) ::= PLUS(B). { ruleHandler->unary_operator__To__PLUS(&A, B); } // +
+unary_operator(A) ::= DASH(B). { ruleHandler->unary_operator__To__DASH(&A, B); } // -
+unary_operator(A) ::= BANG(B). { ruleHandler->unary_operator__To__BANG(&A, B); } // !
+unary_operator(A) ::= TILDE(B). { ruleHandler->unary_operator__To__TILDE(&A, B); } // ~
     // Grammar Note: No '*' or '&' unary ops. Pointers are not supported.
 
-multiplicative_expression(A) ::= unary_expression(B). { generator->multiplicative_expression__To__unary_expression(&A, B); }
-multiplicative_expression(A) ::= multiplicative_expression(B) STAR(C) unary_expression(D). { generator->multiplicative_expression__To__multiplicative_expression___STAR___unary_expression(&A, B, C, D); } // *
-multiplicative_expression(A) ::= multiplicative_expression(B) SLASH(C) unary_expression(D). { generator->multiplicative_expression__To__multiplicative_expression___SLASH___unary_expression(&A, B, C, D); } // /
-multiplicative_expression(A) ::= multiplicative_expression(B) PERCENT(C) unary_expression(D). { generator->multiplicative_expression__To__multiplicative_expression___PERCENT___unary_expression(&A, B, C, D); } // %
+multiplicative_expression(A) ::= unary_expression(B). { ruleHandler->multiplicative_expression__To__unary_expression(&A, B); }
+multiplicative_expression(A) ::= multiplicative_expression(B) STAR(C) unary_expression(D). { ruleHandler->multiplicative_expression__To__multiplicative_expression___STAR___unary_expression(&A, B, C, D); } // *
+multiplicative_expression(A) ::= multiplicative_expression(B) SLASH(C) unary_expression(D). { ruleHandler->multiplicative_expression__To__multiplicative_expression___SLASH___unary_expression(&A, B, C, D); } // /
+multiplicative_expression(A) ::= multiplicative_expression(B) PERCENT(C) unary_expression(D). { ruleHandler->multiplicative_expression__To__multiplicative_expression___PERCENT___unary_expression(&A, B, C, D); } // %
 
-additive_expression(A) ::= multiplicative_expression(B). { generator->additive_expression__To__multiplicative_expression(&A, B); }
-additive_expression(A) ::= additive_expression(B) PLUS(C) multiplicative_expression(D). { generator->additive_expression__To__additive_expression___PLUS___multiplicative_expression(&A, B, C, D); }
-additive_expression(A) ::= additive_expression(B) DASH(C) multiplicative_expression(D). { generator->additive_expression__To__additive_expression___DASH___multiplicative_expression(&A, B, C, D); }
+additive_expression(A) ::= multiplicative_expression(B). { ruleHandler->additive_expression__To__multiplicative_expression(&A, B); }
+additive_expression(A) ::= additive_expression(B) PLUS(C) multiplicative_expression(D). { ruleHandler->additive_expression__To__additive_expression___PLUS___multiplicative_expression(&A, B, C, D); }
+additive_expression(A) ::= additive_expression(B) DASH(C) multiplicative_expression(D). { ruleHandler->additive_expression__To__additive_expression___DASH___multiplicative_expression(&A, B, C, D); }
 
-shift_expression(A) ::= additive_expression(B). { generator->shift_expression__To__additive_expression(&A, B); }
-shift_expression(A) ::= shift_expression(B) LEFT_OP(C) additive_expression(D). { generator->shift_expression__To__shift_expression___LEFT_OP___additive_expression(&A, B, C, D); }
-shift_expression(A) ::= shift_expression(B) RIGHT_OP(C) additive_expression(D). { generator->shift_expression__To__shift_expression___RIGHT_OP___additive_expression(&A, B, C, D); }
+shift_expression(A) ::= additive_expression(B). { ruleHandler->shift_expression__To__additive_expression(&A, B); }
+shift_expression(A) ::= shift_expression(B) LEFT_OP(C) additive_expression(D). { ruleHandler->shift_expression__To__shift_expression___LEFT_OP___additive_expression(&A, B, C, D); }
+shift_expression(A) ::= shift_expression(B) RIGHT_OP(C) additive_expression(D). { ruleHandler->shift_expression__To__shift_expression___RIGHT_OP___additive_expression(&A, B, C, D); }
 
-relational_expression(A) ::= shift_expression(B). { generator->relational_expression__To__shift_expression(&A, B); }
-relational_expression(A) ::= relational_expression(B) LEFT_ANGLE(C) shift_expression(D). { generator->relational_expression__To__relational_expression___LEFT_ANGLE___shift_expression(&A, B, C, D); }
-relational_expression(A) ::= relational_expression(B) RIGHT_ANGLE(C) shift_expression(D). { generator->relational_expression__To__relational_expression___RIGHT_ANGLE___shift_expression(&A, B, C, D); }
-relational_expression(A) ::= relational_expression(B) LE_OP(C) shift_expression(D). { generator->relational_expression__To__relational_expression___LE_OP___shift_expression(&A, B, C, D); }
-relational_expression(A) ::= relational_expression(B) GE_OP(C) shift_expression(D). { generator->relational_expression__To__relational_expression___GE_OP___shift_expression(&A, B, C, D); }
+relational_expression(A) ::= shift_expression(B). { ruleHandler->relational_expression__To__shift_expression(&A, B); }
+relational_expression(A) ::= relational_expression(B) LEFT_ANGLE(C) shift_expression(D). { ruleHandler->relational_expression__To__relational_expression___LEFT_ANGLE___shift_expression(&A, B, C, D); }
+relational_expression(A) ::= relational_expression(B) RIGHT_ANGLE(C) shift_expression(D). { ruleHandler->relational_expression__To__relational_expression___RIGHT_ANGLE___shift_expression(&A, B, C, D); }
+relational_expression(A) ::= relational_expression(B) LE_OP(C) shift_expression(D). { ruleHandler->relational_expression__To__relational_expression___LE_OP___shift_expression(&A, B, C, D); }
+relational_expression(A) ::= relational_expression(B) GE_OP(C) shift_expression(D). { ruleHandler->relational_expression__To__relational_expression___GE_OP___shift_expression(&A, B, C, D); }
 
-equality_expression(A) ::= relational_expression(B). { generator->equality_expression__To__relational_expression(&A, B); }
-equality_expression(A) ::= equality_expression(B) EQ_OP(C) relational_expression(D). { generator->equality_expression__To__equality_expression___EQ_OP___relational_expression(&A, B, C, D); }
-equality_expression(A) ::= equality_expression(B) NE_OP(C) relational_expression(D). { generator->equality_expression__To__equality_expression___NE_OP___relational_expression(&A, B, C, D); }
+equality_expression(A) ::= relational_expression(B). { ruleHandler->equality_expression__To__relational_expression(&A, B); }
+equality_expression(A) ::= equality_expression(B) EQ_OP(C) relational_expression(D). { ruleHandler->equality_expression__To__equality_expression___EQ_OP___relational_expression(&A, B, C, D); }
+equality_expression(A) ::= equality_expression(B) NE_OP(C) relational_expression(D). { ruleHandler->equality_expression__To__equality_expression___NE_OP___relational_expression(&A, B, C, D); }
 
-and_expression(A) ::= equality_expression(B). { generator->and_expression__To__equality_expression(&A, B); }
-and_expression(A) ::= and_expression(B) AMPERSAND(C) equality_expression(D). { generator->and_expression__To__and_expression___AMPERSAND___equality_expression(&A, B, C, D); }
+and_expression(A) ::= equality_expression(B). { ruleHandler->and_expression__To__equality_expression(&A, B); }
+and_expression(A) ::= and_expression(B) AMPERSAND(C) equality_expression(D). { ruleHandler->and_expression__To__and_expression___AMPERSAND___equality_expression(&A, B, C, D); }
 
-exclusive_or_expression(A) ::= and_expression(B). { generator->exclusive_or_expression__To__and_expression(&A, B); }
-exclusive_or_expression(A) ::= exclusive_or_expression(B) CARET(C) and_expression(D). { generator->exclusive_or_expression__To__exclusive_or_expression___CARET___and_expression(&A, B, C, D); } // ^
+exclusive_or_expression(A) ::= and_expression(B). { ruleHandler->exclusive_or_expression__To__and_expression(&A, B); }
+exclusive_or_expression(A) ::= exclusive_or_expression(B) CARET(C) and_expression(D). { ruleHandler->exclusive_or_expression__To__exclusive_or_expression___CARET___and_expression(&A, B, C, D); } // ^
 
-inclusive_or_expression(A) ::= exclusive_or_expression(B). { generator->inclusive_or_expression__To__exclusive_or_expression(&A, B); }
-inclusive_or_expression(A) ::= inclusive_or_expression(B) VERTICAL_BAR(C) exclusive_or_expression(D). { generator->inclusive_or_expression__To__inclusive_or_expression___VERTICAL_BAR___exclusive_or_expression(&A, B, C, D); } // |
+inclusive_or_expression(A) ::= exclusive_or_expression(B). { ruleHandler->inclusive_or_expression__To__exclusive_or_expression(&A, B); }
+inclusive_or_expression(A) ::= inclusive_or_expression(B) VERTICAL_BAR(C) exclusive_or_expression(D). { ruleHandler->inclusive_or_expression__To__inclusive_or_expression___VERTICAL_BAR___exclusive_or_expression(&A, B, C, D); } // |
 
-logical_and_expression(A) ::= inclusive_or_expression(B). { generator->logical_and_expression__To__inclusive_or_expression(&A, B); }
-logical_and_expression(A) ::= logical_and_expression(B) AND_OP(C) inclusive_or_expression(D). { generator->logical_and_expression__To__logical_and_expression___AND_OP___inclusive_or_expression(&A, B, C, D); }
+logical_and_expression(A) ::= inclusive_or_expression(B). { ruleHandler->logical_and_expression__To__inclusive_or_expression(&A, B); }
+logical_and_expression(A) ::= logical_and_expression(B) AND_OP(C) inclusive_or_expression(D). { ruleHandler->logical_and_expression__To__logical_and_expression___AND_OP___inclusive_or_expression(&A, B, C, D); }
 
-logical_or_expression(A) ::= logical_and_expression(B). { generator->logical_or_expression__To__logical_and_expression(&A, B); }
-logical_or_expression(A) ::= logical_or_expression(B) OR_OP(C) logical_and_expression(D). { generator->logical_or_expression__To__logical_or_expression___OR_OP___logical_and_expression(&A, B, C, D); }
+logical_or_expression(A) ::= logical_and_expression(B). { ruleHandler->logical_or_expression__To__logical_and_expression(&A, B); }
+logical_or_expression(A) ::= logical_or_expression(B) OR_OP(C) logical_and_expression(D). { ruleHandler->logical_or_expression__To__logical_or_expression___OR_OP___logical_and_expression(&A, B, C, D); }
 
-conditional_expression(A) ::= logical_or_expression(B). { generator->conditional_expression__To__logical_or_expression(&A, B); }
-conditional_expression(A) ::= logical_or_expression(B) QUESTION(C) expression(D) COLON(E) assignment_expression(F). { generator->conditional_expression__To__logical_or_expression___QUESTION___expression___COLON___assignment_expression(&A, B, C, D, E, F); }
+conditional_expression(A) ::= logical_or_expression(B). { ruleHandler->conditional_expression__To__logical_or_expression(&A, B); }
+conditional_expression(A) ::= logical_or_expression(B) QUESTION(C) expression(D) COLON(E) assignment_expression(F). { ruleHandler->conditional_expression__To__logical_or_expression___QUESTION___expression___COLON___assignment_expression(&A, B, C, D, E, F); }
 
-assignment_expression(A) ::= conditional_expression(B). { generator->assignment_expression__To__conditional_expression(&A, B); }
-assignment_expression(A) ::= unary_expression(B) assignment_operator(C) assignment_expression(D). { generator->assignment_expression__To__unary_expression___assignment_operator___assignment_expression(&A, B, C, D); }
+assignment_expression(A) ::= conditional_expression(B). { ruleHandler->assignment_expression__To__conditional_expression(&A, B); }
+assignment_expression(A) ::= unary_expression(B) assignment_operator(C) assignment_expression(D). { ruleHandler->assignment_expression__To__unary_expression___assignment_operator___assignment_expression(&A, B, C, D); }
 
-assignment_operator(A) ::= EQUAL(B). { generator->assignment_operator__To__EQUAL(&A, B); } // =
-assignment_operator(A) ::= MUL_ASSIGN(B). { generator->assignment_operator__To__MUL_ASSIGN(&A, B); }
-assignment_operator(A) ::= DIV_ASSIGN(B). { generator->assignment_operator__To__DIV_ASSIGN(&A, B); }
-assignment_operator(A) ::= MOD_ASSIGN(B). { generator->assignment_operator__To__MOD_ASSIGN(&A, B); } // %=
-assignment_operator(A) ::= ADD_ASSIGN(B). { generator->assignment_operator__To__ADD_ASSIGN(&A, B); }
-assignment_operator(A) ::= SUB_ASSIGN(B). { generator->assignment_operator__To__SUB_ASSIGN(&A, B); }
-assignment_operator(A) ::= LEFT_ASSIGN(B). { generator->assignment_operator__To__LEFT_ASSIGN(&A, B); } // <<=
-assignment_operator(A) ::= RIGHT_ASSIGN(B). { generator->assignment_operator__To__RIGHT_ASSIGN(&A, B); } // >>=
-assignment_operator(A) ::= AND_ASSIGN(B). { generator->assignment_operator__To__AND_ASSIGN(&A, B); } // &=
-assignment_operator(A) ::= XOR_ASSIGN(B). { generator->assignment_operator__To__XOR_ASSIGN(&A, B); } // ^=
-assignment_operator(A) ::= OR_ASSIGN(B). { generator->assignment_operator__To__OR_ASSIGN(&A, B); } // |=
+assignment_operator(A) ::= EQUAL(B). { ruleHandler->assignment_operator__To__EQUAL(&A, B); } // =
+assignment_operator(A) ::= MUL_ASSIGN(B). { ruleHandler->assignment_operator__To__MUL_ASSIGN(&A, B); }
+assignment_operator(A) ::= DIV_ASSIGN(B). { ruleHandler->assignment_operator__To__DIV_ASSIGN(&A, B); }
+assignment_operator(A) ::= MOD_ASSIGN(B). { ruleHandler->assignment_operator__To__MOD_ASSIGN(&A, B); } // %=
+assignment_operator(A) ::= ADD_ASSIGN(B). { ruleHandler->assignment_operator__To__ADD_ASSIGN(&A, B); }
+assignment_operator(A) ::= SUB_ASSIGN(B). { ruleHandler->assignment_operator__To__SUB_ASSIGN(&A, B); }
+assignment_operator(A) ::= LEFT_ASSIGN(B). { ruleHandler->assignment_operator__To__LEFT_ASSIGN(&A, B); } // <<=
+assignment_operator(A) ::= RIGHT_ASSIGN(B). { ruleHandler->assignment_operator__To__RIGHT_ASSIGN(&A, B); } // >>=
+assignment_operator(A) ::= AND_ASSIGN(B). { ruleHandler->assignment_operator__To__AND_ASSIGN(&A, B); } // &=
+assignment_operator(A) ::= XOR_ASSIGN(B). { ruleHandler->assignment_operator__To__XOR_ASSIGN(&A, B); } // ^=
+assignment_operator(A) ::= OR_ASSIGN(B). { ruleHandler->assignment_operator__To__OR_ASSIGN(&A, B); } // |=
 
-expression(A) ::= assignment_expression(B). { generator->expression__To__assignment_expression(&A, B); }
-expression(A) ::= expression(B) COMMA(C) assignment_expression(D). { generator->expression__To__expression___COMMA___assignment_expression(&A, B, C, D); }
+expression(A) ::= assignment_expression(B). { ruleHandler->expression__To__assignment_expression(&A, B); }
+expression(A) ::= expression(B) COMMA(C) assignment_expression(D). { ruleHandler->expression__To__expression___COMMA___assignment_expression(&A, B, C, D); }
 
-constant_expression(A) ::= conditional_expression(B). { generator->constant_expression__To__conditional_expression(&A, B); }
+constant_expression(A) ::= conditional_expression(B). { ruleHandler->constant_expression__To__conditional_expression(&A, B); }
 
-declaration(A) ::= init_declarator_list(B) SEMICOLON(C). { generator->declaration__To__init_declarator_list___SEMICOLON(&A, B, C); }
+declaration(A) ::= init_declarator_list(B) SEMICOLON(C). { ruleHandler->declaration__To__init_declarator_list___SEMICOLON(&A, B, C); }
 
-function_prototype(A) ::= function_declarator(B) RS(C). { generator->function_prototype__To__function_declarator___RS(&A, B, C); }
+function_prototype(A) ::= function_declarator(B) RS(C). { ruleHandler->function_prototype__To__function_declarator___RS(&A, B, C); }
 
-function_declarator(A) ::= function_header(B). { generator->function_declarator__To__function_header(&A, B); }
-function_declarator(A) ::= function_header_with_parameters(B). { generator->function_declarator__To__function_header_with_parameters(&A, B); }
+function_declarator(A) ::= function_header(B). { ruleHandler->function_declarator__To__function_header(&A, B); }
+function_declarator(A) ::= function_header_with_parameters(B). { ruleHandler->function_declarator__To__function_header_with_parameters(&A, B); }
 
-function_header_with_parameters(A) ::= function_header(B) parameter_declaration(C). { generator->function_header_with_parameters__To__function_header___parameter_declaration(&A, B, C); }
-function_header_with_parameters(A) ::= function_header_with_parameters(B) COMMA(C) parameter_declaration(D). { generator->function_header_with_parameters__To__function_header_with_parameters___COMMA___parameter_declaration(&A, B, C, D); }
+function_header_with_parameters(A) ::= function_header(B) parameter_declaration(C). { ruleHandler->function_header_with_parameters__To__function_header___parameter_declaration(&A, B, C); }
+function_header_with_parameters(A) ::= function_header_with_parameters(B) COMMA(C) parameter_declaration(D). { ruleHandler->function_header_with_parameters__To__function_header_with_parameters___COMMA___parameter_declaration(&A, B, C, D); }
 
-function_header(A) ::= fully_specified_type(B) IDENTIFIER(C) LS(D). { generator->function_header__To__fully_specified_type___IDENTIFIER___LS(&A, B, C, D); }
+function_header(A) ::= fully_specified_type(B) IDENTIFIER(C) LS(D). { ruleHandler->function_header__To__fully_specified_type___IDENTIFIER___LS(&A, B, C, D); }
 
-parameter_declarator(A) ::= type_specifier(B) IDENTIFIER(C). { generator->parameter_declarator__To__type_specifier___IDENTIFIER(&A, B, C); }
-parameter_declarator(A) ::= type_specifier(B) IDENTIFIER(C) array_specifier(D). { generator->parameter_declarator__To__type_specifier___IDENTIFIER___array_specifier(&A, B, C, D); }
+parameter_declarator(A) ::= type_specifier(B) IDENTIFIER(C). { ruleHandler->parameter_declarator__To__type_specifier___IDENTIFIER(&A, B, C); }
+parameter_declarator(A) ::= type_specifier(B) IDENTIFIER(C) array_specifier(D). { ruleHandler->parameter_declarator__To__type_specifier___IDENTIFIER___array_specifier(&A, B, C, D); }
 
-parameter_declaration(A) ::= type_qualifier(B) parameter_declarator(C). { generator->parameter_declaration__To__type_qualifier___parameter_declarator(&A, B, C); }
-parameter_declaration(A) ::= parameter_declarator(B). { generator->parameter_declaration__To__parameter_declarator(&A, B); }
-parameter_declaration(A) ::= type_qualifier(B) parameter_type_specifier(C). { generator->parameter_declaration__To__type_qualifier___parameter_type_specifier(&A, B, C); }
-parameter_declaration(A) ::= parameter_type_specifier(B). { generator->parameter_declaration__To__parameter_type_specifier(&A, B); }
+parameter_declaration(A) ::= type_qualifier(B) parameter_declarator(C). { ruleHandler->parameter_declaration__To__type_qualifier___parameter_declarator(&A, B, C); }
+parameter_declaration(A) ::= parameter_declarator(B). { ruleHandler->parameter_declaration__To__parameter_declarator(&A, B); }
+parameter_declaration(A) ::= type_qualifier(B) parameter_type_specifier(C). { ruleHandler->parameter_declaration__To__type_qualifier___parameter_type_specifier(&A, B, C); }
+parameter_declaration(A) ::= parameter_type_specifier(B). { ruleHandler->parameter_declaration__To__parameter_type_specifier(&A, B); }
 
-parameter_type_specifier(A) ::= type_specifier(B). { generator->parameter_type_specifier__To__type_specifier(&A, B); }
+parameter_type_specifier(A) ::= type_specifier(B). { ruleHandler->parameter_type_specifier__To__type_specifier(&A, B); }
 
-init_declarator_list(A) ::= single_declaration(B). { generator->init_declarator_list__To__single_declaration(&A, B); }
-init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D). { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER(&A, B, C, D); }
-init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) array_specifier(E). { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier(&A, B, C, D, E); }
-init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) array_specifier(E) EQUAL(F) initializer(G). { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier___EQUAL___initializer(&A, B, C, D, E, F, G); }
-init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) EQUAL(E) initializer(F). { generator->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E, F); }
+init_declarator_list(A) ::= single_declaration(B). { ruleHandler->init_declarator_list__To__single_declaration(&A, B); }
+init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D). { ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER(&A, B, C, D); }
+init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) array_specifier(E). { ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier(&A, B, C, D, E); }
+init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) array_specifier(E) EQUAL(F) initializer(G). { ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___array_specifier___EQUAL___initializer(&A, B, C, D, E, F, G); }
+init_declarator_list(A) ::= init_declarator_list(B) COMMA(C) IDENTIFIER(D) EQUAL(E) initializer(F). { ruleHandler->init_declarator_list__To__init_declarator_list___COMMA___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E, F); }
 
-single_declaration(A) ::= fully_specified_type(B). { generator->single_declaration__To__fully_specified_type(&A, B); }
-single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C). { generator->single_declaration__To__fully_specified_type___IDENTIFIER(&A, B, C); }
-single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) array_specifier(D). { generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier(&A, B, C, D); }
-single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) array_specifier(D) EQUAL(E) initializer(F). { generator->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier___EQUAL___initializer(&A, B, C, D, E, F); }
-single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) EQUAL(D) initializer(E). { generator->single_declaration__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E); }
+single_declaration(A) ::= fully_specified_type(B). { ruleHandler->single_declaration__To__fully_specified_type(&A, B); }
+single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C). { ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER(&A, B, C); }
+single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) array_specifier(D). { ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier(&A, B, C, D); }
+single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) array_specifier(D) EQUAL(E) initializer(F). { ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___array_specifier___EQUAL___initializer(&A, B, C, D, E, F); }
+single_declaration(A) ::= fully_specified_type(B) IDENTIFIER(C) EQUAL(D) initializer(E). { ruleHandler->single_declaration__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E); }
 
-fully_specified_type(A) ::= type_specifier(B). { generator->fully_specified_type__To__type_specifier(&A, B); }
-fully_specified_type(A) ::= type_qualifier(B) type_specifier(C). { generator->fully_specified_type__To__type_qualifier___type_specifier(&A, B, C); }
+fully_specified_type(A) ::= type_specifier(B). { ruleHandler->fully_specified_type__To__type_specifier(&A, B); }
+fully_specified_type(A) ::= type_qualifier(B) type_specifier(C). { ruleHandler->fully_specified_type__To__type_qualifier___type_specifier(&A, B, C); }
 
-type_qualifier(A) ::= single_type_qualifier(B). { generator->type_qualifier__To__single_type_qualifier(&A, B); }
-type_qualifier(A) ::= type_qualifier(B) single_type_qualifier(C). { generator->type_qualifier__To__type_qualifier___single_type_qualifier(&A, B, C); }
+type_qualifier(A) ::= single_type_qualifier(B). { ruleHandler->type_qualifier__To__single_type_qualifier(&A, B); }
+type_qualifier(A) ::= type_qualifier(B) single_type_qualifier(C). { ruleHandler->type_qualifier__To__type_qualifier___single_type_qualifier(&A, B, C); }
 
-single_type_qualifier(A) ::= storage_qualifier(B). { generator->single_type_qualifier__To__storage_qualifier(&A, B); }
-single_type_qualifier(A) ::= precision_qualifier(B). { generator->single_type_qualifier__To__precision_qualifier(&A, B); }
+single_type_qualifier(A) ::= storage_qualifier(B). { ruleHandler->single_type_qualifier__To__storage_qualifier(&A, B); }
+single_type_qualifier(A) ::= precision_qualifier(B). { ruleHandler->single_type_qualifier__To__precision_qualifier(&A, B); }
 
-storage_qualifier(A) ::= CONST(B). { generator->storage_qualifier__To__CONST(&A, B); }
-storage_qualifier(A) ::= IN(B). { generator->storage_qualifier__To__IN(&A, B); }
-storage_qualifier(A) ::= OUT(B). { generator->storage_qualifier__To__OUT(&A, B); }
-storage_qualifier(A) ::= INOUT(B). { generator->storage_qualifier__To__INOUT(&A, B); }
-storage_qualifier(A) ::= UNIFORM(B). { generator->storage_qualifier__To__UNIFORM(&A, B); }
+storage_qualifier(A) ::= CONST(B). { ruleHandler->storage_qualifier__To__CONST(&A, B); }
+storage_qualifier(A) ::= IN(B). { ruleHandler->storage_qualifier__To__IN(&A, B); }
+storage_qualifier(A) ::= OUT(B). { ruleHandler->storage_qualifier__To__OUT(&A, B); }
+storage_qualifier(A) ::= INOUT(B). { ruleHandler->storage_qualifier__To__INOUT(&A, B); }
+storage_qualifier(A) ::= UNIFORM(B). { ruleHandler->storage_qualifier__To__UNIFORM(&A, B); }
 
-type_specifier(A) ::= type_specifier_nonarray(B). { generator->type_specifier__To__type_specifier_nonarray(&A, B); }
-type_specifier(A) ::= type_specifier_nonarray(B) array_specifier(C). { generator->type_specifier__To__type_specifier_nonarray___array_specifier(&A, B, C); }
+type_specifier(A) ::= type_specifier_nonarray(B). { ruleHandler->type_specifier__To__type_specifier_nonarray(&A, B); }
+type_specifier(A) ::= type_specifier_nonarray(B) array_specifier(C). { ruleHandler->type_specifier__To__type_specifier_nonarray___array_specifier(&A, B, C); }
 
-array_specifier(A) ::= LM(B) RM(C). { generator->array_specifier__To__LM___RM(&A, B, C); }
-array_specifier(A) ::= LM(B) constant_expression(C) RM(D). { generator->array_specifier__To__LM___constant_expression___RM(&A, B, C, D); }
-array_specifier(A) ::= array_specifier(B) LM(C) RM(D). { generator->array_specifier__To__array_specifier___LM___RM(&A, B, C, D); }
-array_specifier(A) ::= array_specifier(B) LM(C) constant_expression(D) RM(E). { generator->array_specifier__To__array_specifier___LM___constant_expression___RM(&A, B, C, D, E); }
+array_specifier(A) ::= LM(B) RM(C). { ruleHandler->array_specifier__To__LM___RM(&A, B, C); }
+array_specifier(A) ::= LM(B) constant_expression(C) RM(D). { ruleHandler->array_specifier__To__LM___constant_expression___RM(&A, B, C, D); }
+array_specifier(A) ::= array_specifier(B) LM(C) RM(D). { ruleHandler->array_specifier__To__array_specifier___LM___RM(&A, B, C, D); }
+array_specifier(A) ::= array_specifier(B) LM(C) constant_expression(D) RM(E). { ruleHandler->array_specifier__To__array_specifier___LM___constant_expression___RM(&A, B, C, D, E); }
 
-type_specifier_nonarray(A) ::= STRUCT(B) IDENTIFIER(C). { generator->type_specifier_nonarray__To__STRUCT__IDENTIFIER(&A, B, C); }
-type_specifier_nonarray(A) ::= VOID(B). { generator->type_specifier_nonarray__To__VOID(&A, B); }
-type_specifier_nonarray(A) ::= FLOAT(B). { generator->type_specifier_nonarray__To__FLOAT(&A, B); }
-type_specifier_nonarray(A) ::= INT(B). { generator->type_specifier_nonarray__To__INT(&A, B); }
-type_specifier_nonarray(A) ::= UINT(B). { generator->type_specifier_nonarray__To__UINT(&A, B); }
-type_specifier_nonarray(A) ::= BOOL(B). { generator->type_specifier_nonarray__To__BOOL(&A, B); }
-type_specifier_nonarray(A) ::= VEC2(B). { generator->type_specifier_nonarray__To__VEC2(&A, B); }
-type_specifier_nonarray(A) ::= VEC3(B). { generator->type_specifier_nonarray__To__VEC3(&A, B); }
-type_specifier_nonarray(A) ::= VEC4(B). { generator->type_specifier_nonarray__To__VEC4(&A, B); }
-type_specifier_nonarray(A) ::= BVEC2(B). { generator->type_specifier_nonarray__To__BVEC2(&A, B); }
-type_specifier_nonarray(A) ::= BVEC3(B). { generator->type_specifier_nonarray__To__BVEC3(&A, B); }
-type_specifier_nonarray(A) ::= BVEC4(B). { generator->type_specifier_nonarray__To__BVEC4(&A, B); }
-type_specifier_nonarray(A) ::= IVEC2(B). { generator->type_specifier_nonarray__To__IVEC2(&A, B); }
-type_specifier_nonarray(A) ::= IVEC3(B). { generator->type_specifier_nonarray__To__IVEC3(&A, B); }
-type_specifier_nonarray(A) ::= IVEC4(B). { generator->type_specifier_nonarray__To__IVEC4(&A, B); }
-type_specifier_nonarray(A) ::= UVEC2(B). { generator->type_specifier_nonarray__To__UVEC2(&A, B); }
-type_specifier_nonarray(A) ::= UVEC3(B). { generator->type_specifier_nonarray__To__UVEC3(&A, B); }
-type_specifier_nonarray(A) ::= UVEC4(B). { generator->type_specifier_nonarray__To__UVEC4(&A, B); }
-type_specifier_nonarray(A) ::= MAT2(B). { generator->type_specifier_nonarray__To__MAT2(&A, B); }
-type_specifier_nonarray(A) ::= MAT3(B). { generator->type_specifier_nonarray__To__MAT3(&A, B); }
-type_specifier_nonarray(A) ::= MAT4(B). { generator->type_specifier_nonarray__To__MAT4(&A, B); }
-type_specifier_nonarray(A) ::= MAT2X2(B). { generator->type_specifier_nonarray__To__MAT2X2(&A, B); }
-type_specifier_nonarray(A) ::= MAT2X3(B). { generator->type_specifier_nonarray__To__MAT2X3(&A, B); }
-type_specifier_nonarray(A) ::= MAT2X4(B). { generator->type_specifier_nonarray__To__MAT2X4(&A, B); }
-type_specifier_nonarray(A) ::= MAT3X2(B). { generator->type_specifier_nonarray__To__MAT3X2(&A, B); }
-type_specifier_nonarray(A) ::= MAT3X3(B). { generator->type_specifier_nonarray__To__MAT3X3(&A, B); }
-type_specifier_nonarray(A) ::= MAT3X4(B). { generator->type_specifier_nonarray__To__MAT3X4(&A, B); }
-type_specifier_nonarray(A) ::= MAT4X2(B). { generator->type_specifier_nonarray__To__MAT4X2(&A, B); }
-type_specifier_nonarray(A) ::= MAT4X3(B). { generator->type_specifier_nonarray__To__MAT4X3(&A, B); }
-type_specifier_nonarray(A) ::= MAT4X4(B). { generator->type_specifier_nonarray__To__MAT4X4(&A, B); }
-type_specifier_nonarray(A) ::= SAMPLER2D(B). { generator->type_specifier_nonarray__To__SAMPLER2D(&A, B); }
-type_specifier_nonarray(A) ::= SAMPLER3D(B). { generator->type_specifier_nonarray__To__SAMPLER3D(&A, B); }
-type_specifier_nonarray(A) ::= SAMPLERCUBE(B). { generator->type_specifier_nonarray__To__SAMPLERCUBE(&A, B); }
+type_specifier_nonarray(A) ::= STRUCT(B) IDENTIFIER(C). { ruleHandler->type_specifier_nonarray__To__STRUCT__IDENTIFIER(&A, B, C); }
+type_specifier_nonarray(A) ::= VOID(B). { ruleHandler->type_specifier_nonarray__To__VOID(&A, B); }
+type_specifier_nonarray(A) ::= FLOAT(B). { ruleHandler->type_specifier_nonarray__To__FLOAT(&A, B); }
+type_specifier_nonarray(A) ::= INT(B). { ruleHandler->type_specifier_nonarray__To__INT(&A, B); }
+type_specifier_nonarray(A) ::= UINT(B). { ruleHandler->type_specifier_nonarray__To__UINT(&A, B); }
+type_specifier_nonarray(A) ::= BOOL(B). { ruleHandler->type_specifier_nonarray__To__BOOL(&A, B); }
+type_specifier_nonarray(A) ::= VEC2(B). { ruleHandler->type_specifier_nonarray__To__VEC2(&A, B); }
+type_specifier_nonarray(A) ::= VEC3(B). { ruleHandler->type_specifier_nonarray__To__VEC3(&A, B); }
+type_specifier_nonarray(A) ::= VEC4(B). { ruleHandler->type_specifier_nonarray__To__VEC4(&A, B); }
+type_specifier_nonarray(A) ::= BVEC2(B). { ruleHandler->type_specifier_nonarray__To__BVEC2(&A, B); }
+type_specifier_nonarray(A) ::= BVEC3(B). { ruleHandler->type_specifier_nonarray__To__BVEC3(&A, B); }
+type_specifier_nonarray(A) ::= BVEC4(B). { ruleHandler->type_specifier_nonarray__To__BVEC4(&A, B); }
+type_specifier_nonarray(A) ::= IVEC2(B). { ruleHandler->type_specifier_nonarray__To__IVEC2(&A, B); }
+type_specifier_nonarray(A) ::= IVEC3(B). { ruleHandler->type_specifier_nonarray__To__IVEC3(&A, B); }
+type_specifier_nonarray(A) ::= IVEC4(B). { ruleHandler->type_specifier_nonarray__To__IVEC4(&A, B); }
+type_specifier_nonarray(A) ::= UVEC2(B). { ruleHandler->type_specifier_nonarray__To__UVEC2(&A, B); }
+type_specifier_nonarray(A) ::= UVEC3(B). { ruleHandler->type_specifier_nonarray__To__UVEC3(&A, B); }
+type_specifier_nonarray(A) ::= UVEC4(B). { ruleHandler->type_specifier_nonarray__To__UVEC4(&A, B); }
+type_specifier_nonarray(A) ::= MAT2(B). { ruleHandler->type_specifier_nonarray__To__MAT2(&A, B); }
+type_specifier_nonarray(A) ::= MAT3(B). { ruleHandler->type_specifier_nonarray__To__MAT3(&A, B); }
+type_specifier_nonarray(A) ::= MAT4(B). { ruleHandler->type_specifier_nonarray__To__MAT4(&A, B); }
+type_specifier_nonarray(A) ::= MAT2X2(B). { ruleHandler->type_specifier_nonarray__To__MAT2X2(&A, B); }
+type_specifier_nonarray(A) ::= MAT2X3(B). { ruleHandler->type_specifier_nonarray__To__MAT2X3(&A, B); }
+type_specifier_nonarray(A) ::= MAT2X4(B). { ruleHandler->type_specifier_nonarray__To__MAT2X4(&A, B); }
+type_specifier_nonarray(A) ::= MAT3X2(B). { ruleHandler->type_specifier_nonarray__To__MAT3X2(&A, B); }
+type_specifier_nonarray(A) ::= MAT3X3(B). { ruleHandler->type_specifier_nonarray__To__MAT3X3(&A, B); }
+type_specifier_nonarray(A) ::= MAT3X4(B). { ruleHandler->type_specifier_nonarray__To__MAT3X4(&A, B); }
+type_specifier_nonarray(A) ::= MAT4X2(B). { ruleHandler->type_specifier_nonarray__To__MAT4X2(&A, B); }
+type_specifier_nonarray(A) ::= MAT4X3(B). { ruleHandler->type_specifier_nonarray__To__MAT4X3(&A, B); }
+type_specifier_nonarray(A) ::= MAT4X4(B). { ruleHandler->type_specifier_nonarray__To__MAT4X4(&A, B); }
+type_specifier_nonarray(A) ::= SAMPLER2D(B). { ruleHandler->type_specifier_nonarray__To__SAMPLER2D(&A, B); }
+type_specifier_nonarray(A) ::= SAMPLER3D(B). { ruleHandler->type_specifier_nonarray__To__SAMPLER3D(&A, B); }
+type_specifier_nonarray(A) ::= SAMPLERCUBE(B). { ruleHandler->type_specifier_nonarray__To__SAMPLERCUBE(&A, B); }
 
-precision_qualifier(A) ::= HIGH_PRECISION(B). { generator->precision_qualifier__To__HIGH_PRECISION(&A, B); }
-precision_qualifier(A) ::= MEDIUM_PRECISION(B). { generator->precision_qualifier__To__MEDIUM_PRECISION(&A, B); }
-precision_qualifier(A) ::= LOW_PRECISION(B). { generator->precision_qualifier__To__LOW_PRECISION(&A, B); }
+precision_qualifier(A) ::= HIGH_PRECISION(B). { ruleHandler->precision_qualifier__To__HIGH_PRECISION(&A, B); }
+precision_qualifier(A) ::= MEDIUM_PRECISION(B). { ruleHandler->precision_qualifier__To__MEDIUM_PRECISION(&A, B); }
+precision_qualifier(A) ::= LOW_PRECISION(B). { ruleHandler->precision_qualifier__To__LOW_PRECISION(&A, B); }
 
-initializer(A) ::= assignment_expression(B). { generator->initializer__To__assignment_expression(&A, B); }
+initializer(A) ::= assignment_expression(B). { ruleHandler->initializer__To__assignment_expression(&A, B); }
 
-declaration_statement(A) ::= declaration(B). { generator->declaration_statement__To__declaration(&A, B); }
+declaration_statement(A) ::= declaration(B). { ruleHandler->declaration_statement__To__declaration(&A, B); }
 
-statement(A) ::= compound_statement(B). { generator->statement__To__compound_statement(&A, B); }
-statement(A) ::= simple_statement(B). { generator->statement__To__simple_statement(&A, B); }
+statement(A) ::= compound_statement(B). { ruleHandler->statement__To__compound_statement(&A, B); }
+statement(A) ::= simple_statement(B). { ruleHandler->statement__To__simple_statement(&A, B); }
 
-simple_statement(A) ::= declaration_statement(B). { generator->simple_statement__To__declaration_statement(&A, B); }
-simple_statement(A) ::= expression_statement(B). { generator->simple_statement__To__expression_statement(&A, B); }
-simple_statement(A) ::= selection_statement(B). { generator->simple_statement__To__selection_statement(&A, B); }
-simple_statement(A) ::= iteration_statement(B). { generator->simple_statement__To__iteration_statement(&A, B); }
-simple_statement(A) ::= jump_statement(B). { generator->simple_statement__To__jump_statement(&A, B); }
+simple_statement(A) ::= declaration_statement(B). { ruleHandler->simple_statement__To__declaration_statement(&A, B); }
+simple_statement(A) ::= expression_statement(B). { ruleHandler->simple_statement__To__expression_statement(&A, B); }
+simple_statement(A) ::= selection_statement(B). { ruleHandler->simple_statement__To__selection_statement(&A, B); }
+simple_statement(A) ::= iteration_statement(B). { ruleHandler->simple_statement__To__iteration_statement(&A, B); }
+simple_statement(A) ::= jump_statement(B). { ruleHandler->simple_statement__To__jump_statement(&A, B); }
 
-compound_statement(A) ::= LB(B) RB(C). { generator->compound_statement__To__LB___RB(&A, B, C); }
-compound_statement(A) ::= LB(B) statement_list(C) RB(D). { generator->compound_statement__To__LB___statement_list___RB(&A, B, C, D); }
+compound_statement(A) ::= LB(B) RB(C). { ruleHandler->compound_statement__To__LB___RB(&A, B, C); }
+compound_statement(A) ::= LB(B) statement_list(C) RB(D). { ruleHandler->compound_statement__To__LB___statement_list___RB(&A, B, C, D); }
 
-statement_list(A) ::= statement(B). { generator->statement_list__To__statement(&A, B); }
-statement_list(A) ::= statement_list(B) statement(C). { generator->statement_list__To__statement_list___statement(&A, B, C); }
+statement_list(A) ::= statement(B). { ruleHandler->statement_list__To__statement(&A, B); }
+statement_list(A) ::= statement_list(B) statement(C). { ruleHandler->statement_list__To__statement_list___statement(&A, B, C); }
 
-expression_statement(A) ::= SEMICOLON(B). { generator->expression_statement__To__SEMICOLON(&A, B); }
-expression_statement(A) ::= expression(B) SEMICOLON(C). { generator->expression_statement__To__expression___SEMICOLON(&A, B, C); }
+expression_statement(A) ::= SEMICOLON(B). { ruleHandler->expression_statement__To__SEMICOLON(&A, B); }
+expression_statement(A) ::= expression(B) SEMICOLON(C). { ruleHandler->expression_statement__To__expression___SEMICOLON(&A, B, C); }
 
-selection_statement(A) ::= IF(B) LS(C) expression(D) RS(E) selection_rest_statement(F). { generator->selection_statement__To__IF___LS___expression___RS___selection_rest_statement(&A, B, C, D, E, F); }
+selection_statement(A) ::= IF(B) LS(C) expression(D) RS(E) selection_rest_statement(F). { ruleHandler->selection_statement__To__IF___LS___expression___RS___selection_rest_statement(&A, B, C, D, E, F); }
 
-selection_rest_statement(A) ::= statement(B) ELSE(C) statement(D). { generator->selection_rest_statement__To__statement___ELSE___statement(&A, B, C, D); }
-selection_rest_statement(A) ::= statement(B). { generator->selection_rest_statement__To__statement(&A, B); }
+selection_rest_statement(A) ::= statement(B) ELSE(C) statement(D). { ruleHandler->selection_rest_statement__To__statement___ELSE___statement(&A, B, C, D); }
+selection_rest_statement(A) ::= statement(B). { ruleHandler->selection_rest_statement__To__statement(&A, B); }
 
-condition(A) ::= expression(B). { generator->condition__To__expression(&A, B); }
-condition(A) ::= fully_specified_type(B) IDENTIFIER(C) EQUAL(D) initializer(E). { generator->condition__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E); }
+condition(A) ::= expression(B). { ruleHandler->condition__To__expression(&A, B); }
+condition(A) ::= fully_specified_type(B) IDENTIFIER(C) EQUAL(D) initializer(E). { ruleHandler->condition__To__fully_specified_type___IDENTIFIER___EQUAL___initializer(&A, B, C, D, E); }
 
-iteration_statement(A) ::= WHILE(B) LS(C) condition(D) RS(E) statement(F). { generator->iteration_statement__To__WHILE___LS___condition___RS___statement(&A, B, C, D, E, F); }
-iteration_statement(A) ::= FOR(B) LS(C) for_init_statement(D) for_rest_statement(E) RS(F) statement(G). { generator->iteration_statement__To__FOR___LS___for_init_statement___for_rest_statement___RS___statement(&A, B, C, D, E, F, G); }
+iteration_statement(A) ::= WHILE(B) LS(C) condition(D) RS(E) statement(F). { ruleHandler->iteration_statement__To__WHILE___LS___condition___RS___statement(&A, B, C, D, E, F); }
+iteration_statement(A) ::= FOR(B) LS(C) for_init_statement(D) for_rest_statement(E) RS(F) statement(G). { ruleHandler->iteration_statement__To__FOR___LS___for_init_statement___for_rest_statement___RS___statement(&A, B, C, D, E, F, G); }
 
-for_init_statement(A) ::= expression_statement(B). { generator->for_init_statement__To__expression_statement(&A, B); }
-for_init_statement(A) ::= declaration_statement(B). { generator->for_init_statement__To__declaration_statement(&A, B); }
+for_init_statement(A) ::= expression_statement(B). { ruleHandler->for_init_statement__To__expression_statement(&A, B); }
+for_init_statement(A) ::= declaration_statement(B). { ruleHandler->for_init_statement__To__declaration_statement(&A, B); }
 
-condition_opt(A) ::= condition(B). { generator->condition_opt__To__condition(&A, B); }
-condition_opt(A) ::= /* empty */. { generator->condition_opt__To__Empty(&A); }
+condition_opt(A) ::= condition(B). { ruleHandler->condition_opt__To__condition(&A, B); }
+condition_opt(A) ::= /* empty */. { ruleHandler->condition_opt__To__Empty(&A); }
 
-for_rest_statement(A) ::= condition_opt(B) SEMICOLON(C). { generator->for_rest_statement__To__condition_opt___SEMICOLON(&A, B, C); }
-for_rest_statement(A) ::= condition_opt(B) SEMICOLON(C) expression(D). { generator->for_rest_statement__To__condition_opt___SEMICOLON___expression(&A, B, C, D); }
+for_rest_statement(A) ::= condition_opt(B) SEMICOLON(C). { ruleHandler->for_rest_statement__To__condition_opt___SEMICOLON(&A, B, C); }
+for_rest_statement(A) ::= condition_opt(B) SEMICOLON(C) expression(D). { ruleHandler->for_rest_statement__To__condition_opt___SEMICOLON___expression(&A, B, C, D); }
 
-jump_statement(A) ::= CONTINUE(B) SEMICOLON(C). { generator->jump_statement__To__CONTINUE___SEMICOLON(&A, B, C); }
-jump_statement(A) ::= BREAK(B) SEMICOLON(C). { generator->jump_statement__To__BREAK___SEMICOLON(&A, B, C); }
-jump_statement(A) ::= RETURN(B) SEMICOLON(C). { generator->jump_statement__To__RETURN___SEMICOLON(&A, B, C); }
-jump_statement(A) ::= RETURN(B) expression(C) SEMICOLON(D). { generator->jump_statement__To__RETURN___expression___SEMICOLON(&A, B, C, D); }
-jump_statement(A) ::= DISCARD(B) SEMICOLON(C). { generator->jump_statement__To__DISCARD___SEMICOLON(&A, B, C); } // Fragment shader only.
+jump_statement(A) ::= CONTINUE(B) SEMICOLON(C). { ruleHandler->jump_statement__To__CONTINUE___SEMICOLON(&A, B, C); }
+jump_statement(A) ::= BREAK(B) SEMICOLON(C). { ruleHandler->jump_statement__To__BREAK___SEMICOLON(&A, B, C); }
+jump_statement(A) ::= RETURN(B) SEMICOLON(C). { ruleHandler->jump_statement__To__RETURN___SEMICOLON(&A, B, C); }
+jump_statement(A) ::= RETURN(B) expression(C) SEMICOLON(D). { ruleHandler->jump_statement__To__RETURN___expression___SEMICOLON(&A, B, C, D); }
+jump_statement(A) ::= DISCARD(B) SEMICOLON(C). { ruleHandler->jump_statement__To__DISCARD___SEMICOLON(&A, B, C); } // Fragment shader only.
 
-translation_unit(A) ::= external_declaration_list(B). { generator->translation_unit__To__external_declaration_list(&A, B); }
+translation_unit(A) ::= external_declaration_list(B). { ruleHandler->translation_unit__To__external_declaration_list(&A, B); }
 
-external_declaration_list(A) ::= external_declaration(B). { generator->external_declaration_list__To__external_declaration(&A, B); }
-external_declaration_list(A) ::= external_declaration_list(B) external_declaration(C). { generator->external_declaration_list__To__external_declaration_list___external_declaration(&A, B, C); }
+external_declaration_list(A) ::= external_declaration(B). { ruleHandler->external_declaration_list__To__external_declaration(&A, B); }
+external_declaration_list(A) ::= external_declaration_list(B) external_declaration(C). { ruleHandler->external_declaration_list__To__external_declaration_list___external_declaration(&A, B, C); }
 
-external_declaration(A) ::= function_definition(B). { generator->external_declaration__To__function_definition(&A, B); }
-external_declaration(A) ::= declaration(B). { generator->external_declaration__To__declaration(&A, B); }
-external_declaration(A) ::= struct_definition(B). { generator->external_declaration__To__struct_definition(&A, B); }
+external_declaration(A) ::= function_definition(B). { ruleHandler->external_declaration__To__function_definition(&A, B); }
+external_declaration(A) ::= declaration(B). { ruleHandler->external_declaration__To__declaration(&A, B); }
+external_declaration(A) ::= struct_definition(B). { ruleHandler->external_declaration__To__struct_definition(&A, B); }
 
-function_definition(A) ::= function_prototype(B) compound_statement(C). { generator->function_definition__To__function_prototype___compound_statement(&A, B, C); }
+function_definition(A) ::= function_prototype(B) compound_statement(C). { ruleHandler->function_definition__To__function_prototype___compound_statement(&A, B, C); }
 
-declaration_list(A) ::= declaration(B). { generator->declaration_list__To__declaration(&A, B); }
-declaration_list(A) ::= declaration_list(B) declaration(C). { generator->declaration_list__To__declaration_list__declaration(&A, B, C); }
+declaration_list(A) ::= declaration(B). { ruleHandler->declaration_list__To__declaration(&A, B); }
+declaration_list(A) ::= declaration_list(B) declaration(C). { ruleHandler->declaration_list__To__declaration_list__declaration(&A, B, C); }
 
-struct_definition(A) ::= STRUCT(B) IDENTIFIER(C) LB(D) declaration_list(E) RB(F) SEMICOLON(G). { generator->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&A, B, C, D, E, F, G); }
+struct_definition(A) ::= STRUCT(B) IDENTIFIER(C) LB(D) declaration_list(E) RB(F) SEMICOLON(G). { ruleHandler->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&A, B, C, D, E, F, G); }
