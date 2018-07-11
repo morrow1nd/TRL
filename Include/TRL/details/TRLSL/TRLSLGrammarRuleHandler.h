@@ -242,9 +242,11 @@ public:
     TRLSL_RULE_HANDLER_DECL(external_declaration__To__declaration)
     TRLSL_RULE_HANDLER_DECL(external_declaration__To__struct_definition)
     TRLSL_RULE_HANDLER_DECL(function_definition__To__function_prototype___compound_statement)
-    TRLSL_RULE_HANDLER_DECL(declaration_list__To__declaration)
-    TRLSL_RULE_HANDLER_DECL(declaration_list__To__declaration_list__declaration)
-    TRLSL_RULE_HANDLER_DECL(struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON)
+    TRLSL_RULE_HANDLER_DECL(struct_item__To__declaration)
+    TRLSL_RULE_HANDLER_DECL(struct_item__To__LM__IDENTIFIER__RM__declaration)
+    TRLSL_RULE_HANDLER_DECL(struct_item_list__To__struct_item)
+    TRLSL_RULE_HANDLER_DECL(struct_item_list__To__struct_item_list__struct_item)
+    TRLSL_RULE_HANDLER_DECL(struct_definition__To__STRUCT__IDENTIFIER__LB__struct_item_list__RB__SEMICOLON)
 };
 
 

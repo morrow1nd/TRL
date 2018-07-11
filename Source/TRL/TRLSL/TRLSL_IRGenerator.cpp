@@ -851,7 +851,7 @@ TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::array_specifier__To__array_s
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
 }
 
-TRL::TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::type_specifier_nonarray__To__STRUCT__IDENTIFIER(TRL::TRLSLGrammarRuleHandler::InType *_, TRL::TRLSLGrammarRuleHandler::InType _1, TRL::TRLSLGrammarRuleHandler::InType _2, TRL::TRLSLGrammarRuleHandler::InType _3, TRL::TRLSLGrammarRuleHandler::InType _4, TRL::TRLSLGrammarRuleHandler::InType _5, TRL::TRLSLGrammarRuleHandler::InType _6, TRL::TRLSLGrammarRuleHandler::InType _7)
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::type_specifier_nonarray__To__STRUCT__IDENTIFIER(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
 {
     *_ = _1;
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
@@ -1295,7 +1295,7 @@ TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::external_declaration__To__de
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
 }
 
-TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::external_declaration__To__struct_definition(TRLSLGrammarRuleHandler::InType *_, TRL::TRLSLGrammarRuleHandler::InType _1, TRL::TRLSLGrammarRuleHandler::InType _2, TRL::TRLSLGrammarRuleHandler::InType _3, TRL::TRLSLGrammarRuleHandler::InType _4, TRL::TRLSLGrammarRuleHandler::InType _5, TRL::TRLSLGrammarRuleHandler::InType _6, TRL::TRLSLGrammarRuleHandler::InType _7)
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::external_declaration__To__struct_definition(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
 {
     *_ = _1;
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
@@ -1307,22 +1307,29 @@ TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::function_definition__To__fun
     _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
 }
 
-TRL::TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::declaration_list__To__declaration(TRL::TRLSLGrammarRuleHandler::InType *_, TRL::TRLSLGrammarRuleHandler::InType _1, TRL::TRLSLGrammarRuleHandler::InType _2, TRL::TRLSLGrammarRuleHandler::InType _3, TRL::TRLSLGrammarRuleHandler::InType _4, TRL::TRLSLGrammarRuleHandler::InType _5, TRL::TRLSLGrammarRuleHandler::InType _6, TRL::TRLSLGrammarRuleHandler::InType _7)
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_item__To__declaration(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
 {
-    *_ = _1;
-    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+    return TRLSLGrammarRuleHandler::RetType();
 }
 
-TRL::TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::declaration_list__To__declaration_list__declaration(TRL::TRLSLGrammarRuleHandler::InType *_, TRL::TRLSLGrammarRuleHandler::InType _1, TRL::TRLSLGrammarRuleHandler::InType _2, TRL::TRLSLGrammarRuleHandler::InType _3, TRL::TRLSLGrammarRuleHandler::InType _4, TRL::TRLSLGrammarRuleHandler::InType _5, TRL::TRLSLGrammarRuleHandler::InType _6, TRL::TRLSLGrammarRuleHandler::InType _7)
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_item__To__LM__IDENTIFIER__RM__declaration(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
 {
-    *_ = _1;
-    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+    return TRLSLGrammarRuleHandler::RetType();
 }
 
-TRL::TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(TRL::TRLSLGrammarRuleHandler::InType *_, TRL::TRLSLGrammarRuleHandler::InType _1, TRL::TRLSLGrammarRuleHandler::InType _2, TRL::TRLSLGrammarRuleHandler::InType _3, TRL::TRLSLGrammarRuleHandler::InType _4, TRL::TRLSLGrammarRuleHandler::InType _5, TRL::TRLSLGrammarRuleHandler::InType _6, TRL::TRLSLGrammarRuleHandler::InType _7)
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_item_list__To__struct_item(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
 {
-    *_ = _1;
-    _LinkTokens(_1, _2, _3, _4, _5, _6, _7);
+    return TRLSLGrammarRuleHandler::RetType();
+}
+
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_item_list__To__struct_item_list__struct_item(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
+{
+    return TRLSLGrammarRuleHandler::RetType();
+}
+
+TRLSLGrammarRuleHandler::RetType TRLSL_IRGenerator::struct_definition__To__STRUCT__IDENTIFIER__LB__struct_item_list__RB__SEMICOLON(TRLSLGrammarRuleHandler::InType *_, TRLSLGrammarRuleHandler::InType _1, TRLSLGrammarRuleHandler::InType _2, TRLSLGrammarRuleHandler::InType _3, TRLSLGrammarRuleHandler::InType _4, TRLSLGrammarRuleHandler::InType _5, TRLSLGrammarRuleHandler::InType _6, TRLSLGrammarRuleHandler::InType _7)
+{
+    return TRLSLGrammarRuleHandler::RetType();
 }
 
 

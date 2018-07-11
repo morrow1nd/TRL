@@ -101,8 +101,9 @@ public:
 
     struct StructMember
     {
-        StringPtr Name;
         Type Type;
+        StringPtr Name;
+        StringPtr Semantic;
     };
 
     struct Struct
@@ -333,6 +334,9 @@ public:
     {}
 
 	const ToyUtility::List<Struct>& GetStructs() const { return m_Structs; }
+	const ToyUtility::List<UniformVariable>& GetUniformVariables() const { return m_UniformVariables; }
+	const ToyUtility::List<Function>& GetFunctions() const { return m_Functions; }
+	const ToyUtility::List<Pragma>& GetPragmas() const { return m_Pragmas; }
 
 
 private:

@@ -1,8 +1,8 @@
 
 struct VS_INPUT
 {
-    vec4 color;
     vec3 pos;
+    vec4 color;
 };
 
 struct VS_OUTPUT

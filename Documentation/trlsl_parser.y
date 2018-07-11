@@ -343,7 +343,10 @@ external_declaration(A) ::= struct_definition(B). { ruleHandler->external_declar
 
 function_definition(A) ::= function_prototype(B) compound_statement(C). { ruleHandler->function_definition__To__function_prototype___compound_statement(&A, B, C); }
 
-declaration_list(A) ::= declaration(B). { ruleHandler->declaration_list__To__declaration(&A, B); }
-declaration_list(A) ::= declaration_list(B) declaration(C). { ruleHandler->declaration_list__To__declaration_list__declaration(&A, B, C); }
+struct_item(A) ::= declaration(B). { ruleHandler->struct_item__To__declaration(&A, B); }
+struct_item(A) ::= LM(B) IDENTIFIER(C) RM(D) declaration(E). { ruleHandler->struct_item__To__LM__IDENTIFIER__RM__declaration(&A, B, C, D, E); }
 
-struct_definition(A) ::= STRUCT(B) IDENTIFIER(C) LB(D) declaration_list(E) RB(F) SEMICOLON(G). { ruleHandler->struct_definition__To__STRUCT__IDENTIFIER__LB__declaration_list__RB__SEMICOLON(&A, B, C, D, E, F, G); }
+struct_item_list(A) ::= struct_item(B). { ruleHandler->struct_item_list__To__struct_item(&A, B); }
+struct_item_list(A) ::= struct_item_list(B) struct_item(C). { ruleHandler->struct_item_list__To__struct_item_list__struct_item(&A, B, C); }
+
+struct_definition(A) ::= STRUCT(B) IDENTIFIER(C) LB(D) struct_item_list(E) RB(F) SEMICOLON(G). { ruleHandler->struct_definition__To__STRUCT__IDENTIFIER__LB__struct_item_list__RB__SEMICOLON(&A, B, C, D, E, F, G); }
