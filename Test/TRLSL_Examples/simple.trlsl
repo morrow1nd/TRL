@@ -1,13 +1,22 @@
 
 struct VS_INPUT
 {
-    vec3 pos;
+    [POSITION] vec3 pos;
     vec4 color;
 };
 
 struct VS_OUTPUT
 {
-    vec3 pos;
+    [SV_POSITION] vec3 pos;
+};
+
+struct UniformBlock
+{
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+
+    vec4 globalColor;
 };
 
 
@@ -15,6 +24,12 @@ vec3 func(vec3 a)
 {
     return a;
 }
+
+
+//#pragma vertex_shader VS_main
+//#pragma fragment_shader FS_main
+
+uniform struct UniformBlock uniformInfos;
 
 
 // VS

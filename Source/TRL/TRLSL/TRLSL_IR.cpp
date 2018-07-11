@@ -5,6 +5,7 @@ namespace TRL
 {
 
 
+TRLSL_IR::Pragma TRLSL_IR::Pragma::None;
 
 
 } // end of namespace TRL

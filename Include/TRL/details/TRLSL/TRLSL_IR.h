@@ -42,6 +42,12 @@ private:
 	ToyUtility::List<int> m_SizeOfEveryChunk;
 };
 
+#define USE_POOL(TypeName)                                                  \
+private:                                                                    \
+    Pool<TypeName> m_##TypeName##Pool;                                      \
+public:                                                                     \
+    TypeName* New##TypeName() { return m_##TypeName##Pool.New(); }
+
 
 // TRL Shader Language Intermediate Representation
 class TRLSL_IR
@@ -125,104 +131,150 @@ public:
         StringPtr Name;
     };
 
-    struct Expression
+    enum ExpressionType
     {
-        enum ExpressionType
-        {
-            VariableIdentifier,
-            Constant,
-            LB_Expression_RB,
+        VariableIdentifier,
+        Constant,
+        LB_Expression_RB,
 
-            ArrayAccess, // PostfixExp__LM__integer_expression__RM,
-            FunctionCall,
-            MemberFieldAccess, // PostfixExp__DOT__FIELD_SELECTION,
-            PostfixInc, // A ++
-            PostfixDec, // A --
-            PrefixInc, // ++ A
-            PrefixDec, // -- A
-            UnaryOp__Plus, // + A
-            UnaryOp__Dash, // - A
-            UnaryOp__Bang, // ! A
-            UnaryOp__Tilde, // ~ A
-            Mul, // A * B
-            Div, // A / B
-            Percent, // A % B
-            Plus, // A + B
-            Dash, // A - B
-            LeftShift, // A << B
-            RightShift, // A >> B
-            Less, // A < B
-            Greater, // A > B
-            LessEqual, // A <= B
-            GreaterEqual, // A >= B
-            Equal, // A == B
-            NotEqual, // A != B
-            BitOp_And, // A & B
-            BitOp_ExclusiveOr, // A ^ B
-            BitOp_InclusiveOr, // A | B
-            LogicOp_And, // A && B
-            LogicOp_Or, // A || B
-            LogicOp_Question, // A ? B : C
-            Assign_Equal, // A = B
-            Assign_MulEqual, // A *= B
-            Assign_DivEqual, // /=
-            Assign_ModEqual, // %=
-            Assign_AddEqual, // +=
-            Assign_SubEqual, // -=
-            Assign_LeftShiftEqual, // <<=
-            Assign_RightShiftEqual, // >>=
-            Assign_BitOp_AndEqual, // &=
-            Assign_BitOp_XOrEqual, // ^=
-            Assign_BitOp_OrEqual, // |=
+        ArrayAccess, // PostfixExp__LM__integer_expression__RM,
+        FunctionCall,
+        MemberFieldAccess, // PostfixExp__DOT__FIELD_SELECTION,
+        PostfixInc, // A ++
+        PostfixDec, // A --
+        PrefixInc, // ++ A
+        PrefixDec, // -- A
+        UnaryOp__Plus, // + A
+        UnaryOp__Dash, // - A
+        UnaryOp__Bang, // ! A
+        UnaryOp__Tilde, // ~ A
+        Mul, // A * B
+        Div, // A / B
+        Percent, // A % B
+        Plus, // A + B
+        Dash, // A - B
+        LeftShift, // A << B
+        RightShift, // A >> B
+        Less, // A < B
+        Greater, // A > B
+        LessEqual, // A <= B
+        GreaterEqual, // A >= B
+        Equal, // A == B
+        NotEqual, // A != B
+        BitOp_And, // A & B
+        BitOp_ExclusiveOr, // A ^ B
+        BitOp_InclusiveOr, // A | B
+        LogicOp_And, // A && B
+        LogicOp_Or, // A || B
+        LogicOp_Question, // A ? B : C
+        Assign_Equal, // A = B
+        Assign_MulEqual, // A *= B
+        Assign_DivEqual, // /=
+        Assign_ModEqual, // %=
+        Assign_AddEqual, // +=
+        Assign_SubEqual, // -=
+        Assign_LeftShiftEqual, // <<=
+        Assign_RightShiftEqual, // >>=
+        Assign_BitOp_AndEqual, // &=
+        Assign_BitOp_XOrEqual, // ^=
+        Assign_BitOp_OrEqual, // |=
 
-            AnotherExpression, // A, B  `a = 1, b = 3`
-        };
-
-        ExpressionType ExpType;
-        
-        union
-        {
-            struct
-            {
-                Expression* A;
-                Expression* B;
-                Expression* C;
-            } Common;
-
-            struct
-            {
-                Token* Identifier; // TODOH ?
-            } VariableIdentifier;
-
-            struct
-            {
-                // trlsl_parser.y:L116
-                Expression* FunctionIdentifier; // IDENTIFIER
-                Type* FunctionIdentifier_; // type_specifier
-                ToyUtility::List<Expression*>* Params;
-            } FunctionCall;
-        } _;
+        AnotherExpression, // A, B  `a = 1, b = 3`
     };
 
-    struct Statement
+    struct ExpressionBase
     {
-        enum StatementType
-        {
-            ComponentStatement, // Surrounded by `{` and `}`
-            
-            DeclarationStatement,
-            ExpressionStatement,
-            SelectionStatement,
-            IterationStatement,
-            JumpStatement,
-        };
+        ExpressionType ExpType;
+    };
 
+    struct ExpressionCommon : public ExpressionBase
+    {
+        ExpressionBase* A;
+        ExpressionBase* B;
+        ExpressionBase* C;
+    };
+
+    struct ExpressionVariableIdentifier : public ExpressionBase
+    {
+        Token* Identifier; // TODOH ?
+    };
+
+    struct ExpressionFunctionCall : public ExpressionBase
+    {
+        // trlsl_parser.y:L116
+        ExpressionBase* FunctionIdentifier; // IDENTIFIER
+        Type* FunctionIdentifier_; // type_specifier
+        ToyUtility::List<ExpressionBase*> Params;
+    };
+
+    enum StatementType
+    {
+        ComponentStatement, // Surrounded by `{` and `}`
+            
+        DeclarationStatement,
+        ExpressionStatement,
+        SelectionStatement,
+        IterationStatement,
+        JumpStatement,
+    };
+
+    struct StatementBase
+    {
+        StatementType StatementType;
+    };
+
+    struct StatementComponent : public StatementBase
+    {
+        ToyUtility::List<StatementBase> Statements;
+    };
+
+    struct StatementDeclaration : public StatementBase
+    {
+        ToyUtility::List<StringPtr> VariableNames;
+        Type Type;
+        // TODOH: init value
+    };
+
+    struct StatementExp : public StatementBase
+    {
+        ExpressionBase* Expression;
+    };
+
+    struct StatementSelection : public StatementBase
+    {
+        // if statement
+        ExpressionBase* Condition;
+        StatementBase* ThenStatement;
+        StatementBase* ElseStatement;
+    };
+
+    struct StatementIterationBase : public StatementBase
+    {
         enum IterationStmtType
         {
             For,
             While,
         };
 
+        IterationStmtType Type;
+    };
+
+    struct StatementIterationWhile
+    {
+        ExpressionBase* Condition;
+        StatementBase*  LoopBody;
+    };
+
+    struct StatementIterationFor
+    {
+        StatementBase* ForInitStmt;
+        ExpressionBase* Condition;
+        ExpressionBase* ForEndStmt;
+        StatementBase* LoopBody;
+    };
+
+    struct StatementJump : public StatementBase
+    {
         enum JumpStmtType
         {
             Break,
@@ -231,101 +283,48 @@ public:
             Discard,
         };
 
-        StatementType StatementType;
-        union
-        {
-            struct
-            {
-                ToyUtility::List<Statement>* Statements;
-            } ComponentStmt;
+        JumpStmtType Type;
 
-            struct
-            {
-                ToyUtility::List<StringPtr>* VariableNames;
-                Type Type;
-                // TODOH: init value
-            } DeclarationStmt;
-
-            struct
-            {
-                Expression* Expression;
-            } ExpressionStmt;
-
-            struct
-            {
-                // if statement
-                Expression* Condition;
-                Statement* ThenStatement;
-                Statement* ElseStatement;
-            } SelectionStmt;
-
-            struct
-            {
-                IterationStmtType Type;
-                union
-                {
-                    // while statement
-                    struct
-                    {
-                        Expression* Condition;
-                        Statement*  LoopBody;
-                    } WhileStmt;
-                    
-                    // for statement
-                    struct
-                    {
-                        Statement* ForInitStmt;
-                        Expression* Condition;
-                        Expression* ForEndStmt;
-                        Statement* LoopBody;
-                    } ForStmt;
-                } _;
-            } IterationStmt;
-
-            struct
-            {
-                JumpStmtType Type;
-
-                union
-                {
-                    struct
-                    {
-                        Expression* RetExpression;
-                    } ReturnStmt;
-                } _;
-            } JumpStmt;
-        } _;
+        ExpressionBase* RetExpression; // Return statement
     };
 
     struct Function
     {
+        Function()
+            :
+            FunctionImpl(nullptr)
+        {}
+
+
+        bool IsValid() const { return FunctionImpl != nullptr; }
+
+
         StringPtr                           Name;
         Type                                ReturnType;
         ToyUtility::List<FunctionParam>     Params;
-        Statement                           FunctionImpl;
+        StatementBase*                      FunctionImpl;
     };
 
     enum class PragmaCmdType
     {
+        __None,
+
         Vertex, // Vertex Shader
         Fragment, // Fragment Shader
     };
 
     struct Pragma
     {
-        PragmaCmdType CmdType;
-        union
-        {
-            struct
-            {
-                StringPtr FunctionName;
-            } Vertex;
+        Pragma()
+            :
+            CmdType(PragmaCmdType::__None)
+        {}
 
-            struct
-            {
-                StringPtr FunctionName;
-            } Fragment;
-        } _;
+        bool IsValid() const { return CmdType != PragmaCmdType::__None; }
+
+
+        PragmaCmdType CmdType;
+        StringPtr FunctionName;
     };
 
 
@@ -338,6 +337,16 @@ public:
 	const ToyUtility::List<Function>& GetFunctions() const { return m_Functions; }
 	const ToyUtility::List<Pragma>& GetPragmas() const { return m_Pragmas; }
 
+    const Struct& FindStruct(const ToyUtility::String& name) const;
+    const UniformVariable& FindUniformVariable(const ToyUtility::String& name) const;
+    const Function& FindFunction(const ToyUtility::String& name) const;
+
+    const Pragma& FindPragma(PragmaCmdType pragmaType) const;
+
+    const Struct& FindStruct(const StringPtr& strPtr) const;
+    const UniformVariable& FindUniformVariable(const StringPtr& strPtr) const;
+    const Function& FindFunction(const StringPtr& strPtr) const;
+
 
 private:
     ToyUtility::List<Struct> m_Structs;
@@ -345,8 +354,17 @@ private:
     ToyUtility::List<Function> m_Functions;
     ToyUtility::List<Pragma> m_Pragmas;
 
-	Pool<Statement> m_StatementPool;
-	Pool<Expression> m_ExpressionPool;
+    USE_POOL(StatementComponent)
+    USE_POOL(StatementDeclaration)
+    USE_POOL(StatementExp)
+    USE_POOL(StatementSelection)
+    USE_POOL(StatementIterationWhile)
+    USE_POOL(StatementIterationFor)
+    USE_POOL(StatementJump)
+
+    USE_POOL(ExpressionCommon)
+    USE_POOL(ExpressionFunctionCall)
+    USE_POOL(ExpressionVariableIdentifier)
 };
 
 

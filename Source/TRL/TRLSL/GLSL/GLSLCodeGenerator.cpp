@@ -19,7 +19,16 @@ void GLSLCodeGenerator::SetIndentStr(const ToyUtility::String & str)
 
 void GLSLCodeGenerator::GenerateCode(TRLSL_IR &ir, ToyUtility::DataStream & stream)
 {
-	
+	// vertex shader
+    auto& pragma = ir.FindPragma(TRLSL_IR::PragmaCmdType::Vertex);
+    if (pragma.IsValid())
+    {
+        auto& function = ir.FindFunction(pragma.FunctionName);
+        if (function.IsValid())
+        {
+            
+        }
+    }
 }
 
 ToyUtility::SPtr<TRLShader> GLSLCodeGenerator::GenerateCode(TRLSL_IR &ir)
