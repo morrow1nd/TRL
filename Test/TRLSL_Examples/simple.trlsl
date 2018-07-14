@@ -8,6 +8,7 @@ struct VS_INPUT
 struct VS_OUTPUT
 {
     [SV_POSITION] vec3 pos;
+    vec4 color;
 };
 
 struct UniformBlock
@@ -39,6 +40,7 @@ struct VS_OUTPUT VS_main(struct VS_INPUT input)
     struct VS_OUTPUT output;
 
     output.pos = input.pos;
+    output.color = input.color;
 
     func(input.pos);
     

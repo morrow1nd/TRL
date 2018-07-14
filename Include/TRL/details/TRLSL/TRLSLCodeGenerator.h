@@ -2,7 +2,6 @@
 
 #include "ToyUtility/Prerequisites/PreDefine.h"
 #include "ToyUtility/DataStream/DataStream.h"
-#include "TRL/TRLShader.h"
 #include "TRL/details/TRLSL/TRLSL_IR.h"
 
 
@@ -18,7 +17,6 @@ public:
 
 public:
     virtual void GenerateCode(TRLSL_IR& ir, ToyUtility::DataStream& stream) = 0;
-    virtual ToyUtility::SPtr<TRLShader> GenerateCode(TRLSL_IR& ir) = 0;
 };
 
 

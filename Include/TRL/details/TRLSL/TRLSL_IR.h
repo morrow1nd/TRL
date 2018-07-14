@@ -64,6 +64,8 @@ public:
 
         bool Empty() const { return m_StrLen == 0; }
 
+        ToyUtility::String ToString() const { return ToyUtility::String(m_StrPtr, m_StrLen); }
+
 
     private:
         const char* m_StrPtr;
@@ -78,7 +80,6 @@ public:
             Const,
             In,
             Out,
-            Uniform,
             Highp,
             Mediump,
             Lowp,
@@ -94,11 +95,14 @@ public:
         {}
 
 
-        bool GetTag(TypeBitsets t) { return m_Bitset.test(t); }
+        bool GetTag(TypeBitsets t) const { return m_Bitset.test(t); }
         void SetTag(TypeBitsets t, bool value) { m_Bitset.set(t, value); }
+        bool IsArray() const { return !(Arrays[0] == 1 && Arrays[1] == 1 && Arrays[2] == 1 && Arrays[3] == 1); }
+        int GetArraySize() const { return 4; }
 
         GpuDataType DataType;
         ToyUtility::uint8 Arrays[4]; // Example: arr[4][4][4][4]
+        StringPtr Str;
 
 
     private:
@@ -114,6 +118,8 @@ public:
 
     struct Struct
     {
+        bool IsValid() const { return !Name.Empty(); }
+
         StringPtr Name;
         ToyUtility::List<StructMember> Members;
     };
